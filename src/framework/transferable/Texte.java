@@ -11,7 +11,7 @@ package framework.transferable;
  * 
  * @author monbeigj
  */
-public class Texte extends _Transferable {
+public class Texte extends $Transferable {
 	// Start of user code (user defined attributes for Texte)
 
 	// End of user code
@@ -24,7 +24,10 @@ public class Texte extends _Transferable {
 		super();
 		// End of user code
 	}
-
+	
+	public Texte(String message){
+		super.contenu = message;
+	}
 	// Start of user code (user defined methods for Texte)
 
 	// End of user code

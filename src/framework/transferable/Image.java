@@ -11,7 +11,7 @@ package framework.transferable;
  * 
  * @author monbeigj
  */
-public class Image extends Fichier {
+public class Image extends $Fichier {
 	// Start of user code (user defined attributes for Image)
 
 	// End of user code

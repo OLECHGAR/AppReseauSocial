@@ -11,7 +11,7 @@ package framework.transferable;
  * 
  * @author monbeigj
  */
-public class Video extends Fichier {
+public class Video extends $Fichier {
 	// Start of user code (user defined attributes for Video)
 
 	// End of user code

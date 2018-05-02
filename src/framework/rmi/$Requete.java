@@ -23,7 +23,7 @@ public abstract class $Requete {
 	/**
 	 * Description of the property transferable.
 	 */
-	private _Transferable transferable = null;
+	private $Transferable transferable = null;
 
 	// Start of user code (user defined attributes for Requete)
 
@@ -61,7 +61,7 @@ public abstract class $Requete {
 	 * Returns transferable.
 	 * @return transferable 
 	 */
-	public _Transferable getTransferable() {
+	public $Transferable getTransferable() {
 		return this.transferable;
 	}
 
@@ -69,7 +69,7 @@ public abstract class $Requete {
 	 * Sets a value to attribute transferable. 
 	 * @param newTransferable 
 	 */
-	public void setTransferable(_Transferable newTransferable) {
+	public void setTransferable($Transferable newTransferable) {
 		this.transferable = newTransferable;
 	}
 

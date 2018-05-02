@@ -11,7 +11,7 @@ package framework.transferable;
  * 
  * @author monbeigj
  */
-public class Audio extends Fichier {
+public class Audio extends $Fichier {
 	// Start of user code (user defined attributes for Audio)
 
 	// End of user code

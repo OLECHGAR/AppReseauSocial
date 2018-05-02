@@ -24,7 +24,7 @@ public abstract class $ZonePartage {
 	/**
 	 * Description of the property messages.
 	 */
-	private ArrayList<_Transferable> messages = new ArrayList<_Transferable>();
+	private ArrayList<$Transferable> messages = new ArrayList<$Transferable>();
 	private Utilisateur proprietaire;
 	// Start of user code (user defined attributes for $ZonePartage)
 
@@ -59,7 +59,7 @@ public abstract class $ZonePartage {
 	 * Returns messages.
 	 * @return messages 
 	 */
-	public ArrayList<_Transferable> getMessages() {
+	public ArrayList<$Transferable> getMessages() {
 		return this.messages;
 	}
 	

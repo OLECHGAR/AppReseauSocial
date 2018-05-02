@@ -12,35 +12,37 @@ import framework.rmi.*;
 // End of user code
 
 /**
- * Description of _Transferable.
+ * Description of $Transferable.
  * 
  * @author monbeigj
  */
-public abstract class _Transferable {
+public abstract class $Transferable<T> {
 	/**
 	 * Description of the property ZonesPartages.
 	 */
-	private ArrayList<$ZonePartage> ZonesPartages = new ArrayList<$ZonePartage>();
+	protected ArrayList<$ZonePartage> ZonesPartages = new ArrayList<$ZonePartage>();
 
 	/**
 	 * Description of the property requetes.
 	 */
-	private ArrayList<$Requete> requetes = new ArrayList<$Requete>();
+	protected ArrayList<$Requete> requetes = new ArrayList<$Requete>();
+	
+	protected T contenu;
 
-	// Start of user code (user defined attributes for _Transferable)
+	// Start of user code (user defined attributes for $Transferable)
 
 	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public _Transferable() {
-		// Start of user code constructor for _Transferable)
+	public $Transferable() {
+		// Start of user code constructor for $Transferable)
 		super();
 		// End of user code
 	}
 
-	// Start of user code (user defined methods for _Transferable)
+	// Start of user code (user defined methods for $Transferable)
 
 	// End of user code
 	/**

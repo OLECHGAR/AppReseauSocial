@@ -11,7 +11,7 @@ package framework.transferable;
  * 
  * @author monbeigj
  */
-public class Document extends Fichier {
+public class Document extends $Fichier {
 	// Start of user code (user defined attributes for Document)
 
 	// End of user code
