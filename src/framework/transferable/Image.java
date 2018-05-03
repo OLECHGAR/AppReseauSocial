@@ -5,7 +5,7 @@ package framework.transferable;
 // Start of user code (user defined imports)
 
 import framework.exception.NotNullException;
-import framework.zonesPartage.ZonePartage;
+import framework.zonesPartage.ZonePartageSimple;
 
 // End of user code
 
@@ -23,7 +23,7 @@ public class Image extends $Fichier {
 	 * The constructor.
 	 * @throws NotNullException 
 	 */
-	public Image(ZonePartage zone) throws NotNullException {
+	public Image(ZonePartageSimple zone) throws NotNullException {
 		// Start of user code constructor for Image)
 		super(zone);
 		// End of user code

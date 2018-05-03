@@ -6,7 +6,7 @@ package framework.zonesPartage;
 
 import java.util.ArrayList;
 import framework.utilisateur.*;
-import framework.transferable.*;
+import framework.exception.NotNullException;
 
 // End of user code
 
@@ -15,75 +15,109 @@ import framework.transferable.*;
  * 
  * @author monbeigj
  */
-public class ZonePartage {
-	
-
+public class ZonePartage extends ZonePartageSimple {
+	// Start of user code (user defined attributes for ZonePartage)
 	/**
 	 * Description of the property messages.
 	 */
-	private ArrayList<Utilisateur> utilisateursAutorises = new ArrayList<Utilisateur>();
-	private ArrayList<$Transferable> transferables = new ArrayList<$Transferable>();
-	private Utilisateur proprietaire;
-	private boolean estPrivee;
-	// Start of user code (user defined attributes for ZonePartage)
-
+	protected ArrayList<Utilisateur> utilisateursAutorises = new ArrayList<Utilisateur>();
+	protected Utilisateur proprietaire;
+	protected boolean estPrivee;
+	protected String nom;
 	// End of user code
 
 	/**
 	 * The constructor.
+	 * 
+	 * @param proprietaire
+	 * @throws NotNullException
 	 */
-	public ZonePartage() {
-	}
-	
-	public ZonePartage(Utilisateur proprietaire){
+	public ZonePartage(Utilisateur proprietaire) throws NotNullException {
+		// Start of user code constructor for Reception)
 		super();
+		if (proprietaire == null)
+			throw new NotNullException("la zone de partage doit-avoir un utilisateur");
 		this.proprietaire = proprietaire;
 		this.estPrivee = false;
-	}
-	
-	public ZonePartage(Utilisateur proprietaire, ArrayList<Utilisateur> utilisateursAutorises){
-		this.proprietaire = proprietaire;
-		this.estPrivee = true;
-		this.utilisateursAutorises = utilisateursAutorises;
+		// End of user code
 	}
 
 	/**
-	 * Returns messages.
-	 * @return messages 
+	 * The constructor.
+	 * 
+	 * @param proprietaire
+	 * @param utilisateursAutorises
+	 * @throws NotNullException
 	 */
-	public ArrayList<$Transferable> getTransferables() {
-		return this.transferables;
+	public ZonePartage(Utilisateur proprietaire, ArrayList<Utilisateur> utilisateursAutorises) throws NotNullException {
+		// Start of user code constructor for Reception)
+		super();
+		if (proprietaire == null)
+			throw new NotNullException("la zone de partage doit-avoir un utilisateur");
+		this.proprietaire = proprietaire;
+		this.estPrivee = true;
+		this.utilisateursAutorises = utilisateursAutorises;
+		// End of user code
 	}
-	
+
+	// Start of user code (user defined methods for ZonePartage)
 	/**
 	 * @return prorietaire
 	 */
-	public Utilisateur getProprietaire(){
+	public Utilisateur getProprietaire() {
 		return this.proprietaire;
 	}
-	
-	public void setProprietaire(Utilisateur proprietaire){
+
+	/**
+	 * 
+	 * @param proprietaire
+	 * @throws NotNullException
+	 */
+	public void setProprietaire(Utilisateur proprietaire) throws NotNullException {
+		if (proprietaire == null)
+			throw new NotNullException("Propriétaire");
 		this.proprietaire = proprietaire;
 	}
-	
-	public boolean setPublique(){
-		if(this.estPrivee != true)
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean setPublique() {
+		if (this.estPrivee != true)
 			return false;
 		this.estPrivee = false;
 		return true;
 	}
-	
-	public boolean setPrivee(){
-		if(this.estPrivee != false)
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean setPrivee() {
+		if (this.estPrivee != false)
 			return false;
 		this.estPrivee = true;
 		return true;
 	}
-	
-	public void addTransferable($Transferable transferable){
-		this.transferables.add(transferable);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNom() {
+		return this.nom;
 	}
-	
-	
+
+	/**
+	 * 
+	 * @param nom
+	 * @throws NotNullException
+	 */
+	public void setNom(String nom) throws NotNullException {
+		this.nom = nom;
+	}
+
+	// End of user code
 
 }

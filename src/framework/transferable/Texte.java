@@ -5,7 +5,7 @@ package framework.transferable;
 // Start of user code (user defined imports)
 
 import framework.exception.NotNullException;
-import framework.zonesPartage.ZonePartage;
+import framework.zonesPartage.ZonePartageSimple;
 
 // End of user code
 
@@ -23,13 +23,13 @@ public class Texte extends $Transferable {
 	 * The constructor.
 	 * @throws NotNullException 
 	 */
-	public Texte(ZonePartage zone) throws NotNullException {
+	public Texte(ZonePartageSimple zone) throws NotNullException {
 		// Start of user code constructor for Texte)
 		super(zone);
 		// End of user code
 	}
 	
-	public Texte(ZonePartage zone,String message) throws NotNullException{
+	public Texte(ZonePartageSimple zone,String message) throws NotNullException{
 		super(zone);
 		super.contenu = message;
 	}

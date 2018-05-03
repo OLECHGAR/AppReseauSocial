@@ -24,6 +24,7 @@ public class Reception extends $Requete {
 	public Reception() {
 		// Start of user code constructor for Reception)
 		super();
+		super.getTransferable();
 		// End of user code
 	}
 

@@ -1,5 +1,9 @@
 package framework.rmi;
 
+import java.awt.datatransfer.Transferable;
+
+import framework.exception.NotNullException;
+
 /*******************************************************************************
  * 2018, All rights reserved.
  *******************************************************************************/
@@ -20,10 +24,12 @@ public class Envoie extends $Requete {
 
 	/**
 	 * The constructor.
+	 * @throws NotNullException 
 	 */
-	public Envoie() {
+	public <T extends Transferable> Envoie(T contenu) throws NotNullException {
 		// Start of user code constructor for Envoie)
 		super();
+		super.setTransferable(contenu);
 		// End of user code
 	}
 

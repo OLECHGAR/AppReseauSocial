@@ -22,13 +22,13 @@ public abstract class $Transferable<T> {
 	/**
 	 * Description of the property ZonesPartages.
 	 */
-	protected ZonePartage ZonePartage; // NOT NULL
+	protected final ZonePartageSimple ZonePartage; // NOT NULL
 
 	/**
 	 * Description of the property requetes.
 	 */
 	protected ArrayList<$Requete> requetes = new ArrayList<$Requete>();
-	
+
 	protected T contenu;
 
 	// Start of user code (user defined attributes for $Transferable)
@@ -37,12 +37,14 @@ public abstract class $Transferable<T> {
 
 	/**
 	 * The constructor.
-	 * @throws NotNullException 
+	 * 
+	 * @throws NotNullException
 	 */
-	public $Transferable(ZonePartage zone) throws NotNullException {
+	public $Transferable(ZonePartageSimple zone) throws NotNullException {
 		// Start of user code constructor for $Transferable)
 		super();
-		if(zone == null)throw new NotNullException("transferable");
+		if (zone == null)
+			throw new NotNullException("transferable");
 		this.ZonePartage = zone;
 		// End of user code
 	}
@@ -52,21 +54,29 @@ public abstract class $Transferable<T> {
 	// End of user code
 	/**
 	 * Returns ZonesPartages.
-	 * @return ZonesPartages 
+	 * 
+	 * @return ZonesPartages
 	 */
-	public ZonePartage getZonePartage() {
+	public ZonePartageSimple getZonePartage() {
 		return this.ZonePartage;
 	}
 
 	/**
 	 * Returns requetes.
-	 * @return requetes 
+	 * 
+	 * @return requetes
 	 */
 	public ArrayList<$Requete> getRequetes() {
 		return this.requetes;
 	}
-	
-	public void addRequete($Requete requete){
+
+	/**
+	 * 
+	 * @param requete
+	 */
+	public void addRequete($Requete requete) throws NotNullException {
+		if (requete == null)
+			throw new NotNullException("addRequette");
 		this.requetes.add(requete);
 	}
 

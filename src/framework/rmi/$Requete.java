@@ -4,6 +4,10 @@ package framework.rmi;
  * 2018, All rights reserved.
  *******************************************************************************/
 import framework.utilisateur.*;
+
+import java.awt.datatransfer.Transferable;
+
+import framework.exception.NotNullException;
 import framework.transferable.*;
 // Start of user code (user defined imports)
 
@@ -23,7 +27,7 @@ public abstract class $Requete {
 	/**
 	 * Description of the property transferable.
 	 */
-	private $Transferable transferable = null;
+	private $Transferable<? extends Transferable> transferable = null;
 
 	// Start of user code (user defined attributes for Requete)
 
@@ -41,42 +45,58 @@ public abstract class $Requete {
 	// Start of user code (user defined methods for Requete)
 
 	// End of user code
-	public void envoyer(){
-		//-----------------------------------------TO DOOOOOOOOOOOOoooooo
+
+	/**
+	 * 
+	 */
+	public void envoyer() {
+		// -----------------------------------------TO DOOOOOOOOOOOOoooooo
 	}
-	
-	public void receptioner(){
-		//-----------------------------------------TO DOOOOOOOOOOOOoooooo
+
+	/**
+	 * 
+	 */
+	public void receptioner() {
+		// -----------------------------------------TO DOOOOOOOOOOOOoooooo
 	}
+
 	/**
 	 * Returns utilisateur.
-	 * @return utilisateur 
+	 * 
+	 * @return utilisateur
 	 */
 	public Utilisateur getUtilisateur() {
 		return this.utilisateur;
 	}
 
 	/**
-	 * Sets a value to attribute utilisateur. 
-	 * @param newUtilisateur 
+	 * Sets a value to attribute utilisateur.
+	 * 
+	 * @param newUtilisateur
 	 */
-	public void setUtilisateur(Utilisateur newUtilisateur) {
+	public void setUtilisateur(Utilisateur newUtilisateur) throws NotNullException {
+		if (newUtilisateur == null)
+			throw new NotNullException("Utilisateur");
 		this.utilisateur = newUtilisateur;
 	}
 
 	/**
 	 * Returns transferable.
-	 * @return transferable 
+	 * 
+	 * @return transferable
 	 */
-	public $Transferable getTransferable() {
+	protected $Transferable getTransferable() {
 		return this.transferable;
 	}
 
 	/**
-	 * Sets a value to attribute transferable. 
-	 * @param newTransferable 
+	 * Sets a value to attribute transferable.
+	 * 
+	 * @param contenu
 	 */
-	public void setTransferable($Transferable newTransferable) {
-		this.transferable = newTransferable;
+	protected <T extends Transferable> void setTransferable(T contenu) throws NotNullException {
+		if (contenu == null)
+			throw new NotNullException("Transferable");
+		this.transferable = (($Transferable<? extends Transferable>) contenu);
 	}
 }

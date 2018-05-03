@@ -21,9 +21,10 @@ public abstract class $Fichier extends $Transferable {
 
 	/**
 	 * The constructor.
-	 * @throws NotNullException 
+	 * 
+	 * @throws NotNullException
 	 */
-	public $Fichier(ZonePartage zone) throws NotNullException {
+	public $Fichier(ZonePartageSimple zone) throws NotNullException {
 		// Start of user code constructor for $Fichier)
 		super(zone);
 		// End of user code

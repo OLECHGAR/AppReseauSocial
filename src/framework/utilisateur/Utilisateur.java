@@ -2,8 +2,10 @@
  * 2018, All rights reserved.
  *******************************************************************************/
 package framework.utilisateur;
+
 import java.util.ArrayList;
 
+import framework.exception.NotNullException;
 // Start of user code (user defined imports)
 import framework.rmi.*;
 import framework.zonesPartage.*;
@@ -23,14 +25,14 @@ public class Utilisateur {
 	/**
 	 * Description of the property connecter.
 	 */
-	private Authentification connecter = null;
+	private LoginMotDePasse connecter = null;
 
 	/**
 	 * Description of the property ZonesInteractions.
 	 */
-	private ArrayList<ZonePartage> ZonesInteractions = new ArrayList<ZonePartage>();
-	
-	private ArrayList<ZonePartage> ZonesCrees = new ArrayList<ZonePartage>();
+	private ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
+
+	private ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>();
 
 	// Start of user code (user defined attributes for Utilisateur)
 
@@ -50,7 +52,8 @@ public class Utilisateur {
 	// End of user code
 	/**
 	 * Returns requetes.
-	 * @return requetes 
+	 * 
+	 * @return requetes
 	 */
 	public ArrayList<$Requete> getRequetes() {
 		return this.requetes;
@@ -58,40 +61,45 @@ public class Utilisateur {
 
 	/**
 	 * Returns connecter.
-	 * @return connecter 
+	 * 
+	 * @return connecter
 	 */
-	public Authentification getConnecter() {
+	public LoginMotDePasse getConnecter() {
 		return this.connecter;
 	}
 
 	/**
-	 * Sets a value to attribute connecter. 
-	 * @param newConnecter 
+	 * Sets a value to attribute connecter.
+	 * 
+	 * @param newConnecter
 	 */
-	public void setConnecter(Authentification newConnecter) {
-		if (this.connecter != null) {
-			this.connecter = null;
-		}
+	public void setConnecter(LoginMotDePasse newConnecter) throws NotNullException {
+		if (newConnecter == null)
+			throw new NotNullException("Authentification");
 		this.connecter = newConnecter;
 	}
 
 	/**
 	 * Returns ZonesInteractions.
-	 * @return ZonesInteractions 
+	 * 
+	 * @return ZonesInteractions
 	 */
-	public ArrayList<ZonePartage> getZonesInteractions() {
+	public ArrayList<ZonePartageSimple> getZonesInteractions() {
 		return this.ZonesInteractions;
 	}
-	
+
 	/**
 	 * Returns ZonesCrees
-	 * @return ZonesCrees 
+	 * 
+	 * @return ZonesCrees
 	 */
-	public ArrayList<ZonePartage> getZonesCrees() {
+	public ArrayList<ZonePartageSimple> getZonesCrees() {
 		return this.ZonesCrees;
 	}
-	
-	public void ajouterZone(ZonePartage nouvelleZone){
+
+	public void ajouterZone(ZonePartageSimple nouvelleZone) throws NotNullException {
+		if (nouvelleZone != null)
+			throw new NotNullException("Zone de partage");
 		this.ZonesCrees.add(nouvelleZone);
 	}
 
