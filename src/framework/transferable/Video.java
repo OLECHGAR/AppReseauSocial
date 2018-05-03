@@ -4,6 +4,9 @@
 package framework.transferable;
 // Start of user code (user defined imports)
 
+import framework.exception.NotNullException;
+import framework.zonesPartage.ZonePartage;
+
 // End of user code
 
 /**
@@ -18,10 +21,11 @@ public class Video extends $Fichier {
 
 	/**
 	 * The constructor.
+	 * @throws NotNullException 
 	 */
-	public Video() {
+	public Video(ZonePartage zone) throws NotNullException {
 		// Start of user code constructor for Video)
-		super();
+		super(zone);
 		// End of user code
 	}
 

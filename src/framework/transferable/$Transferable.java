@@ -1,8 +1,10 @@
 package framework.transferable;
 
 import java.util.ArrayList;
+import framework.utilisateur.*;
 import framework.zonesPartage.*;
 import framework.rmi.*;
+import framework.exception.*;
 /*******************************************************************************
  * 2018, All rights reserved.
  *******************************************************************************/
@@ -20,7 +22,7 @@ public abstract class $Transferable<T> {
 	/**
 	 * Description of the property ZonesPartages.
 	 */
-	protected ArrayList<$ZonePartage> ZonesPartages = new ArrayList<$ZonePartage>();
+	protected ZonePartage ZonePartage; // NOT NULL
 
 	/**
 	 * Description of the property requetes.
@@ -35,10 +37,13 @@ public abstract class $Transferable<T> {
 
 	/**
 	 * The constructor.
+	 * @throws NotNullException 
 	 */
-	public $Transferable() {
+	public $Transferable(ZonePartage zone) throws NotNullException {
 		// Start of user code constructor for $Transferable)
 		super();
+		if(zone == null)throw new NotNullException("transferable");
+		this.ZonePartage = zone;
 		// End of user code
 	}
 
@@ -49,8 +54,8 @@ public abstract class $Transferable<T> {
 	 * Returns ZonesPartages.
 	 * @return ZonesPartages 
 	 */
-	public ArrayList<$ZonePartage> getZonesPartages() {
-		return this.ZonesPartages;
+	public ZonePartage getZonePartage() {
+		return this.ZonePartage;
 	}
 
 	/**
@@ -59,6 +64,10 @@ public abstract class $Transferable<T> {
 	 */
 	public ArrayList<$Requete> getRequetes() {
 		return this.requetes;
+	}
+	
+	public void addRequete($Requete requete){
+		this.requetes.add(requete);
 	}
 
 }

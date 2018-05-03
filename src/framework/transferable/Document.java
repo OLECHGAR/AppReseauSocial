@@ -4,6 +4,9 @@
 package framework.transferable;
 // Start of user code (user defined imports)
 
+import framework.exception.NotNullException;
+import framework.zonesPartage.ZonePartage;
+
 // End of user code
 
 /**
@@ -18,10 +21,11 @@ public class Document extends $Fichier {
 
 	/**
 	 * The constructor.
+	 * @throws NotNullException 
 	 */
-	public Document() {
+	public Document(ZonePartage zone) throws NotNullException {
 		// Start of user code constructor for Document)
-		super();
+		super(zone);
 		// End of user code
 	}
 
