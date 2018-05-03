@@ -11,7 +11,7 @@ package framework.zonesPartage;
  * 
  * @author monbeigj
  */
-public class ZonePublique extends ZonePartage {
+public class ZonePublique extends ZonePartageSimple {
 	// Start of user code (user defined attributes for ZonePublique)
 
 	// End of user code
