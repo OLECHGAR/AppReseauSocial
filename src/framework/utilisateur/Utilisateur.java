@@ -28,9 +28,9 @@ public class Utilisateur {
 	/**
 	 * Description of the property ZonesInteractions.
 	 */
-	private ArrayList<$ZonePartage> ZonesInteractions = new ArrayList<$ZonePartage>();
+	private ArrayList<ZonePartage> ZonesInteractions = new ArrayList<ZonePartage>();
 	
-	private ArrayList<$ZonePartage> ZonesCrees = new ArrayList<$ZonePartage>();
+	private ArrayList<ZonePartage> ZonesCrees = new ArrayList<ZonePartage>();
 
 	// Start of user code (user defined attributes for Utilisateur)
 
@@ -79,7 +79,7 @@ public class Utilisateur {
 	 * Returns ZonesInteractions.
 	 * @return ZonesInteractions 
 	 */
-	public ArrayList<$ZonePartage> getZonesInteractions() {
+	public ArrayList<ZonePartage> getZonesInteractions() {
 		return this.ZonesInteractions;
 	}
 	
@@ -87,11 +87,11 @@ public class Utilisateur {
 	 * Returns ZonesCrees
 	 * @return ZonesCrees 
 	 */
-	public ArrayList<$ZonePartage> getZonesCrees() {
+	public ArrayList<ZonePartage> getZonesCrees() {
 		return this.ZonesCrees;
 	}
 	
-	public void ajouterZone($ZonePartage nouvelleZone){
+	public void ajouterZone(ZonePartage nouvelleZone){
 		this.ZonesCrees.add(nouvelleZone);
 	}
 

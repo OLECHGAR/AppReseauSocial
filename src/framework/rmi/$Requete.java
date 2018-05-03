@@ -41,6 +41,13 @@ public abstract class $Requete {
 	// Start of user code (user defined methods for Requete)
 
 	// End of user code
+	public void envoyer(){
+		//-----------------------------------------TO DOOOOOOOOOOOOoooooo
+	}
+	
+	public void receptioner(){
+		//-----------------------------------------TO DOOOOOOOOOOOOoooooo
+	}
 	/**
 	 * Returns utilisateur.
 	 * @return utilisateur 
@@ -72,5 +79,4 @@ public abstract class $Requete {
 	public void setTransferable($Transferable newTransferable) {
 		this.transferable = newTransferable;
 	}
-
 }
