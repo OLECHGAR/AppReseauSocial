@@ -13,8 +13,9 @@ import framework.zonesPartage.ZonePartageSimple;
  * Description of Texte.
  * 
  * @author monbeigj
+ * @param <T>
  */
-public class Texte extends $Transferable {
+public class Texte<T> extends $Transferable<T> {
 	// Start of user code (user defined attributes for Texte)
 
 	// End of user code
@@ -29,10 +30,7 @@ public class Texte extends $Transferable {
 		// End of user code
 	}
 	
-	public Texte(ZonePartageSimple zone,String message) throws NotNullException{
-		super(zone);
-		super.contenu = message;
-	}
+
 	// Start of user code (user defined methods for Texte)
 
 	// End of user code

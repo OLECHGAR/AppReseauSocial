@@ -52,7 +52,7 @@ public class LoginMotDePasse implements Auhentification {
 	 */
 	public void setUser(Utilisateur newUser) throws NotNullException {
 		if (newUser == null)
-			throw new NotNullException("Utilisateur");
+			throw new NotNullException("Utilisateur newUser","setUser");
 		this.user = newUser;
 	}
 

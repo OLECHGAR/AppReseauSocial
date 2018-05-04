@@ -14,7 +14,7 @@ import framework.zonesPartage.*;
  * 
  * @author monbeigj
  */
-public abstract class $Fichier extends $Transferable {
+public abstract class $Fichier extends $Transferable<Object> {
 	// Start of user code (user defined attributes for $Fichier)
 
 	// End of user code

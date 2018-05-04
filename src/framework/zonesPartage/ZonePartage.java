@@ -27,37 +27,33 @@ public class ZonePartage extends ZonePartageSimple {
 	// End of user code
 
 	/**
-	 * The constructor.
+	 * The constructor of ZonePartage is zone privacy is set on public.
 	 * 
 	 * @param proprietaire
 	 * @throws NotNullException
 	 */
-	public ZonePartage(Utilisateur proprietaire) throws NotNullException {
-		// Start of user code constructor for Reception)
+	public ZonePartage(Utilisateur proprietaire, String nom) throws NotNullException {
 		super();
-		if (proprietaire == null)
-			throw new NotNullException("la zone de partage doit-avoir un utilisateur");
+		if (proprietaire == null)throw new NotNullException("Utilisateur proprietaire", "ZonePartage");
 		this.proprietaire = proprietaire;
+		
 		this.estPrivee = false;
 		// End of user code
 	}
 
 	/**
-	 * The constructor.
+	 * The constructor of ZonePartage is zone privacy is set on private.
 	 * 
 	 * @param proprietaire
 	 * @param utilisateursAutorises
 	 * @throws NotNullException
 	 */
 	public ZonePartage(Utilisateur proprietaire, ArrayList<Utilisateur> utilisateursAutorises) throws NotNullException {
-		// Start of user code constructor for Reception)
 		super();
-		if (proprietaire == null)
-			throw new NotNullException("la zone de partage doit-avoir un utilisateur");
+		if (proprietaire == null)throw new NotNullException("Utilisateur proprietaire","ZonePartage");
 		this.proprietaire = proprietaire;
 		this.estPrivee = true;
 		this.utilisateursAutorises = utilisateursAutorises;
-		// End of user code
 	}
 
 	// Start of user code (user defined methods for ZonePartage)
@@ -75,7 +71,7 @@ public class ZonePartage extends ZonePartageSimple {
 	 */
 	public void setProprietaire(Utilisateur proprietaire) throws NotNullException {
 		if (proprietaire == null)
-			throw new NotNullException("Propriétaire");
+			throw new NotNullException("Utilisateur propriétaire","setProprietaire");
 		this.proprietaire = proprietaire;
 	}
 

@@ -1,5 +1,6 @@
 package framework.rmi;
 
+import framework.utilisateur.*;
 /*******************************************************************************
  * 2018, All rights reserved.
  *******************************************************************************/
@@ -21,9 +22,9 @@ public class Reception extends $Requete {
 	/**
 	 * The constructor.
 	 */
-	public Reception() {
+	public Reception(Utilisateur u, String type) {
 		// Start of user code constructor for Reception)
-		super();
+		super(u, type);
 		super.getTransferable();
 		// End of user code
 	}

@@ -33,6 +33,8 @@ public class Utilisateur {
 	private ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
 
 	private ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>();
+	
+	private String nom;;
 
 	// Start of user code (user defined attributes for Utilisateur)
 
@@ -46,10 +48,11 @@ public class Utilisateur {
 		super();
 		// End of user code
 	}
+	
+	public Utilisateur(String nom){
+		this.nom = nom;
+	}
 
-	// Start of user code (user defined methods for Utilisateur)
-
-	// End of user code
 	/**
 	 * Returns requetes.
 	 * 
@@ -57,6 +60,10 @@ public class Utilisateur {
 	 */
 	public ArrayList<$Requete> getRequetes() {
 		return this.requetes;
+	}
+	
+	public String getNom(){
+		return this.nom;
 	}
 
 	/**
@@ -74,8 +81,7 @@ public class Utilisateur {
 	 * @param newConnecter
 	 */
 	public void setConnecter(LoginMotDePasse newConnecter) throws NotNullException {
-		if (newConnecter == null)
-			throw new NotNullException("Authentification");
+		if (newConnecter == null)throw new NotNullException("LoginMotDePasse newConnecter","setConnecter");
 		this.connecter = newConnecter;
 	}
 
@@ -98,9 +104,10 @@ public class Utilisateur {
 	}
 
 	public void ajouterZone(ZonePartageSimple nouvelleZone) throws NotNullException {
-		if (nouvelleZone != null)
-			throw new NotNullException("Zone de partage");
+		if (nouvelleZone != null)throw new NotNullException("ZonePartageSimple nouvelleZone","ajouterZone");
 		this.ZonesCrees.add(nouvelleZone);
 	}
+	
+	
 
 }

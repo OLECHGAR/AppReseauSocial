@@ -4,9 +4,7 @@ package framework.rmi;
  * 2018, All rights reserved.
  *******************************************************************************/
 import framework.utilisateur.*;
-
-import java.awt.datatransfer.Transferable;
-
+import framework.zonesPartage.ZonePartageSimple;
 import framework.exception.NotNullException;
 import framework.transferable.*;
 // Start of user code (user defined imports)
@@ -22,13 +20,14 @@ public abstract class $Requete {
 	/**
 	 * Description of the property utilisateur.
 	 */
-	private Utilisateur utilisateur = null;
+	protected Utilisateur utilisateur;
 
 	/**
 	 * Description of the property transferable.
 	 */
-	private $Transferable<? extends Transferable> transferable = null;
-
+	protected $Transferable<Object> transferable;
+	// Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon traitement
+	protected String type;
 	// Start of user code (user defined attributes for Requete)
 
 	// End of user code
@@ -36,28 +35,16 @@ public abstract class $Requete {
 	/**
 	 * The constructor.
 	 */
-	public $Requete() {
+	public $Requete(Utilisateur u, String type) {
 		// Start of user code constructor for Requete)
 		super();
+		utilisateur = u;
+		this.type = type;
 		// End of user code
 	}
-
-	// Start of user code (user defined methods for Requete)
-
-	// End of user code
-
-	/**
-	 * 
-	 */
-	public void envoyer() {
-		// -----------------------------------------TO DOOOOOOOOOOOOoooooo
-	}
-
-	/**
-	 * 
-	 */
-	public void receptioner() {
-		// -----------------------------------------TO DOOOOOOOOOOOOoooooo
+	 
+	public $Requete(){
+		super();
 	}
 
 	/**
@@ -75,8 +62,7 @@ public abstract class $Requete {
 	 * @param newUtilisateur
 	 */
 	public void setUtilisateur(Utilisateur newUtilisateur) throws NotNullException {
-		if (newUtilisateur == null)
-			throw new NotNullException("Utilisateur");
+		if (newUtilisateur == null)	throw new NotNullException("Utilisateur","setUtilisateur");
 		this.utilisateur = newUtilisateur;
 	}
 
@@ -85,18 +71,23 @@ public abstract class $Requete {
 	 * 
 	 * @return transferable
 	 */
-	protected $Transferable getTransferable() {
+	protected $Transferable<Object> getTransferable() {
 		return this.transferable;
 	}
 
 	/**
 	 * Sets a value to attribute transferable.
+	 * @param <T>
+	 * @param <T>
 	 * 
 	 * @param contenu
+	 * @throws NotNullException 
 	 */
-	protected <T extends Transferable> void setTransferable(T contenu) throws NotNullException {
-		if (contenu == null)
-			throw new NotNullException("Transferable");
-		this.transferable = (($Transferable<? extends Transferable>) contenu);
+	protected <T> void setTransferable(T contenu, ZonePartageSimple zone) throws NotNullException{
+		if(this.type == "texte"){
+			this.transferable = new Texte<Object>(zone);
+		}
+		this.transferable.setContenu(contenu);
 	}
+
 }
