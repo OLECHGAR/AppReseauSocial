@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import framework.exception.*;
-import framework.rmi.Envoi;
 import framework.transferable.$Transferable;
 //End of user code
 

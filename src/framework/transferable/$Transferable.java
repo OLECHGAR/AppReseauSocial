@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import framework.utilisateur.*;
 import framework.zonesPartage.*;
@@ -31,7 +32,7 @@ public abstract class $Transferable<T> {
 	/**
 	 * Description of the property requetes.
 	 */
-	protected ArrayList<$Requete> requetes = new ArrayList<$Requete>();
+	protected ArrayList<$Requete<? extends $Utilisateur>> requetes = new ArrayList<$Requete<? extends $Utilisateur>>();
 
 	protected T contenu;
 
@@ -48,7 +49,6 @@ public abstract class $Transferable<T> {
 			throw new NotNullException("ZonePartageSimple zone", "$Transferable");
 		this.heure = new Date();
 		this.ZonePartage = zone;
-		this.ZonePartage.addTransferable(this);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public abstract class $Transferable<T> {
 	 * 
 	 * @return requetes
 	 */
-	public ArrayList<$Requete> getRequetes() {
+	public ArrayList<$Requete<?>> getRequetes() {
 		return this.requetes;
 	}
 
@@ -81,7 +81,7 @@ public abstract class $Transferable<T> {
 	 * 
 	 * @param requete
 	 */
-	public void addRequete($Requete requete) throws NotNullException {
+	public void addRequete($Requete<?> requete) throws NotNullException {
 		if (requete == null)
 			throw new NotNullException("$Requete requete", "addRequete");
 		this.requetes.add(requete);
@@ -92,20 +92,24 @@ public abstract class $Transferable<T> {
 	 * @param contenu
 	 * @throws NotNullException
 	 */
-	public void setContenu(T contenu) throws NotNullException {
+	public void setContenu(Object contenu) throws NotNullException {
+		//TODO changer type object en plus générique
 		if (contenu == null)
 			throw new NotNullException("contenu", "setContenu");
-		this.contenu = contenu;
+		this.contenu = (T) contenu;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Utilisateur getProprietaire() {
-		for (int i = 0; i < this.requetes.size(); i++) {
-			if (this.requetes.get(i).getClass() == new Envoi().getClass())
-				return this.requetes.get(i).getUtilisateur();
+	public <T extends $Utilisateur> T getProprietaire() {
+		Iterator<$Requete<?>> it = this.requetes.iterator();
+		while (it.hasNext()) {
+			$Requete<?> requete = it.next();
+			if (requete.getClass() == new Envoi().getClass()) {
+				return (T) requete.getUtilisateur();
+			}
 		}
 		return null;
 	}
