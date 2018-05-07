@@ -12,60 +12,43 @@ import framework.zonesPartage.*;
 // End of user code
 
 /**
- * Description of Utilisateur.
+ * Description of $Utilisateur.
  * 
  * @author monbeigj
  */
-public class Utilisateur {
-	/**
-	 * Description of the property requetes.
-	 */
-	private ArrayList<$Requete> requetes = new ArrayList<$Requete>();
+public abstract class $Utilisateur{
 
-	/**
-	 * Description of the property connecter.
-	 */
-	private LoginMotDePasse connecter = null;
+	
+	protected ArrayList<$Requete<? extends $Utilisateur>> requetes = new ArrayList<$Requete<? extends $Utilisateur>>();
+
+	protected Authentification connecter = null;
 
 	/**
 	 * Description of the property ZonesInteractions. ZonesInteractions toutes
 	 * les zones dans lesquelles il peut intéragir dont il n'est pas le
 	 * propriétaire
 	 */
-	private ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
+	protected ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
 
 	/**
 	 * Description of the property ZonesInteractions. ZonesInteractions toutes
 	 * les zones dans lesquelles il peut intéragir dont il n'est pas le
 	 * propriétaire
 	 */
-	private ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>(); // TODO
-																							// voir
-																							// pour
-																							// mettre
-																							// null?
+	// TODO voir pour mettre null?
+	protected ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>(); 
 
-	private String nom;;
-
-	// Start of user code (user defined attributes for Utilisateur)
+	// Start of user code (user defined attributes for $Utilisateur)
 
 	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public Utilisateur() {
-		// Start of user code constructor for Utilisateur)
+	public $Utilisateur() {
+		// Start of user code constructor for $Utilisateur)
 		super();
 		// End of user code
-	}
-
-	/**
-	 * 
-	 * @param nom
-	 */
-	public Utilisateur(String nom) {
-		this.nom = nom;
 	}
 
 	/**
@@ -73,16 +56,8 @@ public class Utilisateur {
 	 * 
 	 * @return requetes
 	 */
-	public ArrayList<$Requete> getRequetes() {
+	public ArrayList<$Requete<? extends $Utilisateur>> getRequetes() {
 		return this.requetes;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getNom() {
-		return this.nom;
 	}
 
 	/**
@@ -90,7 +65,7 @@ public class Utilisateur {
 	 * 
 	 * @return connecter
 	 */
-	public LoginMotDePasse getConnecter() {
+	public Authentification getConnecter() {
 		return this.connecter;
 	}
 
