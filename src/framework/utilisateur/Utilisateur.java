@@ -28,12 +28,23 @@ public class Utilisateur {
 	private LoginMotDePasse connecter = null;
 
 	/**
-	 * Description of the property ZonesInteractions.
+	 * Description of the property ZonesInteractions. ZonesInteractions toutes
+	 * les zones dans lesquelles il peut intéragir dont il n'est pas le
+	 * propriétaire
 	 */
 	private ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
 
-	private ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>();
-	
+	/**
+	 * Description of the property ZonesInteractions. ZonesInteractions toutes
+	 * les zones dans lesquelles il peut intéragir dont il n'est pas le
+	 * propriétaire
+	 */
+	private ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>(); // TODO
+																							// voir
+																							// pour
+																							// mettre
+																							// null?
+
 	private String nom;;
 
 	// Start of user code (user defined attributes for Utilisateur)
@@ -48,8 +59,12 @@ public class Utilisateur {
 		super();
 		// End of user code
 	}
-	
-	public Utilisateur(String nom){
+
+	/**
+	 * 
+	 * @param nom
+	 */
+	public Utilisateur(String nom) {
 		this.nom = nom;
 	}
 
@@ -61,8 +76,12 @@ public class Utilisateur {
 	public ArrayList<$Requete> getRequetes() {
 		return this.requetes;
 	}
-	
-	public String getNom(){
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNom() {
 		return this.nom;
 	}
 
@@ -81,7 +100,8 @@ public class Utilisateur {
 	 * @param newConnecter
 	 */
 	public void setConnecter(LoginMotDePasse newConnecter) throws NotNullException {
-		if (newConnecter == null)throw new NotNullException("LoginMotDePasse newConnecter","setConnecter");
+		if (newConnecter == null)
+			throw new NotNullException("LoginMotDePasse newConnecter", "setConnecter");
 		this.connecter = newConnecter;
 	}
 
@@ -103,11 +123,26 @@ public class Utilisateur {
 		return this.ZonesCrees;
 	}
 
-	public void ajouterZone(ZonePartageSimple nouvelleZone) throws NotNullException {
-		if (nouvelleZone != null)throw new NotNullException("ZonePartageSimple nouvelleZone","ajouterZone");
+	/**
+	 * 
+	 * @param nouvelleZone
+	 * @throws NotNullException
+	 */
+	public void creerZone(ZonePartageSimple nouvelleZone) throws NotNullException {
+		if (nouvelleZone == null)
+			throw new NotNullException("ZonePartageSimple nouvelleZone", "ajouterZone");
 		this.ZonesCrees.add(nouvelleZone);
 	}
-	
-	
+
+	/**
+	 * 
+	 * @param zone
+	 * @throws NotNullException
+	 */
+	public void rejoindreZone(ZonePartageSimple zone) throws NotNullException {
+		if (zone == null)
+			throw new NotNullException("ZonePartageSimple zone", "rejoindreZone");
+		this.ZonesInteractions.add(zone);
+	}
 
 }

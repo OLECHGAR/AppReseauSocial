@@ -26,7 +26,8 @@ public abstract class $Requete {
 	 * Description of the property transferable.
 	 */
 	protected $Transferable<Object> transferable;
-	// Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon traitement
+	// Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon
+	// traitement
 	protected String type;
 	// Start of user code (user defined attributes for Requete)
 
@@ -42,8 +43,11 @@ public abstract class $Requete {
 		this.type = type;
 		// End of user code
 	}
-	 
-	public $Requete(){
+
+	/**
+	 * 
+	 */
+	public $Requete() {
 		super();
 	}
 
@@ -62,7 +66,8 @@ public abstract class $Requete {
 	 * @param newUtilisateur
 	 */
 	public void setUtilisateur(Utilisateur newUtilisateur) throws NotNullException {
-		if (newUtilisateur == null)	throw new NotNullException("Utilisateur","setUtilisateur");
+		if (newUtilisateur == null)
+			throw new NotNullException("Utilisateur", "setUtilisateur");
 		this.utilisateur = newUtilisateur;
 	}
 
@@ -77,14 +82,15 @@ public abstract class $Requete {
 
 	/**
 	 * Sets a value to attribute transferable.
+	 * 
 	 * @param <T>
 	 * @param <T>
 	 * 
 	 * @param contenu
-	 * @throws NotNullException 
+	 * @throws NotNullException
 	 */
-	protected <T> void setTransferable(T contenu, ZonePartageSimple zone) throws NotNullException{
-		if(this.type == "texte"){
+	protected <T> void setTransferable(T contenu, ZonePartageSimple zone) throws NotNullException {
+		if (this.type == "texte") {
 			this.transferable = new Texte<Object>(zone);
 		}
 		this.transferable.setContenu(contenu);

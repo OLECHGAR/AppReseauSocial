@@ -1,4 +1,5 @@
 package framework.transferable;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public abstract class $Transferable<T> {
 	protected ArrayList<$Requete> requetes = new ArrayList<$Requete>();
 
 	protected T contenu;
-	
+
 	protected Date heure;
 
 	/**
@@ -43,11 +44,13 @@ public abstract class $Transferable<T> {
 	 */
 	public $Transferable(ZonePartageSimple zone) throws NotNullException {
 		super();
-		if (zone == null)throw new NotNullException("ZonePartageSimple zone","$Transferable");
-		this.heure = new Date(); 
+		if (zone == null)
+			throw new NotNullException("ZonePartageSimple zone", "$Transferable");
+		this.heure = new Date();
 		this.ZonePartage = zone;
 		this.ZonePartage.addTransferable(this);
 	}
+
 	/**
 	 * Returns ZonesPartages.
 	 * 
@@ -56,10 +59,15 @@ public abstract class $Transferable<T> {
 	public ZonePartageSimple getZonePartage() {
 		return this.ZonePartage;
 	}
-	
-	public T getContenu(){
+
+	/**
+	 * 
+	 * @return
+	 */
+	public T getContenu() {
 		return this.contenu;
 	}
+
 	/**
 	 * Returns requetes.
 	 * 
@@ -74,28 +82,41 @@ public abstract class $Transferable<T> {
 	 * @param requete
 	 */
 	public void addRequete($Requete requete) throws NotNullException {
-		if (requete == null)throw new NotNullException("$Requete requete","addRequete");
+		if (requete == null)
+			throw new NotNullException("$Requete requete", "addRequete");
 		this.requetes.add(requete);
 	}
-	
-	public void setContenu(T contenu) throws NotNullException{
-		if (contenu == null)throw new NotNullException("contenu","setContenu");
+
+	/**
+	 * 
+	 * @param contenu
+	 * @throws NotNullException
+	 */
+	public void setContenu(T contenu) throws NotNullException {
+		if (contenu == null)
+			throw new NotNullException("contenu", "setContenu");
 		this.contenu = contenu;
 	}
-	
-	public Utilisateur getProprietaire(){
-		for(int i=0; i<this.requetes.size(); i++){
-			if(this.requetes.get(i).getClass() == new Envoi().getClass())
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Utilisateur getProprietaire() {
+		for (int i = 0; i < this.requetes.size(); i++) {
+			if (this.requetes.get(i).getClass() == new Envoi().getClass())
 				return this.requetes.get(i).getUtilisateur();
 		}
 		return null;
 	}
-	
-	public String timeMessage(){
-		DateFormat sdf = new SimpleDateFormat("HH:mm:ss"); 
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String timeMessage() {
+		DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		return sdf.format(this.heure);
 	}
-	
-	
 
 }

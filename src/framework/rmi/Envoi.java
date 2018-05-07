@@ -1,16 +1,14 @@
 package framework.rmi;
 
-import framework.utilisateur.*;
-import framework.zonesPartage.*;
-
-import framework.exception.NotNullException;
-
 /*******************************************************************************
  * 2018, All rights reserved.
  *******************************************************************************/
 
 // Start of user code (user defined imports)
+import framework.utilisateur.*;
+import framework.zonesPartage.*;
 
+import framework.exception.NotNullException;
 // End of user code
 
 /**
@@ -24,11 +22,21 @@ public class Envoi extends $Requete {
 
 	/**
 	 * The constructor.
-	 * @throws NotNullException 
+	 * 
+	 * @throws NotNullException
 	 */
-	public Envoi(){
+	public Envoi() {
 		super();
 	}
+
+	/**
+	 * 
+	 * @param contenu
+	 * @param u
+	 * @param zoneDestination
+	 * @param type
+	 * @throws NotNullException
+	 */
 	public <T> Envoi(T contenu, Utilisateur u, ZonePartageSimple zoneDestination, String type) throws NotNullException {
 		// Start of user code constructor for Envoie)
 		super(u, type);
@@ -37,15 +45,26 @@ public class Envoi extends $Requete {
 		this.envoyer(zoneDestination);
 		// End of user code
 	}
-	
-	public void envoyer(ZonePartageSimple zone){
-		if(super.type == "texte"){
-			//this.envoyerTexte(zone);
+
+	// Start of user code (user defined methods for Envoie)
+
+	/**
+	 * 
+	 * @param zone
+	 */
+	public void envoyer(ZonePartageSimple zone) {
+		if (super.type == "texte") {
+			// this.envoyerTexte(zone);
 		}
 	}
-	
-	public void envoyerTexte(ZonePartageSimple zone){
-		// Code permettant de faire l'appel serveur suivi d'un enregistrement en BDD
+
+	/**
+	 * 
+	 * @param zone
+	 */
+	public void envoyerTexte(ZonePartageSimple zone) {
+		// Code permettant de faire l'appel serveur suivi d'un enregistrement en
+		// BDD
 		try {
 			zone.addTransferable(super.transferable);
 		} catch (NotNullException e) {
@@ -53,8 +72,6 @@ public class Envoi extends $Requete {
 			e.printStackTrace();
 		}
 	}
-	// Start of user code (user defined methods for Envoie)
-
 	// End of user code
 
 }

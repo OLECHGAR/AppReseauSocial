@@ -4,10 +4,6 @@
 package framework.zonesPartage;
 // Start of user code (user defined imports)
 
-import java.util.ArrayList;
-
-import framework.utilisateur.Utilisateur;
-
 // End of user code
 
 /**
@@ -15,12 +11,12 @@ import framework.utilisateur.Utilisateur;
  * 
  * @author monbeigj
  */
-public class ZonePrivee extends ZonePartage {
+public class ZonePrivee extends ZonePartageSimple {
 	// Start of user code (user defined attributes for ZonePrivee)
 	/**
 	 * Description of the property utilisateurs.
 	 */
-	
+
 	// End of user code
 
 	/**

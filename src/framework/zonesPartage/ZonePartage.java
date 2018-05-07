@@ -5,6 +5,8 @@ package framework.zonesPartage;
 // Start of user code (user defined imports)
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import framework.utilisateur.*;
 import framework.exception.NotNullException;
 
@@ -24,7 +26,21 @@ public class ZonePartage extends ZonePartageSimple {
 	protected Utilisateur proprietaire;
 	protected boolean estPrivee;
 	protected String nom;
+
 	// End of user code
+	/**
+	 * The constructor of ZonePartage without owner
+	 * 
+	 * @param utilisateursAutorises
+	 * @throws NotNullException
+	 */
+	public ZonePartage(ArrayList<Utilisateur> utilisateursAutorises) throws NotNullException {
+		super();
+		this.proprietaire = null;
+		this.estPrivee = true;
+		this.utilisateursAutorises = utilisateursAutorises;
+		ajouterUtilisateurs(utilisateursAutorises);
+	}
 
 	/**
 	 * The constructor of ZonePartage is zone privacy is set on public.
@@ -34,11 +50,14 @@ public class ZonePartage extends ZonePartageSimple {
 	 */
 	public ZonePartage(Utilisateur proprietaire, String nom) throws NotNullException {
 		super();
-		if (proprietaire == null)throw new NotNullException("Utilisateur proprietaire", "ZonePartage");
+		if (proprietaire == null)
+			throw new NotNullException("Utilisateur proprietaire", "ZonePartage");
 		this.proprietaire = proprietaire;
-		
 		this.estPrivee = false;
-		// End of user code
+		if (nom == null)
+			this.nom = "";
+		else
+			this.nom = nom;
 	}
 
 	/**
@@ -50,10 +69,32 @@ public class ZonePartage extends ZonePartageSimple {
 	 */
 	public ZonePartage(Utilisateur proprietaire, ArrayList<Utilisateur> utilisateursAutorises) throws NotNullException {
 		super();
-		if (proprietaire == null)throw new NotNullException("Utilisateur proprietaire","ZonePartage");
+		if (proprietaire == null)
+			throw new NotNullException("Utilisateur proprietaire", "ZonePartage");
 		this.proprietaire = proprietaire;
 		this.estPrivee = true;
 		this.utilisateursAutorises = utilisateursAutorises;
+		ajouterUtilisateurs(utilisateursAutorises);
+	}
+
+	/**
+	 * The constructor of ZonePartage is zone privacy is set on private.
+	 * 
+	 * @param proprietaire
+	 * @param utilisateursAutorises
+	 * @param nom
+	 * @throws NotNullException
+	 */
+	public ZonePartage(Utilisateur proprietaire, ArrayList<Utilisateur> utilisateursAutorises, String nom)
+			throws NotNullException {
+		super();
+		if (proprietaire == null)
+			throw new NotNullException("Utilisateur proprietaire", "ZonePartage");
+		this.proprietaire = proprietaire;
+		this.estPrivee = true;
+		this.utilisateursAutorises = utilisateursAutorises;
+		this.nom = nom;
+		ajouterUtilisateurs(utilisateursAutorises);
 	}
 
 	// Start of user code (user defined methods for ZonePartage)
@@ -71,8 +112,15 @@ public class ZonePartage extends ZonePartageSimple {
 	 */
 	public void setProprietaire(Utilisateur proprietaire) throws NotNullException {
 		if (proprietaire == null)
-			throw new NotNullException("Utilisateur propriétaire","setProprietaire");
+			throw new NotNullException("Utilisateur propriétaire", "setProprietaire");
 		this.proprietaire = proprietaire;
+	}
+
+	public void ajouterUtilisateurs(ArrayList<Utilisateur> utilisateurs) {
+		Iterator<Utilisateur> it = utilisateurs.iterator();
+		while (it.hasNext()) {
+			it.next().rejoindreZone(this);
+		}
 	}
 
 	/**
@@ -80,8 +128,9 @@ public class ZonePartage extends ZonePartageSimple {
 	 * @return
 	 */
 	public boolean setPublique() {
-		if (this.estPrivee != true)
+		if (this.estPrivee == false)
 			return false;
+		this.utilisateursAutorises = new ArrayList<Utilisateur>();
 		this.estPrivee = false;
 		return true;
 	}
@@ -90,9 +139,11 @@ public class ZonePartage extends ZonePartageSimple {
 	 * 
 	 * @return
 	 */
-	public boolean setPrivee() {
-		if (this.estPrivee != false)
+	public boolean setPrivee(ArrayList<Utilisateur> utilisateursAutorises) {
+		if (this.estPrivee == true)
 			return false;
+		this.utilisateursAutorises = utilisateursAutorises;
+		this.ajouterUtilisateurs(utilisateursAutorises);
 		this.estPrivee = true;
 		return true;
 	}
@@ -112,6 +163,14 @@ public class ZonePartage extends ZonePartageSimple {
 	 */
 	public void setNom(String nom) throws NotNullException {
 		this.nom = nom;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean getPrivacy() {
+		return this.estPrivee;
 	}
 
 	// End of user code
