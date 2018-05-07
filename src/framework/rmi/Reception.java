@@ -22,7 +22,7 @@ public class Reception extends $Requete {
 	/**
 	 * The constructor.
 	 */
-	public Reception(Utilisateur u, String type) {
+	public Reception($Utilisateur u, String type) {
 		// Start of user code constructor for Reception)
 		super(u, type);
 		super.getTransferable();

@@ -37,7 +37,7 @@ public class Envoi extends $Requete {
 	 * @param type
 	 * @throws NotNullException
 	 */
-	public <T> Envoi(T contenu, Utilisateur u, ZonePartageSimple zoneDestination, String type) throws NotNullException {
+	public <T> Envoi(T contenu, $Utilisateur u, ZonePartageSimple zoneDestination, String type) throws NotNullException {
 		// Start of user code constructor for Envoie)
 		super(u, type);
 		super.setTransferable(contenu, zoneDestination);
@@ -54,7 +54,7 @@ public class Envoi extends $Requete {
 	 */
 	public void envoyer(ZonePartageSimple zone) {
 		if (super.type == "texte") {
-			// this.envoyerTexte(zone);
+			this.envoyerTexte(zone);
 		}
 	}
 

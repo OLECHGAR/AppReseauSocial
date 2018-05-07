@@ -16,16 +16,16 @@ import framework.transferable.*;
  * 
  * @author monbeigj
  */
-public abstract class $Requete {
+public abstract class $Requete<T extends $Utilisateur> {
 	/**
-	 * Description of the property utilisateur.
+	 * Description of the property $Utilisateur.
 	 */
-	protected Utilisateur utilisateur;
+	protected T utilisateur;
 
 	/**
 	 * Description of the property transferable.
 	 */
-	protected $Transferable<Object> transferable;
+	protected $Transferable<?> transferable;
 	// Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon
 	// traitement
 	protected String type;
@@ -36,7 +36,7 @@ public abstract class $Requete {
 	/**
 	 * The constructor.
 	 */
-	public $Requete(Utilisateur u, String type) {
+	public $Requete(T u, String type) {
 		// Start of user code constructor for Requete)
 		super();
 		utilisateur = u;
@@ -52,22 +52,22 @@ public abstract class $Requete {
 	}
 
 	/**
-	 * Returns utilisateur.
+	 * Returns $Utilisateur.
 	 * 
-	 * @return utilisateur
+	 * @return $Utilisateur
 	 */
-	public Utilisateur getUtilisateur() {
+	public T getUtilisateur() {
 		return this.utilisateur;
 	}
 
 	/**
-	 * Sets a value to attribute utilisateur.
+	 * Sets a value to attribute $Utilisateur.
 	 * 
 	 * @param newUtilisateur
 	 */
-	public void setUtilisateur(Utilisateur newUtilisateur) throws NotNullException {
+	public void setUtilisateur(T newUtilisateur) throws NotNullException {
 		if (newUtilisateur == null)
-			throw new NotNullException("Utilisateur", "setUtilisateur");
+			throw new NotNullException("$Utilisateur", "setUtilisateur");
 		this.utilisateur = newUtilisateur;
 	}
 
@@ -76,7 +76,7 @@ public abstract class $Requete {
 	 * 
 	 * @return transferable
 	 */
-	protected $Transferable<Object> getTransferable() {
+	protected $Transferable<?> getTransferable() {
 		return this.transferable;
 	}
 
@@ -89,7 +89,8 @@ public abstract class $Requete {
 	 * @param contenu
 	 * @throws NotNullException
 	 */
-	protected <T> void setTransferable(T contenu, ZonePartageSimple zone) throws NotNullException {
+	protected void setTransferable(Object contenu, ZonePartageSimple zone) throws NotNullException {
+		//TODO changer type object en plus générique
 		if (this.type == "texte") {
 			this.transferable = new Texte<Object>(zone);
 		}
