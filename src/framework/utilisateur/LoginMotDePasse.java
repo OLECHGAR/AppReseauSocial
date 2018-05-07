@@ -13,11 +13,11 @@ import framework.exception.NotNullException;
  * 
  * @author monbeigj
  */
-public class LoginMotDePasse implements Auhentification {
+public class LoginMotDePasse implements Authentification {
 	/**
 	 * Description of the property user.
 	 */
-	private Utilisateur user = null;
+	private $Utilisateur user = null;
 
 	// Start of user code (user defined attributes for LoginMotDePasse)
 
@@ -41,7 +41,7 @@ public class LoginMotDePasse implements Auhentification {
 	 * 
 	 * @return user
 	 */
-	public Utilisateur getUser() {
+	public $Utilisateur getUser() {
 		return this.user;
 	}
 
@@ -50,9 +50,9 @@ public class LoginMotDePasse implements Auhentification {
 	 * 
 	 * @param newUser
 	 */
-	public void setUser(Utilisateur newUser) throws NotNullException {
+	public void setUser($Utilisateur newUser) throws NotNullException {
 		if (newUser == null)
-			throw new NotNullException("Utilisateur newUser","setUser");
+			throw new NotNullException("$Utilisateur newUser","setUser");
 		this.user = newUser;
 	}
 

@@ -5,12 +5,13 @@ import framework.zonesPartage.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import framework.exception.*;
 import framework.rmi.*;
-import framework.utilisateur.Utilisateur;
+import application.Utilisateur;
 
 public class TestEnvoiSurZonePartage {
 
@@ -18,8 +19,8 @@ public class TestEnvoiSurZonePartage {
 
 	public static void main(String[] args) throws NotNullException {
 		// TODO Auto-generated method stub
-		Utilisateur u = new Utilisateur("Bernard");
-		Utilisateur u2 = new Utilisateur("Gerard");
+		Utilisateur u = new Utilisateur("Bernard","","Bernard","","","", new Date());
+		Utilisateur u2 = new Utilisateur("Gerard","","Gerard","","","", null);
 		String nomZone = "Test";
 		ArrayList<Utilisateur> listU = new ArrayList<Utilisateur>();
 		// listU.add(u2);
@@ -39,7 +40,7 @@ public class TestEnvoiSurZonePartage {
 					System.out.println("Exit!");
 					for (int i = 0; i < zone1.size(); i++) {
 						System.out.println("(" + zone1.getTransferables().get(i).timeMessage() + ") "
-								+ zone1.getTransferables().get(i).getProprietaire().getNom() + " : "
+								+ ((Utilisateur) zone1.getTransferables().get(i).getProprietaire()).getNom() + " : "
 								+ zone1.afficherMessageIndex(i));
 					}
 					System.exit(0);
@@ -66,7 +67,7 @@ public class TestEnvoiSurZonePartage {
 				}
 				nbRequetes++;
 				System.out.println("(" + zone1.getTransferables().get(zone1.size() - 1).timeMessage() + ") "
-						+ zone1.getTransferables().get(zone1.size() - 1).getProprietaire().getNom() + " : "
+						+ ((Utilisateur) zone1.getTransferables().get(zone1.size() - 1).getProprietaire()).getNom() + " : "
 						+ zone1.afficherMessageIndex(zone1.size() - 1));
 
 			}
