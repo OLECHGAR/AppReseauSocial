@@ -4,7 +4,9 @@
 package framework.utilisateur;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import framework.exception.Ensure;
 import framework.exception.NotNullException;
 // Start of user code (user defined imports)
 import framework.rmi.*;
@@ -99,25 +101,50 @@ public abstract class $Utilisateur{
 	}
 
 	/**
+	 * Permet d'ajouter une zone créée dans la liste de zones créées
 	 * 
 	 * @param nouvelleZone
 	 * @throws NotNullException
+	 * @ensure estCree(nouvelleZone) == true
 	 */
 	public void creerZone(ZonePartageSimple nouvelleZone) throws NotNullException {
 		if (nouvelleZone == null)
 			throw new NotNullException("ZonePartageSimple nouvelleZone", "ajouterZone");
 		this.ZonesCrees.add(nouvelleZone);
+		if(!(estCree(nouvelleZone)))throw new Ensure("estCree(nouvelleZone)) == true","$Utilisateur.creerZone");
+		
 	}
 
 	/**
+	 * Permet d'ajouter une zone dans la liste de zones interactions
 	 * 
 	 * @param zone
 	 * @throws NotNullException
+	 * @ensure aRejoint(zone) == true
 	 */
 	public void rejoindreZone(ZonePartageSimple zone) throws NotNullException {
 		if (zone == null)
 			throw new NotNullException("ZonePartageSimple zone", "rejoindreZone");
 		this.ZonesInteractions.add(zone);
+		if(!(aRejoint(zone)))throw new Ensure("aRejoint(zone)) == true","$Utilisateur.rejoindreZone");
 	}
-
+	
+	
+	private boolean estCree(ZonePartageSimple nouvelleZone) {
+		Iterator<ZonePartageSimple> it = this.ZonesCrees.iterator();
+		while(it.hasNext()) {
+			if(it.next() == nouvelleZone)
+				return true;
+		}
+		return false;
+	}
+	
+	private boolean aRejoint(ZonePartageSimple nouvelleZone) {
+		Iterator<ZonePartageSimple> it = this.ZonesInteractions.iterator();
+		while(it.hasNext()) {
+			if(it.next() == nouvelleZone)
+				return true;
+		}
+		return false;
+	}
 }
