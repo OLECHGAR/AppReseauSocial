@@ -6,28 +6,51 @@ import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartage.ZonePartage;
 
-public class SalonDiscussion extends ZonePartage{
+public class SalonDiscussion extends ZonePartage {
 
-	public SalonDiscussion($Utilisateur proprietaire, ArrayList<? extends $Utilisateur> utilisateursAutorises)
+	private static int nbSalon;
+	/**
+	 * Permet de référencer un salon de manière unique
+	 */
+	private final int references;
+
+	public SalonDiscussion($Utilisateur proprietaire,
+			ArrayList<? extends $Utilisateur> utilisateursAutorises)
 			throws NotNullException {
 		super(proprietaire, utilisateursAutorises);
+		nbSalon++;
+		this.references = nbSalon;
 		// TODO Auto-generated constructor stub
 	}
-	public SalonDiscussion($Utilisateur proprietaire, ArrayList<? extends $Utilisateur> utilisateursAutorises,
-			String nom) throws NotNullException {
+
+	public SalonDiscussion($Utilisateur proprietaire,
+			ArrayList<? extends $Utilisateur> utilisateursAutorises, String nom)
+			throws NotNullException {
 		super(proprietaire, utilisateursAutorises, nom);
+		nbSalon++;
+		this.references = nbSalon;
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalonDiscussion($Utilisateur proprietaire, String nom) throws NotNullException {
+	public SalonDiscussion($Utilisateur proprietaire, String nom)
+			throws NotNullException {
 		super(proprietaire, nom);
+		nbSalon++;
+		this.references = nbSalon;
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public SalonDiscussion(ArrayList<? extends $Utilisateur> utilisateursAutorises) throws NotNullException {
+	public SalonDiscussion(
+			ArrayList<? extends $Utilisateur> utilisateursAutorises)
+			throws NotNullException {
 		super(utilisateursAutorises);
+		nbSalon++;
+		this.references = nbSalon;
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getReferences() {
+		return references;
 	}
 
 }
