@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import framework.utilisateur.*;
+import framework.exception.Ensure;
+import framework.exception.Invariant;
 import framework.exception.NotNullException;
 
 // End of user code
@@ -29,13 +31,15 @@ public class ZonePartage extends ZonePartageSimple {
 
 	// End of user code
 	/**
-	 * The constructor of ZonePartage without owner
+	 * Constructeur d'une zone privée sans Propriétaire (pour un chat privé entre 2
+	 * personnes créé par défaut par exemple)
 	 * 
 	 * @param utilisateursAutorises
 	 * @throws NotNullException
 	 */
 	public ZonePartage(ArrayList<? extends $Utilisateur> utilisateursAutorises) throws NotNullException {
 		super();
+		if(utilisateursAutorises == null)throw new NotNullException("utilisateursAutorises", "ZonePartage.ZonePartage");
 		this.proprietaire = null;
 		this.estPrivee = true;
 		this.utilisateursAutorises = utilisateursAutorises;
@@ -43,7 +47,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * The constructor of ZonePartage is zone privacy is set on public.
+	 * Constructeur d'une zone publique avec un nom
 	 * 
 	 * @param proprietaire
 	 * @throws NotNullException
@@ -51,7 +55,7 @@ public class ZonePartage extends ZonePartageSimple {
 	public ZonePartage($Utilisateur proprietaire, String nom) throws NotNullException {
 		super();
 		if (proprietaire == null)
-			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage");
+			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage.ZonePartage");
 		this.proprietaire = proprietaire;
 		this.estPrivee = false;
 		if (nom == null)
@@ -61,16 +65,17 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * The constructor of ZonePartage is zone privacy is set on private.
+	 * Constructeur d'une zone privée avec une liste d'utilisateurs autorisés à la lire et écrire.
 	 * 
 	 * @param proprietaire
 	 * @param utilisateursAutorises
 	 * @throws NotNullException
 	 */
-	public ZonePartage($Utilisateur proprietaire, ArrayList<? extends $Utilisateur> utilisateursAutorises) throws NotNullException {
+	public ZonePartage($Utilisateur proprietaire, ArrayList<? extends $Utilisateur> utilisateursAutorises)
+			throws NotNullException {
 		super();
 		if (proprietaire == null)
-			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage");
+			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage.ZonePartage");
 		this.proprietaire = proprietaire;
 		this.estPrivee = true;
 		this.utilisateursAutorises = utilisateursAutorises;
@@ -78,7 +83,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * The constructor of ZonePartage is zone privacy is set on private.
+	 * Constructeur d'une zone privée avec une liste d'utilisateurs autorisés à la lire et écrire avec un nom.
 	 * 
 	 * @param proprietaire
 	 * @param utilisateursAutorises
@@ -89,7 +94,7 @@ public class ZonePartage extends ZonePartageSimple {
 			throws NotNullException {
 		super();
 		if (proprietaire == null)
-			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage");
+			throw new NotNullException("$Utilisateur proprietaire", "ZonePartage.ZonePartage");
 		this.proprietaire = proprietaire;
 		this.estPrivee = true;
 		this.utilisateursAutorises = utilisateursAutorises;
@@ -99,6 +104,8 @@ public class ZonePartage extends ZonePartageSimple {
 
 	// Start of user code (user defined methods for ZonePartage)
 	/**
+	 * Renvoie le propriétaire de la zone.
+	 * 
 	 * @return prorietaire
 	 */
 	public $Utilisateur getProprietaire() {
@@ -106,45 +113,89 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
+	 * Modifie le propriétaire de la Zone
 	 * 
 	 * @param proprietaire
 	 * @throws NotNullException
+	 * @ensure this.proprietaire == proprietaire
 	 */
 	public void setProprietaire($Utilisateur proprietaire) throws NotNullException {
 		if (proprietaire == null)
-			throw new NotNullException("$Utilisateur propriÃ©taire", "setProprietaire");
+			throw new NotNullException("$Utilisateur propriÃ©taire", "ZonePartage.setProprietaire");
 		this.proprietaire = proprietaire;
-	}
-
-	public void ajouterUtilisateurs(ArrayList<? extends $Utilisateur> $Utilisateurs) {
-		Iterator<? extends $Utilisateur> it = $Utilisateurs.iterator();
-		while (it.hasNext()) {
-			it.next().rejoindreZone(this);
-		}
+		if(this.proprietaire != proprietaire)throw new Ensure("this.proprietaire == proprietaire","ZonePartage.setProprietaire");
 	}
 
 	/**
+	 * Ajoute une liste d'utilisateur à autoriser
+	 * @param $Utilisateurs
+	 * @throw NotNullException
+	 * @invariant estAutorise(it.next()) == true
+	 */
+	public void ajouterUtilisateurs(ArrayList<? extends $Utilisateur> utililsateurs) {
+		if(utililsateurs == null)throw new NotNullException("utilisateurs","ZonePartage.ajouterUtilisateurs");
+		Iterator<? extends $Utilisateur> it = utililsateurs.iterator();
+		while (it.hasNext()) {
+			it.next().rejoindreZone(this);
+			if(!(estAutorise(it.next())))throw new Invariant("estAutorise(it.next()) == true","ZonePartage.ajouterUtilisateur");
+		}
+	}
+	
+	/**
+	 * Vérifie si un utilisateur appartient à la liste des utilisateurs autorisés
 	 * 
-	 * @return
+	 * @param utilisateur
+	 * @return boolean
+	 * @throw NotNullException
+	 */
+	public boolean estAutorise($Utilisateur utilisateur) {
+		if(utilisateur == null)throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
+		Iterator<? extends $Utilisateur> it = this.utilisateursAutorises.iterator();
+		while(it.hasNext()){
+			if(it.next() == utilisateur)
+				return true;
+		}	
+		return false;
+	}
+	
+	/**
+	 * Retourne la liste des utilisateurs autorisés
+	 * 
+	 * @return ArrayList<? extends $Utilisateur>
+	 */
+	public ArrayList<? extends $Utilisateur> getUtilisateursAutorises() {
+		return utilisateursAutorises;
+	}
+
+	/**
+	 * Modifie la visibilité de la zone en publique
+	 * 
+	 * @return boolean
+	 * @ensure this.estPrivee == false
 	 */
 	public boolean setPublique() {
 		if (this.estPrivee == false)
 			return false;
-		this.utilisateursAutorises = new ArrayList<$Utilisateur>(); //TODO check is OK
+		this.utilisateursAutorises = new ArrayList<$Utilisateur>(); // TODO check is OK
 		this.estPrivee = false;
+		if(this.estPrivee != false)throw new Ensure("estPrivee == false","ZonePartage.setPublique");
 		return true;
 	}
 
 	/**
+	 * Modifie la visibilité de la zone en privée
 	 * 
-	 * @return
+	 * @return boolean
+	 * @ensure this.estPrivee == true
 	 */
 	public boolean setPrivee(ArrayList<? extends $Utilisateur> utilisateursAutorises) {
+		if (utilisateursAutorises == null)throw new NotNullException("utilisateursAutorises","ZonePartage.setPrivee");
 		if (this.estPrivee == true)
 			return false;
 		this.utilisateursAutorises = utilisateursAutorises;
 		this.ajouterUtilisateurs(utilisateursAutorises);
 		this.estPrivee = true;
+		if(this.estPrivee != true)throw new Ensure("estPrivee == true","ZonePartage.setPrivee");
 		return true;
 	}
 
