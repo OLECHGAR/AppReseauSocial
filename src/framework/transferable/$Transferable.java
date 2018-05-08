@@ -106,19 +106,23 @@ public abstract class $Transferable<T> {
 		if (contenu == null)
 			throw new NotNullException("contenu", "setContenu");
 		this.contenu = (T) contenu;
-		if(this.contenu !=contenu)throw new Ensure("getContenu() == contenu", "seContenu");
+		if (this.contenu != contenu)
+			throw new Ensure("getContenu() == contenu", "seContenu");
 	}
-	
+
 	/**
-	 * Retourne l'utilisateur qui a envoyé le $Transferable (qui est donc le proprétaire)
+	 * Retourne l'utilisateur qui a envoyé le $Transferable (qui est donc le
+	 * proprétaire)
 	 * 
 	 * @return ? extends $Utilisateur
 	 * @throws NotNullException
 	 * @require this.requetes.size()>0
 	 */
 	public <T extends $Utilisateur> T getProprietaire() {
-		if(this.requetes == null)throw new NotNullException("$Transferable.requetes","$Transferable.getProprietaire");
-		if(this.requetes.size() == 0)throw new Require("requetes.size()>0 ","$Transferable.getProprietaire");
+		if (this.requetes == null)
+			throw new NotNullException("$Transferable.requetes", "$Transferable.getProprietaire");
+		if (this.requetes.size() == 0)
+			throw new Require("requetes.size()>0 ", "$Transferable.getProprietaire");
 		Iterator<$Requete<?>> it = this.requetes.iterator();
 		while (it.hasNext()) {
 			$Requete<?> requete = it.next();
@@ -135,13 +139,15 @@ public abstract class $Transferable<T> {
 	 * @return String
 	 */
 	public String timeMessage() {
-		if(this.heure == null)throw new NotNullException("$Transferable.heure","$Transferable.timeMessage");
+		if (this.heure == null)
+			throw new NotNullException("$Transferable.heure", "$Transferable.timeMessage");
 		DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		return sdf.format(this.heure);
 	}
 
 	/**
-	 * Vérifie si la requete passée en paramètre appartient à la liste de requete du $Transferable
+	 * Vérifie si la requete passée en paramètre appartient à la liste de requete du
+	 * $Transferable
 	 * 
 	 * @param requete
 	 * @return boolean
