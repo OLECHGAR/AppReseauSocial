@@ -42,7 +42,7 @@ public abstract class $Transferable<T> {
 	 * Constructeur de $Transferable
 	 * 
 	 * @param zone
-	 *            (La zone où sera le $Transferable)
+	 *            (La zone oï¿½ sera le $Transferable)
 	 * @throws NotNullException
 	 */
 	public $Transferable(ZonePartageSimple zone) throws NotNullException {
@@ -80,7 +80,7 @@ public abstract class $Transferable<T> {
 	}
 
 	/**
-	 * Ajoute la $Requete passée en paramètre dans la liste de requetes
+	 * Ajoute la $Requete passï¿½e en paramï¿½tre dans la liste de requetes
 	 * 
 	 * @param requete
 	 * @throws NotNullException
@@ -102,7 +102,7 @@ public abstract class $Transferable<T> {
 	 * @ensure this.contenu == contenu
 	 */
 	public void setContenu(Object contenu) throws NotNullException {
-		// TODO changer type object en plus gÃ©nÃ©rique
+		//TODO changer type object en plus gÃ©nÃ©rique
 		if (contenu == null)
 			throw new NotNullException("contenu", "setContenu");
 		this.contenu = (T) contenu;
@@ -111,14 +111,14 @@ public abstract class $Transferable<T> {
 	}
 
 	/**
-	 * Retourne l'utilisateur qui a envoyé le $Transferable (qui est donc le
-	 * proprétaire)
+	 * Retourne l'utilisateur qui a envoyï¿½ le $Transferable (qui est donc le
+	 * proprï¿½taire)
 	 * 
 	 * @return ? extends $Utilisateur
 	 * @throws NotNullException
 	 * @require this.requetes.size()>0
 	 */
-	public <T extends $Utilisateur> T getProprietaire() {
+	public $Utilisateur getProprietaire() {
 		if (this.requetes == null)
 			throw new NotNullException("$Transferable.requetes", "$Transferable.getProprietaire");
 		if (this.requetes.size() == 0)
@@ -126,15 +126,15 @@ public abstract class $Transferable<T> {
 		Iterator<$Requete<?>> it = this.requetes.iterator();
 		while (it.hasNext()) {
 			$Requete<?> requete = it.next();
-			if (requete.getClass() == new Envoi().getClass()) {
-				return (T) requete.getUtilisateur();
+			if (requete.getClass() == new Envoi<$Utilisateur>().getClass()) {
+				return requete.getUtilisateur();
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Retourne l'heure à laquelle le message a été envoyé
+	 * Retourne l'heure ï¿½ laquelle le message a ï¿½tï¿½ envoyï¿½
 	 * 
 	 * @return String
 	 */
@@ -146,7 +146,7 @@ public abstract class $Transferable<T> {
 	}
 
 	/**
-	 * Vérifie si la requete passée en paramètre appartient à la liste de requete du
+	 * Vï¿½rifie si la requete passï¿½e en paramï¿½tre appartient ï¿½ la liste de requete du
 	 * $Transferable
 	 * 
 	 * @param requete
