@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
-import framework.zonesPartage.ZonePartage;
+import framework.zonesPartages.ZonePartage;
 
 public class SalonDiscussion extends ZonePartage {
 
 	private static int nbSalon;
 	/**
-	 * Permet de référencer un salon de manière unique
+	 * Permet de rï¿½fï¿½rencer un salon de maniï¿½re unique
 	 */
 	private final int references;
 

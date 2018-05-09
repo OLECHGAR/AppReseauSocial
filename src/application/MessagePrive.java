@@ -2,7 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
-import framework.zonesPartage.ZonePartageSimple;
+import framework.zonesPartages.ZonePartageSimple;
 
 /**
  * Salon privé entre deux p
