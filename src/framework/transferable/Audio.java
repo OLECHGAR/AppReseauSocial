@@ -5,7 +5,7 @@ package framework.transferable;
 // Start of user code (user defined imports)
 
 import framework.exception.NotNullException;
-import framework.zonesPartage.ZonePartageSimple;
+import framework.zonesPartages.ZonePartageSimple;
 
 // End of user code
 

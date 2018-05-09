@@ -4,7 +4,7 @@ package framework.rmi;
  * 2018, All rights reserved.
  *******************************************************************************/
 import framework.utilisateur.*;
-import framework.zonesPartage.ZonePartageSimple;
+import framework.zonesPartages.ZonePartageSimple;
 import framework.exception.NotNullException;
 import framework.transferable.*;
 // Start of user code (user defined imports)

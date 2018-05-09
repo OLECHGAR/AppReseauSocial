@@ -6,7 +6,7 @@ package framework.rmi;
 
 // Start of user code (user defined imports)
 import framework.utilisateur.*;
-import framework.zonesPartage.*;
+import framework.zonesPartages.*;
 
 import framework.exception.NotNullException;
 // End of user code

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 import framework.utilisateur.*;
-import framework.zonesPartage.*;
+import framework.zonesPartages.*;
 import framework.rmi.*;
 import framework.exception.*;
 /*******************************************************************************

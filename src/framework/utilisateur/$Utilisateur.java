@@ -10,7 +10,7 @@ import framework.exception.Ensure;
 import framework.exception.NotNullException;
 // Start of user code (user defined imports)
 import framework.rmi.*;
-import framework.zonesPartage.*;
+import framework.zonesPartages.*;
 // End of user code
 
 /**
@@ -101,7 +101,7 @@ public abstract class $Utilisateur{
 	}
 
 	/**
-	 * Permet d'ajouter une zone créée dans la liste de zones créées
+	 * Permet d'ajouter une zone crï¿½ï¿½e dans la liste de zones crï¿½ï¿½es
 	 * 
 	 * @param nouvelleZone
 	 * @throws NotNullException

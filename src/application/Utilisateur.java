@@ -30,7 +30,7 @@ public class Utilisateur extends $Utilisateur {
 	private ArrayList<Utilisateur> relations = new ArrayList<Utilisateur>();
 
 	/**
-	 * Collection d'entier contenant les références des zones abonnées par
+	 * Collection d'entier contenant les rï¿½fï¿½rences des zones abonnï¿½es par
 	 * l'utilisateur
 	 */
 	protected HashSet<Integer> zonesAbonement = new HashSet<Integer>();
@@ -58,9 +58,9 @@ public class Utilisateur extends $Utilisateur {
 		this.adresse = adresse;
 		this.mail = mail;
 		this.dateNaissance = dateNaissance;
-
+		
 		Connection con = DriverManager
-				.getConnection("jdbc:sqlite:lib/nineshare.db");
+				.getConnection("jdbc:sqlite:/ext/monbeigj/git/9Share/lib/NineShare.db");
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -73,7 +73,7 @@ public class Utilisateur extends $Utilisateur {
 		statement1.setString(2, login);
 		ResultSet result = statement1.executeQuery();
 		if (result.next()) {
-			System.out.println("nom d'utilisateur ou login déja pris");
+			System.out.println("nom d'utilisateur ou login dï¿½ja pris");
 		} else {
 			String sql = "INSERT INTO utilisateur (id_u,login,motDePasse,nom,prenom,adresse,mail,dateNaissance)"
 					+ "VALUES (?,?,?,?,?,?,?,?)";
@@ -88,7 +88,7 @@ public class Utilisateur extends $Utilisateur {
 			statement.setString(8, dateNaissance.toString());
 			statement.executeUpdate();
 
-			System.out.println("inscription effectué");
+			System.out.println("inscription effectuï¿½");
 		}
 		con.close();
 	}

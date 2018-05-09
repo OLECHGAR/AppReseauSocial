@@ -1,13 +1,11 @@
 package application;
 	
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import framework.rmi.ReseauSocial;
+import application.serveur.ReseauSocial;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
