@@ -1,20 +1,18 @@
 package framework.rmi;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.sql.SQLException;
 
 public class Serveur {
 
-	public static void main(String[] args) throws RemoteException, MalformedURLException {
-		
-		ReseauSocialImplementation reseau = new ReseauSocialImplementation();
-		
-		// FAIRE LA CONNEXION A LA BASE DE DONNÉES ICI
-		// REMPLIR L'OBJET "reseau"
-		
-		Naming.rebind("reseau", reseau); // ON MET A DISPOSITION CET OBJET A DISTANCE VIA RMI
-	}
+	public static void main(String[] args) throws RemoteException, MalformedURLException, SQLException {
 
+		System.setProperty("java.rmi.server.hostname", "129.88.153.41");
+		Registry rmi = LocateRegistry.createRegistry(1099);
+		ReseauSocialImplementation reseau = new ReseauSocialImplementation();
+		rmi.rebind("reseau", reseau); //ON REND DISPONIBLE L'OBJET A DISTANCE
+	}
 }
