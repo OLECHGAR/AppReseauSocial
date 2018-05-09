@@ -1,6 +1,6 @@
 package tests;
 
-import framework.zonesPartage.*;
+import framework.zonesPartages.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
