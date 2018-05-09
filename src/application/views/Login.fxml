@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="568.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="568.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LoginController">
    <children>
       <AnchorPane prefHeight="190.0" prefWidth="388.0">
          <children>
@@ -50,19 +50,19 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <JFXTextField layoutX="125.0" layoutY="213.0" prefHeight="26.0" prefWidth="150.0">
+                  <JFXTextField fx:id="adresseIP" layoutX="125.0" layoutY="213.0" prefHeight="26.0" prefWidth="150.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
-                  <JFXTextField layoutX="127.0" layoutY="261.0" prefHeight="26.0" prefWidth="150.0">
+                  <JFXTextField fx:id="port" layoutX="127.0" layoutY="261.0" prefHeight="26.0" prefWidth="150.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
                   <Label layoutX="14.0" layoutY="219.0" prefHeight="26.0" prefWidth="87.0" text="Hostname" />
                   <Label layoutX="16.0" layoutY="269.0" prefHeight="26.0" prefWidth="87.0" text="Port" />
-                  <JFXButton fx:id="btn_connect" layoutX="165.0" layoutY="312.0" style="-fx-background-color: #0072BB;" text="Connect" textFill="WHITE" />
+                  <JFXButton fx:id="btn_connect" layoutX="165.0" layoutY="312.0" style="-fx-background-color: #0072BB;" text="Connect" textFill="WHITE" onMouseClicked="#submitPressed"/>
                   <JFXButton fx:id="btn_create" buttonType="RAISED" layoutX="284.0" layoutY="14.0" style="-fx-background-color: #00B6F1;" text="... or create " textFill="WHITE" />
                   <JFXPasswordField layoutX="122.0" layoutY="92.0" />
                   <Label layoutX="168.0" layoutY="350.0" prefHeight="18.0" prefWidth="78.0" text="9Share App" textFill="#aba6a6">

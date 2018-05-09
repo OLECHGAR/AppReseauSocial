@@ -18,7 +18,7 @@ public class demo9share extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/application/views/Chat.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/application/views/Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -30,6 +30,8 @@ public class demo9share extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
+		launch(args);
 			
 		ReseauSocial reseauSocial = null; //REPRESENTE L'OBJET QU'ON VA RECUPERER DU SERVEUR
 		try {
@@ -41,7 +43,7 @@ public class demo9share extends Application {
 			System.err.println("RemoteException");
 		}
 		
-		launch(args);
+		
 		
 		//LANCER L'IHM
 		

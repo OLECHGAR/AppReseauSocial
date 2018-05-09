@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 
 import framework.exception.NotNullException;
@@ -26,7 +25,8 @@ public class Utilisateur extends $Utilisateur {
 	private String prenom;
 	private String adresse;
 	private String mail;
-	private Date dateNaissance;
+	//TODO change date String to Date
+	private String dateNaissance;
 	private ArrayList<Utilisateur> relations = new ArrayList<Utilisateur>();
 
 	/**
@@ -47,8 +47,9 @@ public class Utilisateur extends $Utilisateur {
 	 * @throws SQLException
 	 */
 	public Utilisateur(String id, String login, String mdp, String nom,
-			String prenom, String adresse, String mail, Date dateNaissance)
+			String prenom, String adresse, String mail, String dateNaissance , Connection con)
 			throws SQLException {
+		//TODO change date String to Date
 		super();
 		this.id = id;
 		this.login = login;
@@ -58,9 +59,11 @@ public class Utilisateur extends $Utilisateur {
 		this.adresse = adresse;
 		this.mail = mail;
 		this.dateNaissance = dateNaissance;
+
 		
-		Connection con = DriverManager
-				.getConnection("jdbc:sqlite:/ext/monbeigj/git/9Share/lib/NineShare.db");
+		//Connection con = DriverManager
+			//	.getConnection("jdbc:sqlite:/ext/cluselm/git/9Share/src/libs/NineShare.db");
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -73,7 +76,7 @@ public class Utilisateur extends $Utilisateur {
 		statement1.setString(2, login);
 		ResultSet result = statement1.executeQuery();
 		if (result.next()) {
-			System.out.println("nom d'utilisateur ou login d�ja pris");
+			/*TODO ajouter un message box : compte deja pri */
 		} else {
 			String sql = "INSERT INTO utilisateur (id_u,login,motDePasse,nom,prenom,adresse,mail,dateNaissance)"
 					+ "VALUES (?,?,?,?,?,?,?,?)";
@@ -88,9 +91,8 @@ public class Utilisateur extends $Utilisateur {
 			statement.setString(8, dateNaissance.toString());
 			statement.executeUpdate();
 
-			System.out.println("inscription effectu�");
+			/*TODO ajouter un message box : inscription ok */
 		}
-		con.close();
 	}
 
 	/**
@@ -163,7 +165,8 @@ public class Utilisateur extends $Utilisateur {
 	 * @throws SQLException
 	 */
 	public void modifierInformations(String nom, String prenom, String adresse,
-			String mail, Date dateNaissance) throws SQLException {
+			String mail, String dateNaissance) throws SQLException {
+		//TODO change date String to Date
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -218,12 +221,17 @@ public class Utilisateur extends $Utilisateur {
 		return this.nom;
 	}
 
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
+		//TODO change date String to Date
 		return this.dateNaissance;
 	}
 
 	public ArrayList<Utilisateur> getRelations() {
 		return this.relations;
+	}
+	
+	public String getId() {
+		return id;
 	}
 
 }
