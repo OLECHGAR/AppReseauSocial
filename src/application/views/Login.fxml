@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="568.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="190.0" prefWidth="388.0">
+         <children>
+            <Pane layoutY="-2.0" prefHeight="191.0" prefWidth="390.0" style="-fx-background-color: #0072BB;">
+               <children>
+                  <ImageView fitHeight="101.0" fitWidth="150.0" layoutX="128.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../ressources/logo.png" />
+                     </image>
+                  </ImageView>
+                  <FontAwesomeIconView fx:id="btn_close" fill="WHITE" glyphName="CLOSE" layoutX="358.0" layoutY="27.0" onMouseClicked="#close" size="18" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="188.0" prefHeight="381.0" prefWidth="389.0">
+         <children>
+            <Pane prefHeight="381.0" prefWidth="390.0" style="-fx-background-color: #fff;">
+               <children>
+                  <ChoiceBox fx:id="list_users" layoutX="124.0" layoutY="13.0" prefWidth="150.0" style="-fx-background-color: #00B6F1;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ChoiceBox>
+                  <Label layoutX="16.0" layoutY="13.0" prefHeight="26.0" prefWidth="87.0" text="Choose user" />
+                  <JFXTextField layoutX="123.0" layoutY="51.0" prefHeight="26.0" prefWidth="150.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <Label layoutX="16.0" layoutY="63.0" prefHeight="26.0" prefWidth="87.0" text="Username" />
+                  <Label layoutX="16.0" layoutY="101.0" prefHeight="26.0" prefWidth="87.0" text="Password" />
+                  <Label layoutX="131.0" layoutY="165.0" prefHeight="26.0" prefWidth="140.0" text="Server Connection">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <JFXTextField layoutX="125.0" layoutY="213.0" prefHeight="26.0" prefWidth="150.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <JFXTextField layoutX="127.0" layoutY="261.0" prefHeight="26.0" prefWidth="150.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <Label layoutX="14.0" layoutY="219.0" prefHeight="26.0" prefWidth="87.0" text="Hostname" />
+                  <Label layoutX="16.0" layoutY="269.0" prefHeight="26.0" prefWidth="87.0" text="Port" />
+                  <JFXButton fx:id="btn_connect" layoutX="165.0" layoutY="312.0" style="-fx-background-color: #0072BB;" text="Connect" textFill="WHITE" />
+                  <JFXButton fx:id="btn_create" buttonType="RAISED" layoutX="284.0" layoutY="14.0" style="-fx-background-color: #00B6F1;" text="... or create " textFill="WHITE" />
+                  <JFXPasswordField layoutX="122.0" layoutY="92.0" />
+                  <Label layoutX="168.0" layoutY="350.0" prefHeight="18.0" prefWidth="78.0" text="9Share App" textFill="#aba6a6">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

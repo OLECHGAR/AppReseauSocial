@@ -5,6 +5,7 @@ import framework.zonesPartage.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,10 +18,10 @@ public class TestEnvoiSurZonePartage {
 
 	private static int nbRequetes = 0;
 
-	public static void main(String[] args) throws NotNullException {
+	public static void main(String[] args) throws NotNullException, SQLException {
 		// TODO Auto-generated method stub
-		Utilisateur u = new Utilisateur("Bernard","","Bernard","","","", new Date());
-		Utilisateur u2 = new Utilisateur("Gerard","","Gerard","","","", null);
+		Utilisateur u = new Utilisateur("Bernard","","Bernard","","","", null, new Date());
+		Utilisateur u2 = new Utilisateur("Gerard","","Gerard","","","", null, new Date());
 		String nomZone = "Test";
 		ArrayList<Utilisateur> listU = new ArrayList<Utilisateur>();
 		// listU.add(u2);
