@@ -1,4 +1,4 @@
-package framework.rmi;
+package application.serveur;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;

@@ -1,4 +1,4 @@
-package framework.rmi;
+package application.serveur;
 
 import java.rmi.Remote;
 

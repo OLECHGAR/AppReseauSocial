@@ -1,4 +1,4 @@
-package framework.zonesPartage;
+package framework.zonesPartages;
 
 //Start of user code (user defined imports)
 import java.util.ArrayList;
