@@ -1,4 +1,4 @@
-package framework.zonesPartage;
+package framework.zonesPartages;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

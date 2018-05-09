@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import framework.rmi.ReseauSocial;
 import javafx.application.Application;
@@ -30,18 +32,18 @@ public class demo9share extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
-		
+			
 		ReseauSocial reseauSocial = null; //REPRESENTE L'OBJET QU'ON VA RECUPERER DU SERVEUR
 		try {
-			reseauSocial = (ReseauSocial) Naming.lookup("reseau");
+			Registry rmi = LocateRegistry.getRegistry("129.88.153.41", 1099);
+			reseauSocial = (ReseauSocial) rmi.lookup("reseau");
 		} catch (NotBoundException e) {
 			System.err.println("NotBoundException");
-		} catch (MalformedURLException e) {
-			System.err.println("MalformedURLException");
 		} catch (RemoteException e) {
 			System.err.println("RemoteException");
 		}
+		
+		launch(args);
 		
 		//LANCER L'IHM
 		

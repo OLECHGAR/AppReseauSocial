@@ -16,7 +16,7 @@ import framework.exception.NotNullException;
  * 
  * @author monbeigj
  */
-public class Envoi extends $Requete {
+public class Envoi<T extends $Utilisateur> extends $Requete<T> {
 	// Start of user code (user defined attributes for Envoie)
 	// End of user code
 
@@ -37,7 +37,7 @@ public class Envoi extends $Requete {
 	 * @param type
 	 * @throws NotNullException
 	 */
-	public <T> Envoi(T contenu, $Utilisateur u, ZonePartageSimple zoneDestination, String type) throws NotNullException {
+	public <C> Envoi(C contenu, T u, ZonePartageSimple zoneDestination, String type) throws NotNullException {
 		// Start of user code constructor for Envoie)
 		super(u, type);
 		super.setTransferable(contenu, zoneDestination);

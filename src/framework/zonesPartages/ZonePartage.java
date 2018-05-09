@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2018, All rights reserved.
  *******************************************************************************/
-package framework.zonesPartage;
+package framework.zonesPartages;
 // Start of user code (user defined imports)
 
 import java.util.ArrayList;
@@ -130,26 +130,27 @@ public class ZonePartage extends ZonePartageSimple {
 	 * Ajoute une liste d'utilisateur � autoriser
 	 * @param $Utilisateurs
 	 * @throw NotNullException
-	 * @invariant estAutorise(it.next()) == true
+	 * @invariant estAjoute(it.next()) == true
 	 */
 	public void ajouterUtilisateurs(ArrayList<? extends $Utilisateur> utililsateurs) {
 		if(utililsateurs == null)throw new NotNullException("utilisateurs","ZonePartage.ajouterUtilisateurs");
 		Iterator<? extends $Utilisateur> it = utililsateurs.iterator();
 		while (it.hasNext()) {
-			it.next().rejoindreZone(this);
-			if(!(estAutorise(it.next())))throw new Invariant("estAutorise(it.next()) == true","ZonePartage.ajouterUtilisateur");
+			if(!(estAjoute(it.next())))throw new Invariant("estAjoute(it.next()) == true","ZonePartage.ajouterUtilisateur");
 		}
 	}
 	
 	/**
 	 * V�rifie si un utilisateur appartient � la liste des utilisateurs autoris�s
+	 * Ajoute et vérifie si utilisateur est bien ajouté à la liste
 	 * 
 	 * @param utilisateur
 	 * @return boolean
 	 * @throw NotNullException
 	 */
-	public boolean estAutorise($Utilisateur utilisateur) {
+	public boolean estAjoute($Utilisateur utilisateur) {
 		if(utilisateur == null)throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
+		utilisateur.rejoindreZone(this);
 		Iterator<? extends $Utilisateur> it = this.utilisateursAutorises.iterator();
 		while(it.hasNext()){
 			if(it.next() == utilisateur)
