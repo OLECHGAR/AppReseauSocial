@@ -1,5 +1,7 @@
 package framework.zonesPartage;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 //Start of user code (user defined imports)
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +15,11 @@ import framework.transferable.$Transferable;
  * 
  * @author pignardf
  */
-public class ZonePartageSimple {
+public class ZonePartageSimple{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Start of user code (user defined attributes for ZonePartage)
 	// TODO <?extends type de contenu dans trasnferable quand a sera clair>
 	protected ArrayList<$Transferable<?>> transferables = new ArrayList<$Transferable<?>>();
@@ -21,8 +27,9 @@ public class ZonePartageSimple {
 
 	/**
 	 * The constructor.
+	 * @throws RemoteException 
 	 */
-	public ZonePartageSimple() {
+	public ZonePartageSimple(){
 		// Start of user code constructor for Reception)
 		super();
 		// End of user code

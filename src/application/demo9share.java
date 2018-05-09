@@ -20,7 +20,6 @@ public class demo9share extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/views/Chat.fxml"));
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.initStyle(StageStyle.UNDECORATED);

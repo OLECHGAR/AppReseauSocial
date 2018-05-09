@@ -31,8 +31,8 @@ public class ZonePartage extends ZonePartageSimple {
 
 	// End of user code
 	/**
-	 * Constructeur d'une zone privée sans Propriétaire (pour un chat privé entre 2
-	 * personnes créé par défaut par exemple)
+	 * Constructeur d'une zone privï¿½e sans Propriï¿½taire (pour un chat privï¿½ entre 2
+	 * personnes crï¿½ï¿½ par dï¿½faut par exemple)
 	 * 
 	 * @param utilisateursAutorises
 	 * @throws NotNullException
@@ -65,7 +65,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Constructeur d'une zone privée avec une liste d'utilisateurs autorisés à la lire et écrire.
+	 * Constructeur d'une zone privï¿½e avec une liste d'utilisateurs autorisï¿½s ï¿½ la lire et ï¿½crire.
 	 * 
 	 * @param proprietaire
 	 * @param utilisateursAutorises
@@ -83,7 +83,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Constructeur d'une zone privée avec une liste d'utilisateurs autorisés à la lire et écrire avec un nom.
+	 * Constructeur d'une zone privï¿½e avec une liste d'utilisateurs autorisï¿½s ï¿½ la lire et ï¿½crire avec un nom.
 	 * 
 	 * @param proprietaire
 	 * @param utilisateursAutorises
@@ -104,7 +104,7 @@ public class ZonePartage extends ZonePartageSimple {
 
 	// Start of user code (user defined methods for ZonePartage)
 	/**
-	 * Renvoie le propriétaire de la zone.
+	 * Renvoie le propriï¿½taire de la zone.
 	 * 
 	 * @return prorietaire
 	 */
@@ -113,7 +113,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Modifie le propriétaire de la Zone
+	 * Modifie le propriï¿½taire de la Zone
 	 * 
 	 * @param proprietaire
 	 * @throws NotNullException
@@ -127,7 +127,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Ajoute une liste d'utilisateur à autoriser
+	 * Ajoute une liste d'utilisateur ï¿½ autoriser
 	 * @param $Utilisateurs
 	 * @throw NotNullException
 	 * @invariant estAutorise(it.next()) == true
@@ -142,7 +142,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 	
 	/**
-	 * Vérifie si un utilisateur appartient à la liste des utilisateurs autorisés
+	 * Vï¿½rifie si un utilisateur appartient ï¿½ la liste des utilisateurs autorisï¿½s
 	 * 
 	 * @param utilisateur
 	 * @return boolean
@@ -159,7 +159,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 	
 	/**
-	 * Retourne la liste des utilisateurs autorisés
+	 * Retourne la liste des utilisateurs autorisï¿½s
 	 * 
 	 * @return ArrayList<? extends $Utilisateur>
 	 */
@@ -168,7 +168,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Modifie la visibilité de la zone en publique
+	 * Modifie la visibilitï¿½ de la zone en publique
 	 * 
 	 * @return boolean
 	 * @ensure this.estPrivee == false
@@ -183,7 +183,7 @@ public class ZonePartage extends ZonePartageSimple {
 	}
 
 	/**
-	 * Modifie la visibilité de la zone en privée
+	 * Modifie la visibilitï¿½ de la zone en privï¿½e
 	 * 
 	 * @return boolean
 	 * @ensure this.estPrivee == true
