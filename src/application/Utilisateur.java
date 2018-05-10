@@ -16,7 +16,7 @@ import framework.utilisateur.$Utilisateur;
  * @author monbeigj
  *
  */
-public class Utilisateur extends $Utilisateur {
+public class Utilisateur extends $Utilisateur implements java.io.Serializable{
 
 	private String login;
 	private String motDePasse;
@@ -76,7 +76,7 @@ public class Utilisateur extends $Utilisateur {
 					+ "VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, login);
-			statement.setString(2, this.motDePasse);
+			statement.setString(2, mdp);
 			statement.setString(3, nom);
 			statement.setString(4, prenom);
 			statement.setString(5, adresse);

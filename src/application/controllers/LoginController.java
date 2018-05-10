@@ -13,15 +13,12 @@ import de.jensd.fx.glyphs.fontawesome.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -29,7 +26,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
-import application.Connexion;
 import application.Utilisateur;
 import application.serveur.ReseauSocial;
 
@@ -82,8 +78,9 @@ public class LoginController implements Initializable {
 		}
 		System.out.println("coucou");
 		
-		Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Deen\\git\\9Share\\src\\libs\\NineShare.db");
-		Utilisateur user = (new Connexion().login(this.username.getText(), this.password.getText(), con));
+		reseauSocial.openConnection();
+		Utilisateur user = reseauSocial.login(this.username.getText(), this.password.getText());
+		reseauSocial.closeConnection();
 		
 		if(user != null)
 		{
@@ -100,7 +97,6 @@ public class LoginController implements Initializable {
 			alert.setHeaderText("Combinaison login/mot de passe incorrecte");
 			alert.showAndWait();
 		}
-		con.close();
 	}
 
 	@Override

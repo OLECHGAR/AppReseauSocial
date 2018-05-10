@@ -32,13 +32,23 @@
          <children>
             <Pane prefHeight="318.0" prefWidth="770.0" style="-fx-background-color: #fff;">
                <children>
-                  <JFXTextField fx:id="surname_u" layoutX="174.0" layoutY="76.0" prefHeight="26.0" prefWidth="150.0">
+               <JFXTextField fx:id="hostname" layoutX="174.0" layoutY="65.0" prefHeight="26.0" prefWidth="150.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
-                  <Label layoutX="48.0" layoutY="87.0" prefHeight="26.0" prefWidth="87.0" text="Surname" />
-                  <Label layoutX="48.0" layoutY="193.0" prefHeight="26.0" prefWidth="87.0" text="login" />
+               <JFXTextField fx:id="port" layoutX="174.0" layoutY="70.0" prefHeight="26.0" prefWidth="150.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <JFXTextField fx:id="firstname_u" layoutX="174.0" layoutY="76.0" prefHeight="26.0" prefWidth="150.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <Label layoutX="48.0" layoutY="87.0" prefHeight="26.0" prefWidth="87.0" text="First name" />
+                  <Label layoutX="48.0" layoutY="193.0" prefHeight="26.0" prefWidth="87.0" text="Login" />
                   <Label layoutX="323.0" layoutY="32.0" prefHeight="26.0" prefWidth="140.0" text="User informations">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -49,8 +59,8 @@
                      </opaqueInsets>
                   </JFXTextField>
                   <Label layoutX="48.0" layoutY="139.0" prefHeight="26.0" prefWidth="87.0" text="Name" />
-                  <JFXButton fx:id="btn_connect" layoutX="571.0" layoutY="238.0" onAction="#create" style="-fx-background-color: #0072BB;" text="Create" textFill="WHITE" />
-                  <JFXPasswordField fx:id="login_u" layoutX="174.0" layoutY="180.0" prefHeight="26.0" prefWidth="150.0" />
+                  <JFXButton fx:id="btn_create" layoutX="571.0" layoutY="238.0" onAction="#create" style="-fx-background-color: #0072BB;" text="Create" textFill="WHITE" />
+                  <JFXTextField fx:id="login_u" layoutX="174.0" layoutY="180.0" prefHeight="26.0" prefWidth="150.0" />
                   <Label layoutX="350.0" layoutY="288.0" prefHeight="18.0" prefWidth="78.0" text="9Share App" textFill="#aba6a6">
                      <font>
                         <Font size="11.0" />
