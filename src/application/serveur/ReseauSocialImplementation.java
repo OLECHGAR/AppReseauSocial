@@ -22,32 +22,37 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 	// Liste des utilisateurs du réseau social
 	private ArrayList<Utilisateur> listeUtilisateurs;
 
-	protected ReseauSocialImplementation() throws RemoteException, SQLException {
+	protected ReseauSocialImplementation() throws RemoteException {
 		super();
 		this.listeUtilisateurs = new ArrayList<Utilisateur>();
 
-		Connection con3 = DriverManager.getConnection("jdbc:sqlite:/ext/cluselm/git/9Share/src/libs/NineShare.db");
 		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
+			Connection con3 = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Deen\\git\\9Share\\src\\libs\\NineShare.db");
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String sql4 = "SELECT * FROM utilisateur";
+			PreparedStatement statement4 = con3.prepareStatement(sql4);
+			ResultSet res4 = statement4.executeQuery();
+
+			while (res4.next()) {
+				this.listeUtilisateurs
+						.add(new Utilisateur(res4.getString(1), res4.getString(2), res4.getString(3), res4.getString(4),
+								res4.getString(5), res4.getString(6), res4.getString(7), con3));
+			}
+			con3.close();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String sql4 = "SELECT * FROM utilisateur";
-		PreparedStatement statement4 = con3.prepareStatement(sql4);
-		ResultSet res4 = statement4.executeQuery();
-
-		while (res4.next()) {
-			this.listeUtilisateurs
-					.add(new Utilisateur(res4.getString(1), res4.getString(2), res4.getString(3), res4.getString(4),
-							res4.getString(5), res4.getString(6), res4.getString(7), res4.getString(8), con3));
-		}
-		con3.close();
 
 		Iterator<Utilisateur> it = this.listeUtilisateurs.iterator();
 		while (it.hasNext()) {
 			Utilisateur u = it.next();
-			System.out.println("Id : " + u.getId() + " ; " + "Login : " + u.getLogin() + " ; " + " Nom : " + u.getNom() + " ; " + " Prenom : "
+			System.out.println("Login : " + u.getLogin() + " ; " + " Nom : " + u.getNom() + " ; " + " Prenom : "
 					+ u.getPrenom() + " ; " + " Adresse : " + u.getAdresse() + " ; " + " DateNaissance : "
 					+ u.getDateNaissance() + " ; " + " Mail : " + u.getMail());
 		}

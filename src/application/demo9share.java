@@ -33,18 +33,6 @@ public class demo9share extends Application {
 		
 		launch(args);
 			
-		ReseauSocial reseauSocial = null; //REPRESENTE L'OBJET QU'ON VA RECUPERER DU SERVEUR
-		try {
-			Registry rmi = LocateRegistry.getRegistry("129.88.153.41", 1099);
-			reseauSocial = (ReseauSocial) rmi.lookup("reseau");
-		} catch (NotBoundException e) {
-			System.err.println("NotBoundException");
-		} catch (RemoteException e) {
-			System.err.println("RemoteException");
-		}
-		
-		
-		
 		//LANCER L'IHM
 		
 		// CONNEXION

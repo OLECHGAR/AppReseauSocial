@@ -20,12 +20,11 @@ public class Utilisateur extends $Utilisateur {
 
 	private String login;
 	private String motDePasse;
-	private String id;
 	private String nom;
 	private String prenom;
 	private String adresse;
 	private String mail;
-	//TODO change date String to Date
+	// TODO change date String to Date
 	private String dateNaissance;
 	private ArrayList<Utilisateur> relations = new ArrayList<Utilisateur>();
 
@@ -46,12 +45,10 @@ public class Utilisateur extends $Utilisateur {
 	 * @param dateNaissance
 	 * @throws SQLException
 	 */
-	public Utilisateur(String id, String login, String mdp, String nom,
-			String prenom, String adresse, String mail, String dateNaissance , Connection con)
-			throws SQLException {
-		//TODO change date String to Date
+	public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, String mail,
+			String dateNaissance, Connection con) throws SQLException {
+		// TODO change date String to Date
 		super();
-		this.id = id;
 		this.login = login;
 		this.motDePasse = mdp;
 		this.prenom = prenom;
@@ -60,45 +57,41 @@ public class Utilisateur extends $Utilisateur {
 		this.mail = mail;
 		this.dateNaissance = dateNaissance;
 
-		
-		//Connection con = DriverManager
-			//	.getConnection("jdbc:sqlite:/ext/cluselm/git/9Share/src/libs/NineShare.db");
-		
+		// Connection con = DriverManager
+		// .getConnection("jdbc:sqlite:/ext/cluselm/git/9Share/src/libs/NineShare.db");
+
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		PreparedStatement statement1 = con
-				.prepareStatement("select * from utilisateur where id_u= ? or login= ?");
-		statement1.setString(1, id);
-		statement1.setString(2, login);
+		PreparedStatement statement1 = con.prepareStatement("select * from utilisateur where login= ?");
+		statement1.setString(1, login);
 		ResultSet result = statement1.executeQuery();
 		if (result.next()) {
-			/*TODO ajouter un message box : compte deja pri */
+			/* TODO ajouter un message box : compte deja pri */
 		} else {
-			String sql = "INSERT INTO utilisateur (id_u,login,motDePasse,nom,prenom,adresse,mail,dateNaissance)"
-					+ "VALUES (?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO utilisateur (login,motDePasse,nom,prenom,adresse,mail,dateNaissance)"
+					+ "VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement statement = con.prepareStatement(sql);
-			statement.setString(1, id);
-			statement.setString(2, login);
-			statement.setString(3, this.motDePasse);
-			statement.setString(4, nom);
-			statement.setString(5, prenom);
-			statement.setString(6, adresse);
-			statement.setString(7, mail);
-			statement.setString(8, dateNaissance.toString());
+			statement.setString(1, login);
+			statement.setString(2, this.motDePasse);
+			statement.setString(3, nom);
+			statement.setString(4, prenom);
+			statement.setString(5, adresse);
+			statement.setString(6, mail);
+			statement.setString(7, dateNaissance.toString());
 			statement.executeUpdate();
 
-			/*TODO ajouter un message box : inscription ok */
+			/* TODO ajouter un message box : inscription ok */
 		}
 	}
-	
-	public Utilisateur(String id, String login, String mdp, String nom,
-			String prenom, String adresse, String mail, String dateNaissance ) {
+
+	public Utilisateur(String login, String mdp, String nom, String prenom, String adresse, String mail,
+			String dateNaissance) {
+		// TODO change date String to Date
 		super();
-		this.id = id;
 		this.login = login;
 		this.motDePasse = mdp;
 		this.prenom = prenom;
@@ -106,7 +99,6 @@ public class Utilisateur extends $Utilisateur {
 		this.adresse = adresse;
 		this.mail = mail;
 		this.dateNaissance = dateNaissance;
-		
 	}
 
 	/**
@@ -118,8 +110,7 @@ public class Utilisateur extends $Utilisateur {
 	public boolean abonner(SalonDiscussion refZone) throws NotNullException {
 		// Use SalonDiscussion to be more safe.
 		if (refZone == null)
-			throw new NotNullException("SalonDiscussion refZone",
-					"application.Utilisateur");
+			throw new NotNullException("SalonDiscussion refZone", "application.Utilisateur");
 		return this.zonesAbonement.add(refZone.getReferences());
 	}
 
@@ -132,8 +123,7 @@ public class Utilisateur extends $Utilisateur {
 		// TODO ajouter relation via liste?
 		// TODO NotNull/Ensure
 		this.relations.add(u);
-		Connection con = DriverManager
-				.getConnection("jdbc:sqlite:lib/nineshare.db");
+		Connection con = DriverManager.getConnection("jdbc:sqlite:lib/nineshare.db");
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -142,8 +132,8 @@ public class Utilisateur extends $Utilisateur {
 		}
 		String sql = "INSERT INTO relation (utilisateur_1,utilisateur_2) VALUES(? ,?)";
 		PreparedStatement statement = con.prepareStatement(sql);
-		statement.setString(1, this.id);
-		statement.setString(2, u.id);
+		statement.setString(1, this.login);
+		statement.setString(2, u.getLogin());
 		statement.executeUpdate();
 	}
 
@@ -155,8 +145,7 @@ public class Utilisateur extends $Utilisateur {
 	public void supprimerRelation(Utilisateur u) throws SQLException {
 		// TODO NotNull/ENsure
 		this.relations.remove(u);
-		Connection con = DriverManager
-				.getConnection("jdbc:sqlite:lib/nineshare.db");
+		Connection con = DriverManager.getConnection("jdbc:sqlite:lib/nineshare.db");
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -165,7 +154,7 @@ public class Utilisateur extends $Utilisateur {
 		}
 		String sql = "DELETE FROM relation WHERE utilisateur_2 = ?";
 		PreparedStatement statement = con.prepareStatement(sql);
-		statement.setString(1, u.id);
+		statement.setString(1, u.getLogin());
 		statement.executeUpdate();
 	}
 
@@ -178,16 +167,15 @@ public class Utilisateur extends $Utilisateur {
 	 * @param dateNaissance
 	 * @throws SQLException
 	 */
-	public void modifierInformations(String nom, String prenom, String adresse,
-			String mail, String dateNaissance) throws SQLException {
-		//TODO change date String to Date
+	public void modifierInformations(String nom, String prenom, String adresse, String mail, String dateNaissance)
+			throws SQLException {
+		// TODO change date String to Date
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.mail = mail;
 		this.dateNaissance = dateNaissance;
-		Connection con = DriverManager
-				.getConnection("jdbc:sqlite:lib/nineshare.db");
+		Connection con = DriverManager.getConnection("jdbc:sqlite:lib/nineshare.db");
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -236,16 +224,12 @@ public class Utilisateur extends $Utilisateur {
 	}
 
 	public String getDateNaissance() {
-		//TODO change date String to Date
+		// TODO change date String to Date
 		return this.dateNaissance;
 	}
 
 	public ArrayList<Utilisateur> getRelations() {
 		return this.relations;
-	}
-	
-	public String getId() {
-		return id;
 	}
 
 }

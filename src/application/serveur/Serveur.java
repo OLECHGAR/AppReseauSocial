@@ -13,7 +13,7 @@ public class Serveur {
 	public static void main(String[] args) throws RemoteException, MalformedURLException, SQLException, UnknownHostException {
 
 		int port = 1099;
-		String localHost = InetAddress.getLocalHost().toString();
+		String localHost = InetAddress.getLocalHost().getHostAddress();
 		System.setProperty("java.rmi.server.hostname", localHost);
 		Registry rmi = LocateRegistry.createRegistry(port);
 		ReseauSocialImplementation reseau = new ReseauSocialImplementation();

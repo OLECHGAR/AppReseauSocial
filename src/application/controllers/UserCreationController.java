@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Utilisateur;
@@ -31,7 +32,7 @@ public class UserCreationController implements Initializable {
 	@FXML 
 	private JFXTextField hostname_u;
 	@FXML 
-	private JFXTextField password_u;
+	private JFXPasswordField password_u;
 	
 	@FXML
 	void create(ActionEvent event) throws IOException  {
