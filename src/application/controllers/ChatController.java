@@ -24,8 +24,11 @@ public class ChatController implements Initializable {
 	private FontAwesomeIconView btn_close;
 	@FXML
 	private FontAwesomeIconView btnjoindre;
-	@FXML private ListView<String> list;
-
+	@FXML
+	private FontAwesomeIconView btn_add_room;
+	@FXML 
+	private ListView<String> list;
+	
 	@FXML 
 	private void multipleChooser(MouseEvent ae){
 		FileChooser fc = new FileChooser();
@@ -44,34 +47,13 @@ public class ChatController implements Initializable {
 	
 	@FXML
 	void AjoutZone(MouseEvent event) throws IOException  {
-		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/chat/views/AjoutZone.fxml"));
+		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/AjoutZone.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
         app_stage.show(); 
 	}
 	
-	/*
-	@FXML
-	public SalonDiscussion getSalon() {
-        try {
-            return null
-        } catch (RemoteException ex) {
-            close(null);
-            return null;
-        }
-    }
-	
-	@FXML
-	public MessagePrive getMsg() {
-        try {
-            return getMsg().getDestinataire(u)
-        } catch (RemoteException ex) {
-            close(null);
-            return null;
-        }
-    }
-	*/
 	
 	@FXML
 	void close(MouseEvent event) {
