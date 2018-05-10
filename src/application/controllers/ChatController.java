@@ -54,6 +54,14 @@ public class ChatController implements Initializable {
         app_stage.show(); 
 	}
 	
+	@FXML
+	void homepage(MouseEvent event) throws IOException  {
+		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Accueil.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+	}
 	
 	@FXML
 	void close(MouseEvent event) {

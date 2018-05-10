@@ -89,6 +89,7 @@
             </JFXTextField>
             <FontAwesomeIconView fill="#155ff2" glyphName="PLAY_CIRCLE" layoutX="232.0" layoutY="490.0" size="25" />
             <JFXListView fx:id="list" layoutY="40.0" prefHeight="424.0" prefWidth="333.0" style="-fx-background-color: #fff;" />
+            <FontAwesomeIconView fx:id="btn_profile" fill="WHITE" glyphName="USER" layoutX="288.0" layoutY="24.0" onMouseClicked="#homepage" size="18" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

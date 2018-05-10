@@ -43,7 +43,7 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <JFXTextField fx:id="hostname_u" layoutX="175.0" layoutY="128.0" prefHeight="26.0" prefWidth="150.0">
+                  <JFXTextField fx:id="name_u" layoutX="175.0" layoutY="128.0" prefHeight="26.0" prefWidth="150.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -61,7 +61,7 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
-                  <JFXTextField fx:id="brthdate_u" layoutX="534.0" layoutY="180.0" prefHeight="26.0" prefWidth="150.0">
+                  <JFXTextField fx:id="birthdate_u" layoutX="534.0" layoutY="180.0" prefHeight="26.0" prefWidth="150.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

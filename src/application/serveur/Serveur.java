@@ -18,7 +18,7 @@ public class Serveur {
 		Registry rmi = LocateRegistry.createRegistry(port);
 		ReseauSocialImplementation reseau = new ReseauSocialImplementation();
 		rmi.rebind("reseau", reseau); //ON REND DISPONIBLE L'OBJET A DISTANCE
-		System.out.println("Le serveur est lancé sur l'adresse locale : "+localHost);
+		System.out.println("Le serveur est lancï¿½ sur l'adresse locale : "+localHost);
 		System.out.println("et sur le port : "+port);
 	}
 }
