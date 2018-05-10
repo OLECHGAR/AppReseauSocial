@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ChatController">
-   <children>
+  <children>
       <AnchorPane fx:id="an_menu" layoutX="-2.0" layoutY="-1.0" prefHeight="517.0" prefWidth="201.0" style="-fx-background-color: #0072BB;">
          <children>
             <Pane prefHeight="40.0" prefWidth="201.0" style="-fx-background-color: #009DE0;">
@@ -34,6 +34,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" layoutX="162.0" layoutY="24.0" onMouseClicked="#AjoutZone" size="15" wrappingWidth="5.9114468693733215" />
                </children>
             </Pane>
             <JFXListView layoutX="1.0" layoutY="278.0" prefHeight="198.0" prefWidth="200.0" style="-fx-background-color: #009DE0;" />
@@ -86,7 +87,7 @@
                   <Insets left="5.0" />
                </padding>
             </JFXTextField>
-            <FontAwesomeIconView fill="#155ff2" glyphName="PLAY_CIRCLE" layoutX="232.0" layoutY="490.0" size="30" />
+            <FontAwesomeIconView fill="#155ff2" glyphName="PLAY_CIRCLE" layoutX="232.0" layoutY="490.0" size="25" />
             <JFXListView fx:id="list" layoutY="40.0" prefHeight="424.0" prefWidth="333.0" style="-fx-background-color: #fff;" />
          </children></AnchorPane>
    </children>

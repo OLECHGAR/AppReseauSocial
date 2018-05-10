@@ -23,6 +23,7 @@ public class UserCreationController implements Initializable {
 	private JFXButton btn_connect;
 	@FXML 
 	private FontAwesomeIconView btn_close;
+	
 	@FXML
 	void create(ActionEvent event) throws IOException  {
 		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Login.fxml"));

@@ -35,14 +35,22 @@ public class LoginController implements Initializable {
 	@FXML 
 	private FontAwesomeIconView btn_close;
 	
- 
 	@FXML
-	void createUser(ActionEvent evt) throws IOException  {
-		Parent userCreation = FXMLLoader.load(getClass().getResource("/application/views/UserCreation.fxml"));
-        Scene scene = new Scene(userCreation);
-        Stage stage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show(); 
+	void userCreation(MouseEvent event) throws IOException  {
+		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/UserCreation.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+	}
+	
+	@FXML
+	void connect(ActionEvent event) throws IOException{
+		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Chat.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
 	}
 	
 	@FXML
@@ -51,15 +59,16 @@ public class LoginController implements Initializable {
 		Stage stage = (Stage) node.getScene().getWindow();
 		stage.close();
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(this.adresseIP.getText());
-	}
 	
 	public void submitPressed (MouseEvent event)
     {
 		System.out.println(this.adresseIP.getText());
  
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		System.out.println(this.adresseIP.getText());
+	}
+	
 }
