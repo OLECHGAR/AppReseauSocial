@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Utilisateur;
+
 
 public class LoginController implements Initializable {
 
@@ -45,7 +47,7 @@ public class LoginController implements Initializable {
 	}
 	
 	@FXML
-	void connect(ActionEvent event) throws IOException{
+	void connect(MouseEvent event) throws IOException{
 		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Chat.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

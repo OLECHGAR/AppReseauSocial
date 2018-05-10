@@ -34,7 +34,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" layoutX="162.0" layoutY="24.0" onMouseClicked="#AjoutZone" size="15" wrappingWidth="5.9114468693733215" />
+                  <FontAwesomeIconView fx:id="btn_add_room" fill="WHITE" glyphName="USER_PLUS" layoutX="162.0" layoutY="25.0" onMouseClicked="#AjoutZone" size="15" wrappingWidth="5.9114468693733215" />
                </children>
             </Pane>
             <JFXListView layoutX="1.0" layoutY="278.0" prefHeight="198.0" prefWidth="200.0" style="-fx-background-color: #009DE0;" />
@@ -67,7 +67,7 @@
                   <Font size="12.0" />
                </font>
             </JFXButton>
-            <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" layoutX="105.0" layoutY="500.0" size="20" />
+            <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" layoutX="112.0" layoutY="499.0" size="16" text="" />
          </children></AnchorPane>
       <AnchorPane fx:id="an_content" layoutX="473.0" prefHeight="516.0" prefWidth="327.0" style="-fx-background-color: #fff;">
          <children>

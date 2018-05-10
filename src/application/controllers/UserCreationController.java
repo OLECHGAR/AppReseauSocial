@@ -2,10 +2,13 @@ package application.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
+import application.Utilisateur;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +26,12 @@ public class UserCreationController implements Initializable {
 	private JFXButton btn_connect;
 	@FXML 
 	private FontAwesomeIconView btn_close;
+	@FXML 
+	private JFXTextField surname_u;
+	@FXML 
+	private JFXTextField hostname_u;
+	@FXML 
+	private JFXTextField password_u;
 	
 	@FXML
 	void create(ActionEvent event) throws IOException  {
@@ -30,7 +39,10 @@ public class UserCreationController implements Initializable {
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
-        app_stage.show(); 
+        app_stage.show();
+        //surname_u.getText();
+        //hostname_u.getText();
+        //password_u.getText();
 	}
 	@FXML
 	void close(MouseEvent event) {

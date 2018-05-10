@@ -94,6 +94,20 @@ public class Utilisateur extends $Utilisateur {
 			/*TODO ajouter un message box : inscription ok */
 		}
 	}
+	
+	public Utilisateur(String id, String login, String mdp, String nom,
+			String prenom, String adresse, String mail, String dateNaissance ) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.motDePasse = mdp;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.adresse = adresse;
+		this.mail = mail;
+		this.dateNaissance = dateNaissance;
+		
+	}
 
 	/**
 	 * 
