@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="485.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="485.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.UserCreationController">
    <children>
       <AnchorPane prefHeight="190.0" prefWidth="388.0">
          <children>
             <Pane layoutY="-2.0" prefHeight="191.0" prefWidth="390.0" style="-fx-background-color: #0072BB;">
                <children>
-                  <ImageView fitHeight="101.0" fitWidth="150.0" layoutX="128.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="101.0" fitWidth="150.0" layoutX="151.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../ressources/logo.png" />
                      </image>
@@ -49,7 +49,7 @@
                      </opaqueInsets>
                   </JFXTextField>
                   <Label layoutX="16.0" layoutY="139.0" prefHeight="26.0" prefWidth="87.0" text="Hostname" />
-                  <JFXButton fx:id="btn_connect" layoutX="155.0" layoutY="238.0" style="-fx-background-color: #0072BB;" text="Create" textFill="WHITE" />
+                  <JFXButton fx:id="btn_connect" layoutX="155.0" layoutY="238.0" onAction="#create" style="-fx-background-color: #0072BB;" text="Create" textFill="WHITE" />
                   <JFXPasswordField layoutX="121.0" layoutY="180.0" />
                   <Label layoutX="158.0" layoutY="285.0" prefHeight="18.0" prefWidth="78.0" text="9Share App" textFill="#aba6a6">
                      <font>
