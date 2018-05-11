@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +30,8 @@ public class AjoutZoneController implements Initializable {
 	private JFXRadioButton private_zone;
 	@FXML
 	private JFXRadioButton public_zone;
+	@FXML
+	private FontAwesomeIconView btn_close;
 	
 	final ToggleGroup radioGroup = new ToggleGroup();
 	
@@ -41,6 +45,14 @@ public class AjoutZoneController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
         app_stage.show(); 
+	}
+	
+	@FXML
+	void close(MouseEvent event) throws IOException {
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
+		stage.close();
+		AjouterZone(event);
 	}
 	
 	@Override
