@@ -80,7 +80,6 @@ public class LoginController implements Initializable {
 		
 		reseauSocial.openConnection();
 		Utilisateur user = reseauSocial.login(this.username.getText(), this.password.getText());
-		
 		reseauSocial.closeConnection();
 		
 		if(user != null)

@@ -18,8 +18,7 @@ public class Serveur {
 	System.setProperty("java.rmi.server.hostname", localHost);
 	Registry rmi = LocateRegistry.createRegistry(port);
 	// args corespond au chemin d'accès de la base de donnée
-	ReseauSocialImplementation reseau = new ReseauSocialImplementation(
-		args[1]);
+	ReseauSocialImplementation reseau = new ReseauSocialImplementation(args[0]);
 	rmi.rebind("reseau", reseau); // ON REND DISPONIBLE L'OBJET A DISTANCE
 	System.out.println("Le serveur est lancï¿½ sur l'adresse locale : "
 		+ localHost);
