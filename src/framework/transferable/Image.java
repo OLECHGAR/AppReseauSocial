@@ -57,7 +57,7 @@ public class Image extends $Fichier<BufferedImage> {
 	// Start of user code constructor for Image)
 	super(zone);
 	this.contenu = ImageIO.read((new File(pathImage)));
-	this.name = pathImage.getFile();
+	this.name = pathImage.toURL().getFile();
 	// End of user code
     }
 
