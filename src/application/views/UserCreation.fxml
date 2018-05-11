@@ -24,6 +24,7 @@
                      </image>
                   </ImageView>
                   <FontAwesomeIconView fx:id="btn_close" fill="WHITE" glyphName="CLOSE" layoutX="736.0" layoutY="27.0" onMouseClicked="#close" size="18" />
+                  <FontAwesomeIconView fx:id="btn_back" fill="WHITE" glyphName="BACK" layoutX="020.0" layoutY="27.0" onMouseClicked="#back" size="18" />
                </children>
             </Pane>
          </children>
