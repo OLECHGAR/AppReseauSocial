@@ -17,6 +17,9 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
+import application.Utilisateur;
+import application.serveur.ReseauSocial;
+
 
 public class ChatController implements Initializable {
 
@@ -28,6 +31,10 @@ public class ChatController implements Initializable {
 	private FontAwesomeIconView btn_add_room;
 	@FXML 
 	private ListView<String> list;
+	
+	private Utilisateur user;
+	
+	private ReseauSocial reseauSocial;
 	
 	@FXML 
 	private void multipleChooser(MouseEvent ae){
@@ -56,7 +63,14 @@ public class ChatController implements Initializable {
 	
 	@FXML
 	void homepage(MouseEvent event) throws IOException  {
-		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Accueil.fxml"));
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/application/views/Accueil.fxml"));
+		Loader.load();
+		
+		AccueilController controller = Loader.getController();
+		controller.setObjects(reseauSocial, user);
+		
+		Parent home_page_parent = Loader.getRoot();
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
@@ -73,5 +87,11 @@ public class ChatController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+	}
+
+	public void setObjects(ReseauSocial reseauSocial, Utilisateur user) {
+		System.out.println("CHATCONTROLLER : "+user.toString());
+		this.reseauSocial = reseauSocial;
+		this.user = user;		
 	}
 }

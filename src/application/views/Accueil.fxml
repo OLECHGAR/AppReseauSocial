@@ -45,11 +45,11 @@
       <Label layoutX="224.0" layoutY="300.0" text="Mail :" />
       <Label layoutX="225.0" layoutY="335.0" text="Adresse :" />
       <Label layoutX="225.0" layoutY="371.0" text="Date De Naissance :" />
-      <Label fx:id="Nom" layoutX="287.0" layoutY="233.0" text="Label" />
-      <Label fx:id="Prenom" layoutX="287.0" layoutY="267.0" text="Label" />
-      <Label fx:id="Mail" layoutX="287.0" layoutY="300.0" text="Label" />
-      <Label fx:id="Adresse" layoutX="288.0" layoutY="335.0" text="Label" />
-      <Label fx:id="DateDeNaissance" layoutX="363.0" layoutY="371.0" text="Label" />
+      <Label fx:id="nom" layoutX="287.0" layoutY="233.0" />
+      <Label fx:id="prenom" layoutX="287.0" layoutY="267.0" />
+      <Label fx:id="mail" layoutX="287.0" layoutY="300.0" />
+      <Label fx:id="adresse" layoutX="288.0" layoutY="335.0"/>
+      <Label fx:id="dateDeNaissance" layoutX="363.0" layoutY="371.0" text="" />
       <ListView layoutX="562.0" layoutY="99.0" prefHeight="385.0" prefWidth="214.0" style="-fx-background-radius: 1em;" />
    </children>
 </AnchorPane>

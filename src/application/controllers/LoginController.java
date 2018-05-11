@@ -80,11 +80,20 @@ public class LoginController implements Initializable {
 		
 		reseauSocial.openConnection();
 		Utilisateur user = reseauSocial.login(this.username.getText(), this.password.getText());
+		
 		reseauSocial.closeConnection();
 		
 		if(user != null)
 		{
-			Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/Chat.fxml"));
+			FXMLLoader Loader = new FXMLLoader();
+			Loader.setLocation(getClass().getResource("/application/views/Chat.fxml"));
+			Loader.load();
+			
+			System.out.println("LOGIN : "+user.toString());
+			ChatController controller = Loader.getController();
+			controller.setObjects(reseauSocial, user);
+			
+			Parent home_page_parent = Loader.getRoot();
 			Scene home_page_scene = new Scene(home_page_parent);
 			Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			app_stage.setScene(home_page_scene);

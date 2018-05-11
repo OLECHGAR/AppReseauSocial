@@ -18,6 +18,10 @@ import framework.utilisateur.$Utilisateur;
  */
 public class Utilisateur extends $Utilisateur implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String login;
 	private String motDePasse;
 	private String nom;
@@ -230,6 +234,12 @@ public class Utilisateur extends $Utilisateur implements java.io.Serializable{
 
 	public ArrayList<Utilisateur> getRelations() {
 		return this.relations;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [login=" + login + ", motDePasse=" + motDePasse + ", nom=" + nom + ", prenom=" + prenom
+				+ ", adresse=" + adresse + ", mail=" + mail + ", dateNaissance=" + dateNaissance + "]";
 	}
 
 }
