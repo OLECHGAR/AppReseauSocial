@@ -74,22 +74,23 @@
             <Pane prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #014492;">
                <children>
                   <FontAwesomeIconView fx:id="btn_close" fill="WHITE" glyphName="CLOSE" layoutX="307.0" layoutY="24.0" onMouseClicked="#close" size="18" />
-                  <FontAwesomeIconView fx:id="btnjoindre" fill="#014492" glyphName="FILE" layoutX="269.0" layoutY="486.0" onMousePressed="#multipleChooser" size="16" text="" />
-                  <FontAwesomeIconView fill="#014492" glyphName="TRASH" layoutX="291.0" layoutY="487.0" size="20" />
+                  <FontAwesomeIconView fx:id="btnjoindre" fill="#014492" glyphName="FILE" layoutX="280.0" layoutY="486.0" onMousePressed="#multipleChooser" size="16" text="" />
+                  <FontAwesomeIconView fx:id="btn_delete" fill="#014492" glyphName="TRASH" layoutX="300.0" layoutY="487.0" size="20" />
                   <Label prefHeight="40.0" prefWidth="200.0" text="MESSAGES" textFill="WHITE">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </Label>
                </children></Pane>
-            <JFXTextField layoutX="11.0" layoutY="459.0" prefHeight="40.0" prefWidth="248.0" promptText="Send a message..." style="-fx-background-color: #fff;" unFocusColor="#a8a4a4">
+            <JFXTextField layoutX="11.0" layoutY="459.0" prefHeight="40.0" prefWidth="230.0" promptText="Send a message..." style="-fx-background-color: #fff;" unFocusColor="#a8a4a4">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </JFXTextField>
-            <FontAwesomeIconView fill="#155ff2" glyphName="PLAY_CIRCLE" layoutX="232.0" layoutY="490.0" size="25" />
+            <FontAwesomeIconView fx:id="btn_video" fill="#014492" glyphName="PLAY_CIRCLE" layoutX="251.0" layoutY="489.0" size="24" />
             <JFXListView fx:id="list" layoutY="40.0" prefHeight="424.0" prefWidth="333.0" style="-fx-background-color: #fff;" />
             <FontAwesomeIconView fx:id="btn_profile" fill="WHITE" glyphName="USER" layoutX="288.0" layoutY="24.0" onMouseClicked="#homepage" size="18" />
+            <FontAwesomeIconView fx:id="btn_msg" fill="#014492" glyphName="ENVELOPE" layoutX="216.0" layoutY="489.0" size="24" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
