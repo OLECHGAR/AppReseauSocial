@@ -24,6 +24,7 @@ import framework.zonesPartages.ZonePartageSimple;
  */
 public class Image extends $Fichier<BufferedImage> {
     // Start of user code (user defined attributes for Image)
+    private final String name;
 
     // End of user code
 
@@ -38,7 +39,9 @@ public class Image extends $Fichier<BufferedImage> {
 	    throws NotNullException, IOException {
 	// Start of user code constructor for Image)
 	super(zone);
-	this.contenu = ImageIO.read((new File(pathImage)));
+	File f = new File(pathImage);
+	this.contenu = ImageIO.read(f);
+	this.name = f.getName();
 	// End of user code
     }
 
@@ -54,6 +57,7 @@ public class Image extends $Fichier<BufferedImage> {
 	// Start of user code constructor for Image)
 	super(zone);
 	this.contenu = ImageIO.read((new File(pathImage)));
+	this.name = pathImage.getFile();
 	// End of user code
     }
 
@@ -69,16 +73,13 @@ public class Image extends $Fichier<BufferedImage> {
 	// Start of user code constructor for Image)
 	super(zone);
 	this.contenu = ImageIO.read(fichierImage);
+	this.name = fichierImage.getName();
 	// End of user code
     }
 
     // Start of user code (user defined methods for Image)
     public String[] getReaderFormatNames() {
 	return ImageIO.getReaderFormatNames();
-    }
-
-    public BufferedImage getImage() {
-	return this.contenu;
     }
     // End of user code
 
