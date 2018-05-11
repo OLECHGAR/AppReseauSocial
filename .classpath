@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/home/marvin/Demo/libs/controlsfx-8.40.14.jar"/>
 	<classpathentry kind="lib" path="/home/marvin/Demo/libs/jfoenix-8.0.4.jar"/>
 	<classpathentry kind="lib" path="/home/marvin/Demo/libs/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="/home/marvin/git/9Share/src/libs/sqlite-jdbc-3.21.0.jar.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

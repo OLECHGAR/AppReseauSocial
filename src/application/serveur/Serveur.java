@@ -14,10 +14,11 @@ public class Serveur {
 	    MalformedURLException, SQLException, UnknownHostException {
 
 	int port = 1099;
-	String localHost = InetAddress.getLocalHost().getHostAddress();
+	//String localHost = InetAddress.getLocalHost().getHostAddress();
+	String localHost = "172.20.10.2";
 	System.setProperty("java.rmi.server.hostname", localHost);
 	Registry rmi = LocateRegistry.createRegistry(port);
-	// args corespond au chemin d'accès de la base de donnée
+	// args corespond au chemin d'accï¿½s de la base de donnï¿½e
 	ReseauSocialImplementation reseau = new ReseauSocialImplementation(args[0]);
 	rmi.rebind("reseau", reseau); // ON REND DISPONIBLE L'OBJET A DISTANCE
 	System.out.println("Le serveur est lancï¿½ sur l'adresse locale : "
