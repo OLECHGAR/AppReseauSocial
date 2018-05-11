@@ -52,7 +52,7 @@ public class Audio extends $Fichier<AudioClip> {
 	    MalformedURLException {
 	// Start of user code constructor for Audio)
 	super(zone);
-	URL url = new URL(path);
+	URL url = new URL("ftp://" + path);
 	this.contenu = Applet.newAudioClip(url);
 	this.name = url.getFile();
 	// End of user code
