@@ -76,7 +76,7 @@ public class AjoutZoneController implements Initializable {
 		
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Validation");
-		alert.setHeaderText("Room created successfully");
+		alert.setHeaderText("Room successfully created");
 		alert.showAndWait();
 		
         FXMLLoader Loader = new FXMLLoader();
