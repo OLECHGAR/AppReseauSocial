@@ -14,8 +14,8 @@ public class Serveur {
 	    MalformedURLException, SQLException, UnknownHostException {
 
 	int port = 1099;
-	//String localHost = InetAddress.getLocalHost().getHostAddress();
-	String localHost = "172.20.10.2";
+	String localHost = InetAddress.getLocalHost().getHostAddress();
+	//String localHost = "172.20.10.2";
 	System.setProperty("java.rmi.server.hostname", localHost);
 	Registry rmi = LocateRegistry.createRegistry(port);
 	// args corespond au chemin d'acc�s de la base de donn�e

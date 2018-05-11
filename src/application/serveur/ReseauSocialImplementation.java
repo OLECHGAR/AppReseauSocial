@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import application.SalonDiscussion;
 import application.Utilisateur;
 
 public class ReseauSocialImplementation extends UnicastRemoteObject implements ReseauSocial {
@@ -20,7 +21,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 
 	private Connection connection;
 
-	// Liste des utilisateurs du réseau social
+	// Liste des utilisateurs du rÃ©seau social
 	private ArrayList<Utilisateur> listeUtilisateurs;
 
 	protected ReseauSocialImplementation(String args) throws RemoteException {
@@ -118,6 +119,90 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 					res.getString(5), res.getString(6), res.getString(7));
 		} else {
 			return null;
+		}
+	}
+	
+	public Utilisateur getUser(String login) throws SQLException {
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PreparedStatement statement = this.connection.prepareStatement(
+				"select * from utilisateur where login = '" + login + "'");
+		ResultSet res = statement.executeQuery();
+
+		if (res.next()) {
+			return new Utilisateur(res.getString(1), res.getString(2), res.getString(3), res.getString(4),
+					res.getString(5), res.getString(6), res.getString(7));
+		} else {
+			return null;
+		}
+	}
+
+	public boolean ajoutSalonDiscussion(String nom, boolean privacy, ArrayList<Utilisateur> utilisateurs,Utilisateur proprietaire) throws SQLException {
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("SALUT");
+		PreparedStatement statement1 = this.connection.prepareStatement("SELECT * FROM SalonDiscussion WHERE proprietaire=? AND nom=?");
+		System.out.println("SALUT");
+		statement1.setString(1, proprietaire.getLogin());
+		statement1.setString(2, nom);
+		ResultSet result = statement1.executeQuery();
+		System.out.println("SALUT");
+		SalonDiscussion salon;
+
+		if (result.next())
+		{
+			/* TODO ajouter un message box : compte deja pris */
+			System.out.println(result.toString());
+			return false;
+		} else { 
+			System.out.println("SALUT");
+			String sql = "INSERT INTO SalonDiscussion (nom,estPrivee,proprietaire)" + "VALUES (?, ?, ?)";
+			PreparedStatement statement = this.connection.prepareStatement(sql);
+			statement.setString(1, nom);
+			statement.setBoolean(2, privacy);
+			statement.setString(3, proprietaire.getLogin());
+			System.out.println("BOUM");
+			statement.executeUpdate();
+			System.out.println("SALUT");
+			
+			String sql1 = "SELECT COUNT(*) FROM SalonDiscussion;";
+			PreparedStatement statementCount = this.connection.prepareStatement(sql1);
+			statement.setString(3, proprietaire.getLogin());
+			System.out.println("BOUM");
+			ResultSet count = statementCount.executeQuery();
+			int ref = Integer.parseInt(count.getString(1));
+			if (!privacy) {
+				
+				salon = new SalonDiscussion(proprietaire, utilisateurs, nom, ref);
+				proprietaire.creerZone(salon);
+				Iterator<Utilisateur> it = utilisateurs.iterator();
+
+				while (it.hasNext()) {
+					String log = it.next().getLogin();
+					String sql2 = "INSERT INTO abonnement (utilisateur_abo,salon)" + "VALUES (?, ?)";
+					PreparedStatement statement2 = this.connection.prepareStatement(sql2);
+					statement2.setString(1, log);
+					statement2.setInt(2, salon.getReferences());
+					statement2.executeUpdate();
+				}
+			} else {
+				// TODO abonner toutes les relations de l'utilisateur à la nouvelle salle
+				salon = new SalonDiscussion(proprietaire, nom, ref);
+				proprietaire.creerZone(salon);
+			}
+
+			
+			System.out.println("creation de zone effectu�e");
+			return true;
 		}
 	}
 

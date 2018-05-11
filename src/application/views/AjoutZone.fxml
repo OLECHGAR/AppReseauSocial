@@ -15,7 +15,7 @@
    <children>
       <AnchorPane fx:id="an_menu" layoutX="-1.0" prefHeight="41.0" prefWidth="296.0" style="-fx-background-color: #0072BB;">
          <children>
-            <Label layoutX="112.0" layoutY="12.0" text="Ajout Zone" textFill="WHITE">
+            <Label layoutX="112.0" layoutY="12.0" text="Add Room" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
@@ -27,13 +27,13 @@
             <Insets />
          </opaqueInsets>
       </JFXListView>
-      <JFXTextField fx:id="namezone" layoutX="55.0" layoutY="78.0" prefHeight="26.0" prefWidth="189.0" promptText="Name Zone" text="Nom de la zone" />
-      <JFXTextField fx:id="search_user" layoutX="58.0" layoutY="190.0" prefHeight="26.0" prefWidth="156.0" promptText="Rechercher amis ..." text="" />
+      <JFXTextField fx:id="namezone" layoutX="55.0" layoutY="78.0" prefHeight="26.0" prefWidth="189.0" promptText="Room name" text="" />
+      <JFXTextField fx:id="search_user" layoutX="58.0" layoutY="190.0" prefHeight="26.0" prefWidth="156.0" promptText="Search friends ..." text="" />
       <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" layoutX="223.0" layoutY="244.0" size="20" />
-      <ListView layoutX="53.0" layoutY="238.0" opacity="0.3" prefHeight="165.0" prefWidth="189.0" style="-fx-background-radius: 1em; -fx-background-color: #EFEFEF;" />
+      <ListView fx:id ="listUsers" layoutX="53.0" layoutY="238.0" opacity="0.3" prefHeight="165.0" prefWidth="189.0" style="-fx-background-radius: 1em; -fx-background-color: #EFEFEF;" />
       <JFXRadioButton fx:id="public_zone" layoutX="58.0" layoutY="146.0" text="Public" />
-      <JFXRadioButton fx:id="private_zone" layoutX="183.0" layoutY="146.0" text="Privé" />
-      <FontAwesomeIconView fx:id="ajout_user" fill="#0072bb" glyphName="USER_PLUS" layoutX="229.0" layoutY="209.0" size="16" />
-      <JFXButton fx:id="btn_create" buttonType="RAISED" layoutX="86.0" layoutY="416.0" onMouseClicked="#AjouterZone" prefHeight="41.0" prefWidth="114.0" style="-fx-background-color: #0072BB;" text="Créer" textFill="WHITE" />
+      <JFXRadioButton fx:id="private_zone" layoutX="183.0" layoutY="146.0" text="Private" />
+      <FontAwesomeIconView fx:id="ajout_user" onMouseClicked="#AjouterUtilisateur" fill="#0072bb" glyphName="USER_PLUS" layoutX="229.0" layoutY="209.0" size="16" />
+      <JFXButton fx:id="btn_create" buttonType="RAISED" layoutX="86.0" layoutY="416.0" onMouseClicked="#AjouterZone" prefHeight="41.0" prefWidth="114.0" style="-fx-background-color: #0072BB;" text="Create" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -54,7 +54,14 @@ public class ChatController implements Initializable {
 	
 	@FXML
 	void AjoutZone(MouseEvent event) throws IOException  {
-		Parent home_page_parent = FXMLLoader.load(getClass().getResource("/application/views/AjoutZone.fxml"));
+        FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/application/views/AjoutZone.fxml"));
+		Loader.load();
+		
+		AjoutZoneController controller = Loader.getController();
+		controller.setObjects(reseauSocial, user);
+		
+		Parent home_page_parent = Loader.getRoot();
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);

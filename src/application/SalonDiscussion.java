@@ -15,37 +15,37 @@ public class SalonDiscussion extends ZonePartage {
 	private final int references;
 
 	public SalonDiscussion($Utilisateur proprietaire,
-			ArrayList<? extends $Utilisateur> utilisateursAutorises)
+			ArrayList<? extends $Utilisateur> utilisateursAutorises, int ref)
 			throws NotNullException {
 		super(proprietaire, utilisateursAutorises);
 		nbSalon++;
-		this.references = nbSalon;
+		this.references = ref;
 		// TODO Auto-generated constructor stub
 	}
 
 	public SalonDiscussion($Utilisateur proprietaire,
-			ArrayList<? extends $Utilisateur> utilisateursAutorises, String nom)
+			ArrayList<? extends $Utilisateur> utilisateursAutorises, String nom, int ref)
 			throws NotNullException {
 		super(proprietaire, utilisateursAutorises, nom);
 		nbSalon++;
-		this.references = nbSalon;
+		this.references = ref;
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalonDiscussion($Utilisateur proprietaire, String nom)
+	public SalonDiscussion($Utilisateur proprietaire, String nom, int ref)
 			throws NotNullException {
 		super(proprietaire, nom);
 		nbSalon++;
-		this.references = nbSalon;
+		this.references = ref;
 		// TODO Auto-generated constructor stub
 	}
 
 	public SalonDiscussion(
-			ArrayList<? extends $Utilisateur> utilisateursAutorises)
+			ArrayList<? extends $Utilisateur> utilisateursAutorises, int ref)
 			throws NotNullException {
 		super(utilisateursAutorises);
 		nbSalon++;
-		this.references = nbSalon;
+		this.references = ref;
 		// TODO Auto-generated constructor stub
 	}
 
