@@ -32,7 +32,7 @@ public abstract class $Transferable<T> {
 	/**
 	 * Description of the property requetes.
 	 */
-	protected ArrayList<$Requete<? extends $Utilisateur>> requetes = new ArrayList<$Requete<? extends $Utilisateur>>();
+	protected ArrayList<$Requete<? extends $Utilisateur<?>>> requetes = new ArrayList<$Requete<? extends $Utilisateur<?>>>();
 
 	protected T contenu;
 
@@ -75,7 +75,7 @@ public abstract class $Transferable<T> {
 	 * 
 	 * @return requetes
 	 */
-	public ArrayList<$Requete<?>> getRequetes() {
+	public ArrayList<$Requete<? extends $Utilisateur<?>>> getRequetes() {
 		return this.requetes;
 	}
 
@@ -86,7 +86,7 @@ public abstract class $Transferable<T> {
 	 * @throws NotNullException
 	 * @ensure requeteAjoutee(requete) == true
 	 */
-	public void addRequete($Requete<?> requete) throws NotNullException {
+	public void addRequete($Requete<? extends $Utilisateur<?>> requete) throws NotNullException {
 		if (requete == null)
 			throw new NotNullException("$Requete requete", "addRequete");
 		this.requetes.add(requete);
@@ -118,15 +118,15 @@ public abstract class $Transferable<T> {
 	 * @throws NotNullException
 	 * @require this.requetes.size()>0
 	 */
-	public $Utilisateur getProprietaire() {
+	public $Utilisateur<?> getProprietaire() {
 		if (this.requetes == null)
 			throw new NotNullException("$Transferable.requetes", "$Transferable.getProprietaire");
 		if (this.requetes.size() == 0)
 			throw new Require("requetes.size()>0 ", "$Transferable.getProprietaire");
-		Iterator<$Requete<?>> it = this.requetes.iterator();
+		Iterator<$Requete<? extends $Utilisateur<?>>> it = this.requetes.iterator();
 		while (it.hasNext()) {
 			$Requete<?> requete = it.next();
-			if (requete.getClass() == new Envoi<$Utilisateur>().getClass()) {
+			if (requete.getClass() == new Envoi<$Utilisateur<?>>().getClass()) {
 				return requete.getUtilisateur();
 			}
 		}
@@ -152,8 +152,8 @@ public abstract class $Transferable<T> {
 	 * @param requete
 	 * @return boolean
 	 */
-	protected boolean requeteAjoutee($Requete<?> requete) {
-		Iterator<$Requete<?>> it = this.requetes.iterator();
+	protected boolean requeteAjoutee($Requete<? extends $Utilisateur<?>> requete) {
+		Iterator<$Requete<? extends $Utilisateur<?>>> it = this.requetes.iterator();
 		while (it.hasNext()) {
 			$Requete<?> r = it.next();
 			if (requete == r)

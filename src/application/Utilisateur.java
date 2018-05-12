@@ -16,7 +16,7 @@ import framework.utilisateur.$Utilisateur;
  * @author monbeigj
  *
  */
-public class Utilisateur extends $Utilisateur implements java.io.Serializable{
+public class Utilisateur extends $Utilisateur<SalonDiscussion> implements java.io.Serializable{
 
 	/**
 	 * 

@@ -14,8 +14,8 @@ public class SalonDiscussion extends ZonePartage {
 	 */
 	private final int references;
 
-	public SalonDiscussion($Utilisateur proprietaire,
-			ArrayList<? extends $Utilisateur> utilisateursAutorises, int ref)
+	public SalonDiscussion(Utilisateur proprietaire,
+			ArrayList<Utilisateur> utilisateursAutorises, int ref)
 			throws NotNullException {
 		super(proprietaire, utilisateursAutorises);
 		nbSalon++;
@@ -23,8 +23,8 @@ public class SalonDiscussion extends ZonePartage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalonDiscussion($Utilisateur proprietaire,
-			ArrayList<? extends $Utilisateur> utilisateursAutorises, String nom, int ref)
+	public SalonDiscussion(Utilisateur proprietaire,
+			ArrayList<Utilisateur> utilisateursAutorises, String nom, int ref)
 			throws NotNullException {
 		super(proprietaire, utilisateursAutorises, nom);
 		nbSalon++;
@@ -32,7 +32,7 @@ public class SalonDiscussion extends ZonePartage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalonDiscussion($Utilisateur proprietaire, String nom, int ref)
+	public SalonDiscussion($Utilisateur<SalonDiscussion> proprietaire, String nom, int ref)
 			throws NotNullException {
 		super(proprietaire, nom);
 		nbSalon++;
@@ -41,7 +41,7 @@ public class SalonDiscussion extends ZonePartage {
 	}
 
 	public SalonDiscussion(
-			ArrayList<? extends $Utilisateur> utilisateursAutorises, int ref)
+			ArrayList<? extends $Utilisateur<SalonDiscussion>> utilisateursAutorises, int ref)
 			throws NotNullException {
 		super(utilisateursAutorises);
 		nbSalon++;

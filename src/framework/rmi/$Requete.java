@@ -25,7 +25,7 @@ import framework.zonesPartages.ZonePartageSimple;
  * 
  * @author monbeigj
  */
-public abstract class $Requete<T extends $Utilisateur> {
+public abstract class $Requete<T extends $Utilisateur<?>> {
     /**
      * Description of the property $Utilisateur.
      */

@@ -1,9 +1,5 @@
 package framework.rmi;
 
-/*******************************************************************************
- * 2018, All rights reserved.
- *******************************************************************************/
-
 // Start of user code (user defined imports)
 import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
@@ -16,7 +12,7 @@ import framework.zonesPartages.ZonePartageSimple;
  * 
  * @author monbeigj
  */
-public class Envoi<T extends $Utilisateur> extends $Requete<T> {
+public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     // Start of user code (user defined attributes for Envoie)
     // End of user code
 
