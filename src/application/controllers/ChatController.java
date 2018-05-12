@@ -1,5 +1,7 @@
 package application.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import de.jensd.fx.glyphs.fontawesome.*;
+import framework.zonesPartages.ZonePartageSimple;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -15,8 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import application.SalonDiscussion;
 import application.Utilisateur;
 import application.serveur.ReseauSocial;
 
@@ -31,9 +36,11 @@ public class ChatController implements Initializable {
 	private FontAwesomeIconView btn_add_room;
 	@FXML 
 	private ListView<String> list;
+	@FXML
+	private ListView<SalonDiscussion> chat_rooms;
 	
 	private Utilisateur user;
-	
+	private ObservableList<SalonDiscussion> allSalon = FXCollections.observableArrayList();
 	private ReseauSocial reseauSocial;
 	
 	@FXML 
@@ -96,9 +103,18 @@ public class ChatController implements Initializable {
 
 	}
 
-	public void setObjects(ReseauSocial reseauSocial, Utilisateur user) {
+	public void setObjects(ReseauSocial reseauSocial, Utilisateur user) throws RemoteException, SQLException {
 		System.out.println("CHATCONTROLLER : "+user.toString());
 		this.reseauSocial = reseauSocial;
-		this.user = user;		
+		this.user = user;	
+		
+		//CHARGEMENT DE LA PAGE
+		reseauSocial.openConnection();
+		reseauSocial.getAllUserSalonDiscussion(user);
+		allSalon.addAll(user.getZonesCrees());
+		allSalon.addAll(user.getZonesInteractions());
+		chat_rooms.setItems(allSalon);
+		reseauSocial.closeConnection();
+		
 	}
 }

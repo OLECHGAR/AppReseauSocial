@@ -121,7 +121,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			return null;
 		}
 	}
-	
+
 	public Utilisateur getUser(String login) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -130,8 +130,8 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			e.printStackTrace();
 		}
 
-		PreparedStatement statement = this.connection.prepareStatement(
-				"select * from utilisateur where login = '" + login + "'");
+		PreparedStatement statement = this.connection
+				.prepareStatement("select * from utilisateur where login = '" + login + "'");
 		ResultSet res = statement.executeQuery();
 
 		if (res.next()) {
@@ -142,7 +142,8 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 		}
 	}
 
-	public boolean ajoutSalonDiscussion(String nom, boolean privacy, ArrayList<Utilisateur> utilisateurs,Utilisateur proprietaire) throws SQLException {
+	public boolean ajoutSalonDiscussion(String nom, boolean privacy, ArrayList<Utilisateur> utilisateurs,
+			Utilisateur proprietaire) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -150,7 +151,8 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			e.printStackTrace();
 		}
 		System.out.println("SALUT");
-		PreparedStatement statement1 = this.connection.prepareStatement("SELECT * FROM SalonDiscussion WHERE proprietaire=? AND nom=?");
+		PreparedStatement statement1 = this.connection
+				.prepareStatement("SELECT * FROM SalonDiscussion WHERE proprietaire=? AND nom=?");
 		System.out.println("SALUT");
 		statement1.setString(1, proprietaire.getLogin());
 		statement1.setString(2, nom);
@@ -158,12 +160,11 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 		System.out.println("SALUT");
 		SalonDiscussion salon;
 
-		if (result.next())
-		{
+		if (result.next()) {
 			/* TODO ajouter un message box : compte deja pris */
 			System.out.println(result.toString());
 			return false;
-		} else { 
+		} else {
 			System.out.println("SALUT");
 			String sql = "INSERT INTO SalonDiscussion (nom,estPrivee,proprietaire)" + "VALUES (?, ?, ?)";
 			PreparedStatement statement = this.connection.prepareStatement(sql);
@@ -173,7 +174,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			System.out.println("BOUM");
 			statement.executeUpdate();
 			System.out.println("SALUT");
-			
+
 			String sql1 = "SELECT COUNT(*) FROM SalonDiscussion;";
 			PreparedStatement statementCount = this.connection.prepareStatement(sql1);
 			statement.setString(3, proprietaire.getLogin());
@@ -181,7 +182,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			ResultSet count = statementCount.executeQuery();
 			int ref = Integer.parseInt(count.getString(1));
 			if (!privacy) {
-				
+
 				salon = new SalonDiscussion(proprietaire, utilisateurs, nom, ref);
 				proprietaire.creerZone(salon);
 				Iterator<Utilisateur> it = utilisateurs.iterator();
@@ -200,9 +201,111 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 				proprietaire.creerZone(salon);
 			}
 
-			
 			System.out.println("creation de zone effectu�e");
 			return true;
+		}
+	}
+
+	/*
+	 * Charger toutes les zones --------------------------------------------------
+	 */
+	public void getAllUserSalonDiscussion(Utilisateur utilisateur) throws SQLException {
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// String sql = "SELECT * FROM SalonDiscussion INNER JOIN abonnement ON
+		// salon=reference WHERE utilisateur_abo=?";
+		PreparedStatement statement = this.connection.prepareStatement(
+				"SELECT * FROM SalonDiscussion INNER JOIN abonnement ON salon=reference WHERE utilisateur_abo=?");
+		statement.setString(1, utilisateur.getLogin());
+		ResultSet result = statement.executeQuery();
+
+		while (result.next())
+		{
+			// Si l'utilisateur est le proprietaire de la zone
+			if (result.getString(3).equals(utilisateur.getLogin())) {
+				// Si la zone est privée
+				if (result.getBoolean(2)) {
+
+					PreparedStatement statement1 = this.connection.prepareStatement(
+							"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login WHERE salon=? AND utilisateur_abo!=?");
+
+					statement.setString(1, Integer.toString(result.getInt(4)));
+					statement.setString(2, utilisateur.getLogin());
+					ResultSet result1 = statement1.executeQuery();
+
+					ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
+
+					while (result1.next()) {
+
+						autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
+								result1.getString(4), result1.getString(5), result1.getString(6),
+								result1.getString(7)));
+
+					}
+
+					utilisateur.creerZone(
+							new SalonDiscussion(utilisateur, autorises, result.getString(1), result.getInt(4)));
+
+				}
+
+				// Si la zone est publique
+
+				else {
+
+					utilisateur.creerZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
+
+				}
+
+			}
+
+			// SI l'utilisateur n'est pas le propriétaire de la salle
+
+			else {
+
+				// Récupération du propriétaire de la salle
+
+				PreparedStatement getProprietaire = this.connection.prepareStatement(
+						"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login INNER JOIN SalonDiscussion ON reference=salon WHERE salon=? AND login=proprietaire");
+
+				getProprietaire.setString(1, Integer.toString(result.getInt(4)));
+
+				ResultSet resultProprietaire = getProprietaire.executeQuery();
+
+				Utilisateur proprietaire = new Utilisateur(resultProprietaire.getString(1),
+						resultProprietaire.getString(2), resultProprietaire.getString(3),
+						resultProprietaire.getString(4), resultProprietaire.getString(5),
+						resultProprietaire.getString(6), resultProprietaire.getString(7));
+
+				// Si la zone est privée
+
+				if (result.getBoolean(2)) {
+
+					PreparedStatement statement2 = this.connection.prepareStatement(
+							"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login WHERE salon=? AND login!=?");
+
+					statement2.setString(1, Integer.toString(result.getInt(4)));
+					statement2.setString(2, proprietaire.getLogin());
+					ResultSet result1 = statement2.executeQuery();
+					ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
+
+					while (result1.next()) {
+						autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
+								result1.getString(4), result1.getString(5), result1.getString(6),
+								result1.getString(7)));
+					}
+					utilisateur.rejoindreZone(
+							new SalonDiscussion(proprietaire, autorises, result.getString(1), result.getInt(4)));
+				}
+				// Si la zone est publique
+				else {
+					utilisateur.rejoindreZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
+				}
+			}
 		}
 	}
 

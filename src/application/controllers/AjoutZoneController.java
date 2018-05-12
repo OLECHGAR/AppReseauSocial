@@ -47,7 +47,7 @@ public class AjoutZoneController implements Initializable {
 	private Utilisateur user;
 	private ReseauSocial reseauSocial;
 	private ArrayList<Utilisateur> Users;
-	private ObservableList<String> items = FXCollections.observableArrayList();
+	private ObservableList<String> listUsersTemp = FXCollections.observableArrayList();
 	final ToggleGroup radioGroup = new ToggleGroup();
 
 	@FXML
@@ -96,8 +96,8 @@ public class AjoutZoneController implements Initializable {
 	@FXML
 	void AjouterUtilisateur(MouseEvent event) {
 		// System.out.println(search_user.getText());
-		items.add(search_user.getText());
-		listUsers.setItems(items);
+		listUsersTemp.add(search_user.getText());
+		listUsers.setItems(listUsersTemp);
 		search_user.setText("");
 	}
 

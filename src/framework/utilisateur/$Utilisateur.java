@@ -18,10 +18,10 @@ import framework.zonesPartages.*;
  * 
  * @author monbeigj
  */
-public abstract class $Utilisateur{
+public abstract class $Utilisateur<T extends ZonePartageSimple>{
 
 	
-	protected ArrayList<$Requete<? extends $Utilisateur>> requetes = new ArrayList<$Requete<? extends $Utilisateur>>();
+	protected ArrayList<$Requete<? extends $Utilisateur<T>>> requetes = new ArrayList<$Requete<? extends $Utilisateur<T>>>();
 
 	protected Authentification connecter = null;
 
@@ -30,7 +30,7 @@ public abstract class $Utilisateur{
 	 * les zones dans lesquelles il peut intéragir dont il n'est pas le
 	 * propriétaire
 	 */
-	protected ArrayList<ZonePartageSimple> ZonesInteractions = new ArrayList<ZonePartageSimple>();
+	protected ArrayList<T> ZonesInteractions = new ArrayList<T>();
 
 	/**
 	 * Description of the property ZonesInteractions. ZonesInteractions toutes
@@ -38,7 +38,7 @@ public abstract class $Utilisateur{
 	 * propriétaire
 	 */
 	// TODO voir pour mettre null?
-	protected ArrayList<ZonePartageSimple> ZonesCrees = new ArrayList<ZonePartageSimple>(); 
+	protected ArrayList<T> ZonesCrees = new ArrayList<T>(); 
 
 	// Start of user code (user defined attributes for $Utilisateur)
 
@@ -58,7 +58,7 @@ public abstract class $Utilisateur{
 	 * 
 	 * @return requetes
 	 */
-	public ArrayList<$Requete<? extends $Utilisateur>> getRequetes() {
+	public ArrayList<$Requete<? extends $Utilisateur<T>>> getRequetes() {
 		return this.requetes;
 	}
 
@@ -87,7 +87,7 @@ public abstract class $Utilisateur{
 	 * 
 	 * @return ZonesInteractions
 	 */
-	public ArrayList<ZonePartageSimple> getZonesInteractions() {
+	public ArrayList<T> getZonesInteractions() {
 		return this.ZonesInteractions;
 	}
 
@@ -96,7 +96,7 @@ public abstract class $Utilisateur{
 	 * 
 	 * @return ZonesCrees
 	 */
-	public ArrayList<ZonePartageSimple> getZonesCrees() {
+	public ArrayList<T> getZonesCrees() {
 		return this.ZonesCrees;
 	}
 
@@ -107,7 +107,7 @@ public abstract class $Utilisateur{
 	 * @throws NotNullException
 	 * @ensure estCree(nouvelleZone) == true
 	 */
-	public void creerZone(ZonePartageSimple nouvelleZone) throws NotNullException {
+	public void creerZone(T nouvelleZone) throws NotNullException {
 		if (nouvelleZone == null)
 			throw new NotNullException("ZonePartageSimple nouvelleZone", "ajouterZone");
 		this.ZonesCrees.add(nouvelleZone);
@@ -122,7 +122,7 @@ public abstract class $Utilisateur{
 	 * @throws NotNullException
 	 * @ensure aRejoint(zone) == true
 	 */
-	public void rejoindreZone(ZonePartageSimple zone) throws NotNullException {
+	public  void rejoindreZone(T zone) throws NotNullException {
 		if (zone == null)
 			throw new NotNullException("ZonePartageSimple zone", "rejoindreZone");
 		this.ZonesInteractions.add(zone);
@@ -130,8 +130,8 @@ public abstract class $Utilisateur{
 	}
 	
 	
-	private boolean estCree(ZonePartageSimple nouvelleZone) {
-		Iterator<ZonePartageSimple> it = this.ZonesCrees.iterator();
+	private boolean estCree(T nouvelleZone) {
+		Iterator<T> it = this.ZonesCrees.iterator();
 		while(it.hasNext()) {
 			if(it.next() == nouvelleZone)
 				return true;
@@ -139,8 +139,8 @@ public abstract class $Utilisateur{
 		return false;
 	}
 	
-	private boolean aRejoint(ZonePartageSimple nouvelleZone) {
-		Iterator<ZonePartageSimple> it = this.ZonesInteractions.iterator();
+	private boolean aRejoint(T nouvelleZone) {
+		Iterator<T> it = this.ZonesInteractions.iterator();
 		while(it.hasNext()) {
 			if(it.next() == nouvelleZone)
 				return true;

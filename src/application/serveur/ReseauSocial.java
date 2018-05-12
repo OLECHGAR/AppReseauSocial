@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import application.SalonDiscussion;
 import application.Utilisateur;
 
 public interface ReseauSocial extends Remote {
@@ -20,6 +21,8 @@ public interface ReseauSocial extends Remote {
 	public Utilisateur getUser(String login) throws SQLException, RemoteException;
 	
 	public boolean ajoutSalonDiscussion(String nom, boolean privacy, ArrayList<Utilisateur> utilisateurs,Utilisateur proprietaire) throws SQLException, RemoteException;
+	
+	public void getAllUserSalonDiscussion(Utilisateur utilisateur) throws SQLException, RemoteException;
 	
 	
 }

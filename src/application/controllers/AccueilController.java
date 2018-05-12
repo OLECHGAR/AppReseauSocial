@@ -2,6 +2,7 @@ package application.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.scene.*;
@@ -42,7 +43,7 @@ public class AccueilController implements Initializable {
 	private ReseauSocial reseauSocial;
 
 	@FXML
-	void chat(MouseEvent event) throws IOException {
+	void chat(MouseEvent event) throws IOException, SQLException {
 
 		FXMLLoader Loader = new FXMLLoader();
 		Loader.setLocation(getClass().getResource("/application/views/Chat.fxml"));
