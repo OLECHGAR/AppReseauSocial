@@ -209,104 +209,98 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 	/*
 	 * Charger toutes les zones --------------------------------------------------
 	 */
+        @Override
 	public void getAllUserSalonDiscussion(Utilisateur utilisateur) throws SQLException {
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-		// String sql = "SELECT * FROM SalonDiscussion INNER JOIN abonnement ON
-		// salon=reference WHERE utilisateur_abo=?";
-		PreparedStatement statement = this.connection.prepareStatement(
-				"SELECT * FROM SalonDiscussion INNER JOIN abonnement ON salon=reference WHERE utilisateur_abo=?");
-		statement.setString(1, utilisateur.getLogin());
-		ResultSet result = statement.executeQuery();
+            // String sql = "SELECT * FROM SalonDiscussion INNER JOIN abonnement ON
+            // salon=reference WHERE utilisateur_abo=?";
+            PreparedStatement statement = this.connection.prepareStatement(
+                "SELECT * "
+                + "FROM SalonDiscussion"
+                + " INNER JOIN abonnement ON salon=reference"
+                + " WHERE utilisateur_abo=? OR proprietaire=?");
+            statement.setString(1, utilisateur.getLogin());
+            statement.setString(2, utilisateur.getLogin());
+            ResultSet result = statement.executeQuery();
 
-		while (result.next())
-		{
-			// Si l'utilisateur est le proprietaire de la zone
-			if (result.getString(3).equals(utilisateur.getLogin())) {
-				// Si la zone est privée
-				if (result.getBoolean(2)) {
+            while (result.next())
+            {
+                // Si l'utilisateur est le proprietaire de la zone
+                if (result.getString(3).equals(utilisateur.getLogin())) {
+                    // Si la zone est privée
+                    if (result.getBoolean(2)) {
+                        //Récupération de tous les utilisateurs de la salle sauf le proprio
+                        PreparedStatement statement1 = this.connection.prepareStatement(
+                            "SELECT * "
+                            + "FROM utilisateur "
+                            + "INNER JOIN abonnement ON utilisateur_abo=login "
+                            + "WHERE salon=? AND utilisateur_abo!=?");
+                            statement.setString(1, Integer.toString(result.getInt(4)));
+                            statement.setString(2, utilisateur.getLogin());
+                            ResultSet result1 = statement1.executeQuery();
 
-					PreparedStatement statement1 = this.connection.prepareStatement(
-							"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login WHERE salon=? AND utilisateur_abo!=?");
+                        ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
+                                        
+                        while (result1.next()) {
+                            autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
+                                result1.getString(4), result1.getString(5), result1.getString(6),
+                                result1.getString(7)));
+                        }
+                        utilisateur.creerZone(new SalonDiscussion(utilisateur, autorises, result.getString(1), result.getInt(4)));
+                    }
+                    // Si la zone est publique
+                    else {
+                        utilisateur.creerZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
+                    }
+                }
+                // SI l'utilisateur n'est pas le propriétaire de la salle
+                else {
+                    // Récupération du propriétaire de la salle
+                    PreparedStatement getProprietaire = this.connection.prepareStatement(
+                        "SELECT * "
+                        + "FROM utilisateur "
+                        + "WHERE login=(SELECT proprietaire FROM SalonDiscussion WHERE reference =?");
+                    getProprietaire.setString(1, Integer.toString(result.getInt(4)));
+                    ResultSet resultProprietaire = getProprietaire.executeQuery();
+                    Utilisateur proprietaire = new Utilisateur(resultProprietaire.getString(1),
+                        resultProprietaire.getString(2), resultProprietaire.getString(3),
+                        resultProprietaire.getString(4), resultProprietaire.getString(5),
+                        resultProprietaire.getString(6), resultProprietaire.getString(7));
+                            
+                    // Si la zone est privée
+                    if (result.getBoolean(2)) {
+                        //Récupération de tous les utilisateurs de la salle sauf le proprio
+                        PreparedStatement statement2 = this.connection.prepareStatement(
+                            "SELECT * "
+                            + "FROM utilisateur "
+                            + "INNER JOIN abonnement "
+                            + "ON utilisateur_abo=login "
+                            + "WHERE salon=? AND login!=?");
 
-					statement.setString(1, Integer.toString(result.getInt(4)));
-					statement.setString(2, utilisateur.getLogin());
-					ResultSet result1 = statement1.executeQuery();
+                        statement2.setString(1, Integer.toString(result.getInt(4)));
+                        statement2.setString(2, proprietaire.getLogin());
+                        ResultSet result1 = statement2.executeQuery();
+                        ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
 
-					ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
-
-					while (result1.next()) {
-
-						autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
-								result1.getString(4), result1.getString(5), result1.getString(6),
-								result1.getString(7)));
-
-					}
-
-					utilisateur.creerZone(
-							new SalonDiscussion(utilisateur, autorises, result.getString(1), result.getInt(4)));
-
-				}
-
-				// Si la zone est publique
-
-				else {
-
-					utilisateur.creerZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
-
-				}
-
-			}
-
-			// SI l'utilisateur n'est pas le propriétaire de la salle
-
-			else {
-
-				// Récupération du propriétaire de la salle
-
-				PreparedStatement getProprietaire = this.connection.prepareStatement(
-						"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login INNER JOIN SalonDiscussion ON reference=salon WHERE salon=? AND login=proprietaire");
-
-				getProprietaire.setString(1, Integer.toString(result.getInt(4)));
-
-				ResultSet resultProprietaire = getProprietaire.executeQuery();
-
-				Utilisateur proprietaire = new Utilisateur(resultProprietaire.getString(1),
-						resultProprietaire.getString(2), resultProprietaire.getString(3),
-						resultProprietaire.getString(4), resultProprietaire.getString(5),
-						resultProprietaire.getString(6), resultProprietaire.getString(7));
-
-				// Si la zone est privée
-
-				if (result.getBoolean(2)) {
-
-					PreparedStatement statement2 = this.connection.prepareStatement(
-							"SELECT * FROM utilisateur INNER JOIN abonnement ON utilisateur_abo=login WHERE salon=? AND login!=?");
-
-					statement2.setString(1, Integer.toString(result.getInt(4)));
-					statement2.setString(2, proprietaire.getLogin());
-					ResultSet result1 = statement2.executeQuery();
-					ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
-
-					while (result1.next()) {
-						autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
-								result1.getString(4), result1.getString(5), result1.getString(6),
-								result1.getString(7)));
-					}
-					utilisateur.rejoindreZone(
-							new SalonDiscussion(proprietaire, autorises, result.getString(1), result.getInt(4)));
-				}
-				// Si la zone est publique
-				else {
-					utilisateur.rejoindreZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
-				}
-			}
-		}
+                        while (result1.next()) {
+                            autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
+                                result1.getString(4), result1.getString(5), result1.getString(6),
+                                result1.getString(7)));
+                        }
+                        utilisateur.rejoindreZone(new SalonDiscussion(proprietaire, autorises, result.getString(1), result.getInt(4)));
+                    }
+                    // Si la zone est publique
+                    else {
+                        utilisateur.rejoindreZone(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
+                    }
+                }
+            }
 	}
 
 	@Override
