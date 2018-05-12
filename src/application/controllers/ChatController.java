@@ -106,15 +106,23 @@ public class ChatController implements Initializable {
 	public void setObjects(ReseauSocial reseauSocial, Utilisateur user) throws RemoteException, SQLException {
 		System.out.println("CHATCONTROLLER : "+user.toString());
 		this.reseauSocial = reseauSocial;
-		this.user = user;	
-		
-		//CHARGEMENT DE LA PAGE
+		this.user = user;		
+	}
+	
+	public void refreshRooms() throws RemoteException, SQLException
+	{
+		System.out.println("hello");
 		reseauSocial.openConnection();
 		reseauSocial.getAllUserSalonDiscussion(user);
+		
+		System.out.println((user.getZonesCrees().size()));
 		allSalon.addAll(user.getZonesCrees());
+		
+		System.out.println(user.getZonesInteractions().size());
 		allSalon.addAll(user.getZonesInteractions());
+		
+		System.out.println(allSalon.size());
 		chat_rooms.setItems(allSalon);
 		reseauSocial.closeConnection();
-		
 	}
 }
