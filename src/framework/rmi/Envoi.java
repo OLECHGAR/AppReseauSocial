@@ -1,11 +1,8 @@
 package framework.rmi;
 
-// Start of user code (user defined imports)
 import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartages.ZonePartageSimple;
-
-// End of user code
 
 /**
  * Description of Envoie.
@@ -13,19 +10,18 @@ import framework.zonesPartages.ZonePartageSimple;
  * @author monbeigj
  */
 public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
-    // Start of user code (user defined attributes for Envoie)
-    // End of user code
-
     /**
      * The constructor.
      * 
      * @throws NotNullException
      */
+    // TODO supp ?
     public Envoi() {
 	super();
     }
 
     /**
+     * The constructor.
      * 
      * @param contenu
      * @param u
@@ -35,20 +31,18 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
      */
     public <C> Envoi(C contenu, T u, ZonePartageSimple zoneDestination,
 	    String type) throws NotNullException {
-	// Start of user code constructor for Envoie)
 	super(u, type);
 	super.setTransferable(contenu, zoneDestination);
 	super.transferable.addRequete(this);
 	this.envoyer(zoneDestination);
-	// End of user code
     }
 
-    // Start of user code (user defined methods for Envoie)
-
     /**
+     * Permet d'envoyer le transferable vers la zone.
      * 
      * @param zone
      */
+    // TODO change String constante to Enumération
     public void envoyer(ZonePartageSimple zone) {
 	if (super.type == "texte") {
 	    this.envoyerTexte(zone);
@@ -71,12 +65,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer le texte vers la zone. Code permettant de faire l'appel
+     * serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerTexte(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -86,12 +80,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer l'image vers la zone. Code permettant de faire l'appel
+     * serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerImage(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -101,12 +95,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer le document vers la zone. Code permettant de faire
+     * l'appel serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerDocument(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -116,12 +110,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer la vidéo vers la zone. Code permettant de faire l'appel
+     * serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerVideo(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -131,12 +125,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer le planning vers la zone. Code permettant de faire
+     * l'appel serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerPlanning(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -146,12 +140,12 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     }
 
     /**
+     * Permet d'envoyer le fichier audio vers la zone. Code permettant de faire
+     * l'appel serveur suivi d'un enregistrement en BDD
      * 
      * @param zone
      */
     public void envoyerAudio(ZonePartageSimple zone) {
-	// Code permettant de faire l'appel serveur suivi d'un enregistrement en
-	// BDD
 	try {
 	    zone.addTransferable(super.transferable);
 	} catch (NotNullException e) {
@@ -159,6 +153,5 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
 	    e.printStackTrace();
 	}
     }
-    // End of user code
 
 }

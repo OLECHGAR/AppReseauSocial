@@ -1,15 +1,11 @@
 package framework.rmi;
 
-/*******************************************************************************
- * 2018, All rights reserved.
- *******************************************************************************/
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import framework.exception.NotNullException;
 import framework.transferable.$Transferable;
-// Start of user code (user defined imports)
 import framework.transferable.Audio;
 import framework.transferable.Document;
 import framework.transferable.Image;
@@ -17,8 +13,6 @@ import framework.transferable.Texte;
 import framework.transferable.Video;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartages.ZonePartageSimple;
-
-// End of user code
 
 /**
  * Description of Requete.
@@ -35,28 +29,26 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
      * Description of the property transferable.
      */
     protected $Transferable<?> transferable;
-    // Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon
-    // traitement
+    /**
+     * Le type d'envoi : texte/audio/document/image... afin d'effectuer le bon
+     * traitement
+     */
+    // TODO change to Enumeration
     protected String type;
-
-    // Start of user code (user defined attributes for Requete)
-
-    // End of user code
 
     /**
      * The constructor.
      */
     public $Requete(T u, String type) {
-	// Start of user code constructor for Requete)
 	super();
 	this.utilisateur = u;
 	this.type = type;
-	// End of user code
     }
 
     /**
-	 * 
-	 */
+     * The constructor.
+     */
+    // TODO supp ?
     public $Requete() {
 	super();
     }
