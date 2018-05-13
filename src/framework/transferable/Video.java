@@ -17,6 +17,9 @@ import framework.zonesPartages.ZonePartageSimple;
  * @author marvin
  */
 public class Video extends $Fichier<File> {
+
+    private final String name;
+
     /**
      * The constructor.
      * 
@@ -24,7 +27,21 @@ public class Video extends $Fichier<File> {
      */
     public Video(ZonePartageSimple zone, URL path) throws NotNullException {
 	super(zone);
-	path.getFile();
+	this.name = path.getFile();
+	this.contenu = new File(path.getPath()); // TODO Test
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @throws NotNullException
+     * @throws FileNotFoundException
+     */
+    public Video(ZonePartageSimple zone, String path) throws NotNullException,
+	    FileNotFoundException {
+	super(zone);
+	this.name = path; // TODO change to name only
+	this.contenu = new File(path);
     }
 
     /**
