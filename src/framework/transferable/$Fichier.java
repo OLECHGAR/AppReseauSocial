@@ -10,12 +10,27 @@ import framework.zonesPartages.ZonePartageSimple;
  */
 public abstract class $Fichier<T> extends $Transferable<T> {
 
+    private final String name;
+
     /**
      * The constructor.
      * 
+     * @param zone
+     * @param path
      * @throws NotNullException
      */
-    public $Fichier(ZonePartageSimple zone) throws NotNullException {
+    public $Fichier(ZonePartageSimple zone, String path)
+	    throws NotNullException {
 	super(zone);
+	this.name = path; // TODO change to have name only
+    }
+
+    /**
+     * Permet de récupérer le nom du fichier.
+     * 
+     * @return
+     */
+    public String getName() {
+	return this.name;
     }
 }

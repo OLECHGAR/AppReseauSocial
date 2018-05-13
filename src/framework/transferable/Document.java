@@ -1,6 +1,7 @@
 package framework.transferable;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URI;
 
 import framework.exception.NotNullException;
@@ -22,7 +23,7 @@ public class Document extends $Fichier<File> {
      */
     public Document(ZonePartageSimple zone, String path)
 	    throws NotNullException {
-	super(zone);
+	super(zone, path);
 	this.contenu = new File(path);
     }
 
@@ -32,9 +33,11 @@ public class Document extends $Fichier<File> {
      * @param zone
      * @param path
      * @throws NotNullException
+     * @throws MalformedURLException
      */
-    public Document(ZonePartageSimple zone, URI path) throws NotNullException {
-	super(zone);
+    public Document(ZonePartageSimple zone, URI path) throws NotNullException,
+	    MalformedURLException {
+	super(zone, path.toURL().getFile());
 	this.contenu = new File(path);
     }
 }

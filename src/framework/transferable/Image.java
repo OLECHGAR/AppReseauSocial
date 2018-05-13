@@ -17,8 +17,6 @@ import framework.zonesPartages.ZonePartageSimple;
  */
 public class Image extends $Fichier<BufferedImage> {
 
-    private final String name;
-
     /**
      * The constructor.
      * 
@@ -27,12 +25,11 @@ public class Image extends $Fichier<BufferedImage> {
      * @throws NotNullException
      * @throws IOException
      */
-    public Image(ZonePartageSimple zone, String pathImage)
-	    throws NotNullException, IOException {
-	super(zone);
-	File f = new File(pathImage);
+    public Image(ZonePartageSimple zone, String path) throws NotNullException,
+	    IOException {
+	super(zone, path);
+	File f = new File(path);
 	this.contenu = ImageIO.read(f);
-	this.name = f.getName();
     }
 
     /**
@@ -43,11 +40,10 @@ public class Image extends $Fichier<BufferedImage> {
      * @throws NotNullException
      * @throws IOException
      */
-    public Image(ZonePartageSimple zone, URI pathImage)
-	    throws NotNullException, IOException {
-	super(zone);
-	this.contenu = ImageIO.read((new File(pathImage)));
-	this.name = pathImage.toURL().getFile();
+    public Image(ZonePartageSimple zone, URI path) throws NotNullException,
+	    IOException {
+	super(zone, path.toURL().getFile());
+	this.contenu = ImageIO.read((new File(path)));
     }
 
     /**
@@ -60,9 +56,8 @@ public class Image extends $Fichier<BufferedImage> {
      */
     public Image(ZonePartageSimple zone, File fichierImage)
 	    throws NotNullException, IOException {
-	super(zone);
+	super(zone, fichierImage.getName());
 	this.contenu = ImageIO.read(fichierImage);
-	this.name = fichierImage.getName();
     }
 
     /**
@@ -73,14 +68,4 @@ public class Image extends $Fichier<BufferedImage> {
     public String[] getReaderFormatNames() {
 	return ImageIO.getReaderFormatNames();
     }
-
-    /**
-     * Permet de récupérer le nom du fichier image.
-     * 
-     * @return this.name;
-     */
-    public String getName() {
-	return this.name;
-    }
-
 }

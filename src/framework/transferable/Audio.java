@@ -14,7 +14,6 @@ import framework.zonesPartages.ZonePartageSimple;
  * @author monbeigj
  */
 public class Audio extends $Fichier<AudioClip> {
-    private final String name;
 
     /**
      * The constructor.
@@ -24,9 +23,8 @@ public class Audio extends $Fichier<AudioClip> {
      * @throws NotNullException
      */
     public Audio(ZonePartageSimple zone, URL path) throws NotNullException {
-	super(zone);
+	super(zone, path.getFile());
 	this.contenu = Applet.newAudioClip(path);
-	this.name = path.getFile();
     }
 
     /**
@@ -39,18 +37,8 @@ public class Audio extends $Fichier<AudioClip> {
      */
     public Audio(ZonePartageSimple zone, String path) throws NotNullException,
 	    MalformedURLException {
-	super(zone);
+	super(zone, path);
 	URL url = new URL("ftp://" + path);
 	this.contenu = Applet.newAudioClip(url);
-	this.name = url.getFile();
-    }
-
-    /**
-     * Permet de récupérer le nom du fichier audio.
-     * 
-     * @return this.name
-     */
-    public String getName() {
-	return this.name;
     }
 }
