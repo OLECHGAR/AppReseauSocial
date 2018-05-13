@@ -6,6 +6,11 @@ import framework.exception.NotNullException;
 import framework.transferable.Texte;
 import framework.zonesPartages.ZonePartage;
 
+/**
+ * 
+ * @author monbeigj
+ *
+ */
 public class SalonDiscussion extends ZonePartage<Utilisateur, SalonDiscussion>
 	implements java.io.Serializable {
 

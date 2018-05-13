@@ -26,6 +26,11 @@ import com.jfoenix.controls.JFXTextField;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
+/**
+ * 
+ * @author monbeigj
+ *
+ */
 public class UserCreationController implements Initializable {
 
     @FXML
@@ -51,9 +56,18 @@ public class UserCreationController implements Initializable {
     @FXML
     private JFXPasswordField password_u;
 
-    public ReseauSocial reseauSocial = null; // REPRESENTE L'OBJET QU'ON VA
-					     // RECUPERER DU SERVEUR
+    /**
+     * REPRESENTE L'OBJET QU'ON VA RECUPERER DU SERVEUR
+     */
+    public ReseauSocial reseauSocial = null;
 
+    /**
+     * Permet de créer la connexion.
+     * 
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     void create(ActionEvent event) throws IOException, SQLException {
 
@@ -66,7 +80,6 @@ public class UserCreationController implements Initializable {
 	} catch (RemoteException e) {
 	    System.err.println("RemoteException");
 	}
-	System.out.println("coucou");
 
 	this.reseauSocial.openConnection();
 	this.reseauSocial.ajoutUtilisateur(this.login_u.getText(),
@@ -79,6 +92,11 @@ public class UserCreationController implements Initializable {
 		.getWindow(), "/application/views/Login.fxml");
     }
 
+    /**
+     * Permet à l'utilisateur de fermer la vue.
+     * 
+     * @param event
+     */
     @FXML
     void close(MouseEvent event) {
 	Node node = (Node) event.getSource();
@@ -86,17 +104,36 @@ public class UserCreationController implements Initializable {
 	stage.close();
     }
 
+    /**
+     * Permet à l'utilisateur de revenir en arrière.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void back(MouseEvent event) throws IOException {
 	this.changeView((Stage) ((Node) event.getSource()).getScene()
 		.getWindow(), "/application/views/Login.fxml");
     }
 
+    /**
+     * Permet d'initialiser la vue.
+     * 
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 	// initialize
     }
 
+    /**
+     * Permet d de changer de vue.
+     * 
+     * @param app_stage
+     * @param path
+     * @throws IOException
+     */
     private void changeView(Stage app_stage, String path) throws IOException {
 	Parent home_page_parent = FXMLLoader.load(this.getClass().getResource(
 		path));
