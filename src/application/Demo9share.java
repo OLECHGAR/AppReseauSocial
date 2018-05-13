@@ -7,7 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class demo9share extends Application {
+/**
+ * Demo9share application principale
+ * 
+ * @author monbeigj
+ *
+ */
+public class Demo9share extends Application {
     @Override
     public void start(Stage primaryStage) {
 	try {
@@ -24,12 +30,6 @@ public class demo9share extends Application {
     }
 
     public static void main(String[] args) {
-
 	launch(args);
-
-	// LANCER L'IHM
-
-	// CONNEXION
-	//
     }
 }

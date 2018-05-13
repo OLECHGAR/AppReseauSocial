@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import framework.zonesPartages.ZonePartageSimple;
 
 /**
- * Salon privé entre deux p
+ * Salon privé entre deux personnes.
  * 
  * @author monbeigj
  *

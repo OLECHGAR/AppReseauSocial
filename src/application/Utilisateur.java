@@ -293,7 +293,7 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
     }
 
     @Override
-	public String toString() {
-		return ""+nom + ", "+prenom;
-	}
+    public String toString() {
+	return "" + this.nom + ", " + this.prenom;
+    }
 }
