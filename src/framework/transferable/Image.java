@@ -1,9 +1,4 @@
-/*******************************************************************************
- * 2018, All rights reserved.
- *******************************************************************************/
 package framework.transferable;
-
-// Start of user code (user defined imports)
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,20 +10,17 @@ import javax.imageio.ImageIO;
 import framework.exception.NotNullException;
 import framework.zonesPartages.ZonePartageSimple;
 
-// End of user code
-
 /**
  * Description of Image.
  * 
  * @author monbeigj
  */
 public class Image extends $Fichier<BufferedImage> {
-    // Start of user code (user defined attributes for Image)
+
     private final String name;
 
-    // End of user code
-
     /**
+     * The constructor.
      * 
      * @param zone
      * @param pathImage
@@ -37,15 +29,14 @@ public class Image extends $Fichier<BufferedImage> {
      */
     public Image(ZonePartageSimple zone, String pathImage)
 	    throws NotNullException, IOException {
-	// Start of user code constructor for Image)
 	super(zone);
 	File f = new File(pathImage);
 	this.contenu = ImageIO.read(f);
 	this.name = f.getName();
-	// End of user code
     }
 
     /**
+     * The constructor.
      * 
      * @param zone
      * @param pathImage
@@ -54,14 +45,13 @@ public class Image extends $Fichier<BufferedImage> {
      */
     public Image(ZonePartageSimple zone, URI pathImage)
 	    throws NotNullException, IOException {
-	// Start of user code constructor for Image)
 	super(zone);
 	this.contenu = ImageIO.read((new File(pathImage)));
 	this.name = pathImage.toURL().getFile();
-	// End of user code
     }
 
     /**
+     * The constructor.
      * 
      * @param zone
      * @param fichierImage
@@ -70,17 +60,27 @@ public class Image extends $Fichier<BufferedImage> {
      */
     public Image(ZonePartageSimple zone, File fichierImage)
 	    throws NotNullException, IOException {
-	// Start of user code constructor for Image)
 	super(zone);
 	this.contenu = ImageIO.read(fichierImage);
 	this.name = fichierImage.getName();
-	// End of user code
     }
 
-    // Start of user code (user defined methods for Image)
+    /**
+     * Peremet de récupérer les format pris en charge par notre framwork.
+     * 
+     * @return extention des fichiers sour un tableau de String
+     */
     public String[] getReaderFormatNames() {
 	return ImageIO.getReaderFormatNames();
     }
-    // End of user code
+
+    /**
+     * Permet de récupérer le nom du fichier image.
+     * 
+     * @return this.name;
+     */
+    public String getName() {
+	return this.name;
+    }
 
 }
