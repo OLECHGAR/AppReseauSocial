@@ -44,7 +44,7 @@ public class Video extends $Fichier {
 	 * @return un tableau de byte
 	 * @throws FileNotFoundException
 	 */
-	public static ByteArrayOutputStream VideoToByte(String path) throws FileNotFoundException{
+	public static ByteArrayOutputStream GetVideoToByte(String path) throws FileNotFoundException{
 		
 		File file = new File(path);
 		FileInputStream input = new FileInputStream(file);
@@ -71,7 +71,7 @@ public class Video extends $Fichier {
 	 * @return video: le fichier video formé
 	 * @throws FileNotFoundException
 	 */
-	public static File ByteToVideo(ByteArrayOutputStream byteFile, String path) throws FileNotFoundException{
+	public static File GetByteToVideo(ByteArrayOutputStream byteFile, String path) throws FileNotFoundException{
 		 
 		byte[] bytes = byteFile.toByteArray();
 		 File video = new File(path);
