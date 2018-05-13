@@ -13,12 +13,11 @@ import framework.utilisateur.$Utilisateur;
  * 
  * @author monbeigj
  */
-public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> extends ZonePartageSimple implements java.io.Serializable{
+public class ZonePartage<U extends $Utilisateur<Z>, Z extends ZonePartageSimple>
+	extends ZonePartageSimple implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1L;
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
      * Description of the property messages.
      */
     protected ArrayList<U> utilisateursAutorises = new ArrayList<U>();
@@ -33,8 +32,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @param utilisateursAutorises
      * @throws NotNullException
      */
-    public ZonePartage(
-	    ArrayList<U> utilisateursAutorises)
+    public ZonePartage(ArrayList<U> utilisateursAutorises)
 	    throws NotNullException {
 	super();
 	if (utilisateursAutorises == null)
@@ -52,8 +50,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @param proprietaire
      * @throws NotNullException
      */
-    public ZonePartage(U proprietaire, String nom)
-	    throws NotNullException {
+    public ZonePartage(U proprietaire, String nom) throws NotNullException {
 	super();
 	if (proprietaire == null)
 	    throw new NotNullException("$Utilisateur proprietaire",
@@ -74,8 +71,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @param utilisateursAutorises
      * @throws NotNullException
      */
-    public ZonePartage(
-	    U proprietaire, ArrayList<U> utilisateursAutorises)
+    public ZonePartage(U proprietaire, ArrayList<U> utilisateursAutorises)
 	    throws NotNullException {
 	super();
 	if (proprietaire == null)
@@ -96,9 +92,8 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @param nom
      * @throws NotNullException
      */
-    public ZonePartage(
-	    U proprietaire, ArrayList<U> utilisateursAutorises, String nom)
-	    throws NotNullException {
+    public ZonePartage(U proprietaire, ArrayList<U> utilisateursAutorises,
+	    String nom) throws NotNullException {
 	super();
 	if (proprietaire == null)
 	    throw new NotNullException("$Utilisateur proprietaire",
@@ -116,7 +111,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @return prorietaire
      */
     public U getProprietaire() {
-    	return this.proprietaire;
+	return this.proprietaire;
     }
 
     /**
@@ -126,8 +121,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @throws NotNullException
      * @ensure this.proprietaire == proprietaire
      */
-    public void setProprietaire(U proprietaire)
-	    throws NotNullException {
+    public void setProprietaire(U proprietaire) throws NotNullException {
 	if (proprietaire == null)
 	    throw new NotNullException("$Utilisateur propriétaire",
 		    "ZonePartage.setProprietaire");
@@ -144,15 +138,16 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @throw NotNullException
      * @invariant estAjoute(it.next()) == true
      */
-    public void ajouterUtilisateurs( ArrayList<U> utililsateurs) {
+    public void ajouterUtilisateurs(ArrayList<U> utililsateurs) {
 	if (utililsateurs == null)
 	    throw new NotNullException("utilisateurs",
 		    "ZonePartage.ajouterUtilisateurs");
 	Iterator<U> it = utililsateurs.iterator();
 	while (it.hasNext()) {
-	    if (!(this.estAjoute(it.next())))throw new Invariant("estAjoute(it.next()) == true",
+	    if (!(this.estAjoute(it.next())))
+		throw new Invariant("estAjoute(it.next()) == true",
 			"ZonePartage.ajouterUtilisateur");
-		}
+	}
     }
 
     /**
@@ -165,16 +160,16 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @throw NotNullException
      */
     public boolean estAjoute(U utilisateur) {
-		if (utilisateur == null)
-		    throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
-		utilisateur.rejoindreZone((Z) this);
-		this.utilisateursAutorises.add(utilisateur);
-		Iterator<U> it = this.utilisateursAutorises.iterator();
-		while (it.hasNext()) {
-		    if (it.next() == utilisateur) {
-		    	return true;
+	if (utilisateur == null)
+	    throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
+	utilisateur.rejoindreZone((Z) this);
+	this.utilisateursAutorises.add(utilisateur);
+	Iterator<U> it = this.utilisateursAutorises.iterator();
+	while (it.hasNext()) {
+	    if (it.next() == utilisateur) {
+		return true;
 	    }
-	    	
+
 	}
 	return false;
     }
@@ -211,8 +206,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @return boolean
      * @ensure this.estPrivee == true
      */
-    public boolean setPrivee(
-	    ArrayList<U> utilisateursAutorises) {
+    public boolean setPrivee(ArrayList<U> utilisateursAutorises) {
 	if (utilisateursAutorises == null)
 	    throw new NotNullException("utilisateursAutorises",
 		    "ZonePartage.setPrivee");

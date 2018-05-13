@@ -19,27 +19,54 @@ public class Texte<String> extends $Transferable<String> {
      * 
      * @throws NotNullException
      */
-	private Utilisateur proprietaire;
+    private Utilisateur proprietaire;
+
     public Texte(ZonePartageSimple zone) throws NotNullException {
 	super(zone);
     }
-    
-    public <Z extends ZonePartageSimple> Texte( int id,Z zone, String contenu, Date heure ){
-    	super(id,zone,contenu,heure);
+
+    /**
+     * The constructor.
+     * 
+     * @param id
+     * @param zone
+     * @param contenu
+     * @param heure
+     */
+    public <Z extends ZonePartageSimple> Texte(int id, Z zone, String contenu,
+	    Date heure) {
+	super(id, zone, contenu, heure);
     }
-    
-    public <Z extends ZonePartageSimple> Texte( int id,Z zone, String contenu, Date heure, Utilisateur proprietaire){
-    	super(id,zone,contenu,heure);
-    	this.proprietaire = proprietaire;
+
+    /**
+     * The constructor.
+     * 
+     * @param id
+     * @param zone
+     * @param contenu
+     * @param heure
+     * @param proprietaire
+     */
+    public <Z extends ZonePartageSimple> Texte(int id, Z zone, String contenu,
+	    Date heure, Utilisateur proprietaire) {
+	super(id, zone, contenu, heure);
+	this.proprietaire = proprietaire;
     }
-    
+
+    /**
+     * Permet de récupérer le propriétaire.
+     * 
+     * @return
+     */
+    @Override
     public Utilisateur getProprietaire() {
-    	return this.proprietaire;
+	return this.proprietaire;
     }
-    
-    public java.lang.String toString()
-    {
-    	System.out.println(super.contenu.toString());
-    	return (java.lang.String) (""+this.timeMessage()+ " "+this.proprietaire.getLogin()+" : "+this.contenu);
+
+    @Override
+    public java.lang.String toString() {
+	System.out.println(super.contenu.toString());
+	return "" + this.timeMessage() + " " + this.proprietaire.getLogin()
+		+ " : " + this.contenu;
     }
 }

@@ -31,7 +31,7 @@ public abstract class $Transferable<T> implements java.io.Serializable {
     protected ArrayList<$Requete<? extends $Utilisateur<?>>> requetes = new ArrayList<$Requete<? extends $Utilisateur<?>>>();
 
     protected T contenu;
-    
+
     protected Date heure;
 
     /**
@@ -49,8 +49,18 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	this.heure = new Date();
 	this.ZonePartage = zone;
     }
-    
-    public <Z extends ZonePartageSimple> $Transferable(int id, Z zone, T contenu, Date heure) throws NotNullException {
+
+    /**
+     * Constructeur de $Transferable
+     * 
+     * @param id
+     * @param zone
+     * @param contenu
+     * @param heure
+     * @throws NotNullException
+     */
+    public <Z extends ZonePartageSimple> $Transferable(int id, Z zone,
+	    T contenu, Date heure) throws NotNullException {
 	super();
 	this.heure = heure;
 	this.id = id;
@@ -110,8 +120,8 @@ public abstract class $Transferable<T> implements java.io.Serializable {
      */
     public void setContenu(Object contenu) throws NotNullException {
 	// TODO changer type object en plus générique
-	//if (contenu == null)
-	  //  throw new NotNullException("contenu", "setContenu");
+	// if (contenu == null)
+	// throw new NotNullException("contenu", "setContenu");
 	this.contenu = (T) contenu;
 	if (this.contenu != contenu)
 	    throw new Ensure("getContenu() == contenu", "seContenu");
@@ -137,7 +147,7 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	while (it.hasNext()) {
 	    $Requete<?> requete = it.next();
 	    if (requete.getClass() == new Envoi<$Utilisateur<?>>().getClass()) {
-		return (U)requete.getUtilisateur();
+		return (U) requete.getUtilisateur();
 	    }
 	}
 	return null;
@@ -174,12 +184,12 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	return false;
     }
 
-	@Override
-	public String toString() {
-		return "" + this.heure +" : "+ this.contenu;
-	}
-	
-	public int getId() {
-		return this.id;
-	}
+    @Override
+    public String toString() {
+	return "" + this.heure + " : " + this.contenu;
+    }
+
+    public int getId() {
+	return this.id;
+    }
 }
