@@ -1,7 +1,9 @@
 package application.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,7 +33,6 @@ import application.serveur.ReseauSocial;
 import framework.rmi.Envoi;
 import framework.transferable.*;
 
-
 public class ChatController implements Initializable {
 
 	@FXML
@@ -40,7 +41,7 @@ public class ChatController implements Initializable {
 	private FontAwesomeIconView btnjoindre;
 	@FXML
 	private FontAwesomeIconView btn_add_room;
-	@FXML 
+	@FXML
 	private ListView<String> list;
 	@FXML
 	private ListView<Utilisateur> room_users;
@@ -50,62 +51,59 @@ public class ChatController implements Initializable {
 	private ListView<$Transferable<?>> room_messages;
 	@FXML
 	private JFXTextField contenu;
-	
+
 	private Utilisateur user;
 	private SalonDiscussion salon;
 	private ObservableList<SalonDiscussion> allSalon = FXCollections.observableArrayList();
 	private ObservableList<Utilisateur> ListUsersRoom = FXCollections.observableArrayList();
 	private ObservableList<$Transferable<?>> ListMessagesRoom = FXCollections.observableArrayList();
 	private ReseauSocial reseauSocial;
-	
-	@FXML 
-	private void multipleChooser(MouseEvent ae){
-		FileChooser fc = new FileChooser();
-	    File SelectedFile = fc.showOpenDialog(null);
-	    
-	    if(SelectedFile != null)
-		    {
-		    	list.getItems().add(SelectedFile.getName());
-		    }
-	    else 
-		    {
-		    	System.out.println("Fichier non valide");
-		    }
-  
-	}
-	
+
 	@FXML
-	void AjoutZone(MouseEvent event) throws IOException  {
-        FXMLLoader Loader = new FXMLLoader();
+	private void multipleChooser(MouseEvent ae) {
+		FileChooser fc = new FileChooser();
+		File SelectedFile = fc.showOpenDialog(null);
+
+		if (SelectedFile != null) {
+			list.getItems().add(SelectedFile.getName());
+		} else {
+			System.out.println("Fichier non valide");
+		}
+
+	}
+
+	@FXML
+	void AjoutZone(MouseEvent event) throws IOException {
+		FXMLLoader Loader = new FXMLLoader();
 		Loader.setLocation(getClass().getResource("/application/views/AjoutZone.fxml"));
 		Loader.load();
-		
+
 		AjoutZoneController controller = Loader.getController();
 		controller.setObjects(reseauSocial, user);
-		
+
 		Parent home_page_parent = Loader.getRoot();
-        Scene home_page_scene = new Scene(home_page_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show(); 
+		Scene home_page_scene = new Scene(home_page_parent);
+		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		app_stage.setScene(home_page_scene);
+		app_stage.show();
 	}
-	
+
 	@FXML
-	void homepage(MouseEvent event) throws IOException  {
+	void homepage(MouseEvent event) throws IOException {
 		FXMLLoader Loader = new FXMLLoader();
 		Loader.setLocation(getClass().getResource("/application/views/Accueil.fxml"));
 		Loader.load();
-		
+
 		AccueilController controller = Loader.getController();
 		controller.setObjects(reseauSocial, user);
-		
+
 		Parent home_page_parent = Loader.getRoot();
-        Scene home_page_scene = new Scene(home_page_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show(); 
+		Scene home_page_scene = new Scene(home_page_parent);
+		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		app_stage.setScene(home_page_scene);
+		app_stage.show();
 	}
-	
+
 	@FXML
 	void close(MouseEvent event) {
 		Node node = (Node) event.getSource();
@@ -119,60 +117,79 @@ public class ChatController implements Initializable {
 	}
 
 	public void setObjects(ReseauSocial reseauSocial, Utilisateur user) throws RemoteException, SQLException {
-		System.out.println("CHATCONTROLLER : "+user.toString());
 		this.reseauSocial = reseauSocial;
-		this.user = user;		
+		this.user = user;
 	}
-	
-	public void refreshRooms() throws RemoteException, SQLException
-	{
+
+	public void refreshRooms() throws RemoteException, SQLException {
 		allSalon.clear();
-			
-		//reseauSocial.getAllUserSalonDiscussion(user);
-		//System.out.println(user.getZonesCrees().size());
-		//System.out.println(user.getZonesInteractions().size());
-		//allSalon.addAll(user.getZonesCrees());
-		//System.out.println(user.getZonesInteractions().size());
-		//allSalon.addAll(user.getZonesInteractions());
-		
-		System.out.println("hello");
+
 		reseauSocial.openConnection();
 		allSalon.addAll(reseauSocial.getAllUserSalonDiscussion2(user));
-		System.out.println(reseauSocial.getAllUserSalonDiscussion2(user).size());
-		System.out.println(allSalon.size());
 		chat_rooms.setItems(allSalon);
 		reseauSocial.closeConnection();
 	}
-	
-	public void joinRoom() throws RemoteException, SQLException
-	{
+
+	public void joinRoom() throws RemoteException, SQLException {
 		reseauSocial.openConnection();
-		
+
 		ListUsersRoom.clear();
 		ListMessagesRoom.clear();
-		
+
 		ListUsersRoom.add(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire());
 		ListUsersRoom.addAll(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises());
-		
+
 		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
-		
-		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises().toString());
-		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire().toString());
-		System.out.println(ListMessagesRoom.toString());
+
 		salon = chat_rooms.getSelectionModel().getSelectedItem();
 		room_users.setItems(ListUsersRoom);
 		room_messages.setItems(ListMessagesRoom);
 		reseauSocial.closeConnection();
-		
+
+		Task task = new Task<Void>() {
+			@Override
+			public Void call() throws Exception {
+				while (true) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								reseauSocial.openConnection();
+							} catch (RemoteException | SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							ListMessagesRoom.clear();
+							try {
+								ListMessagesRoom.addAll(reseauSocial
+										.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
+							} catch (RemoteException | SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							room_messages.setItems(ListMessagesRoom);
+							try {
+								reseauSocial.closeConnection();
+							} catch (RemoteException | SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+					Thread.sleep(5000);
+				}
+			}
+		};
+		Thread th = new Thread(task);
+		th.setDaemon(true);
+		th.start();
 	}
-	
-	public void sendMessage() throws RemoteException, SQLException
-	{
-		System.out.println("envoie");
+
+	public void sendMessage() throws RemoteException, SQLException {
 		this.reseauSocial.openConnection();
 		reseauSocial.envoyerMessage(user, salon, contenu.getText());
 		contenu.setText("");
-		
+
 		ListMessagesRoom.clear();
 		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
 		room_messages.setItems(ListMessagesRoom);
