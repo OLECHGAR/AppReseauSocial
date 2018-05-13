@@ -3,6 +3,7 @@ package application.serveur;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.Iterator;
 
 import application.SalonDiscussion;
 import application.Utilisateur;
+import framework.rmi.Envoi;
 import framework.transferable.Texte;
 
 public class ReseauSocialImplementation extends UnicastRemoteObject implements ReseauSocial {
@@ -363,10 +365,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 		}
 		// Récupération de tous les utilisateurs de la salle sauf le proprio
 			Iterator<SalonDiscussion> it = returnList.iterator();
-			System.out.println("Taille "+returnList.size());
 			while(it.hasNext()) {
-				
-				System.out.println("\nrentre dans le while");
 				SalonDiscussion current = it.next();
 				String sqlStat1 = "SELECT * " + "FROM utilisateur "
 						+ "INNER JOIN abonnement ON utilisateur_abo=login "
@@ -377,11 +376,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 				statement1.setString(2, current.getProprietaire().getLogin());
 				ResultSet result1 = statement1.executeQuery();
 				ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
-				System.out.println("Ref : " +current.getReferences());
-				while (result1.next()) {
-					
-					System.out.println("login : "+result1.getString(1));
-					
+				while (result1.next()) {					
 					autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
 							result1.getString(4), result1.getString(5), result1.getString(6),
 							result1.getString(7)));
@@ -395,19 +390,68 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 	}
 	
 	@Override
-	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon) throws SQLException, RemoteException{
-		String sqlMessages = "SELECT * FROM Message WHERE salon_id =?";
+	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon, Utilisateur utilisateur) throws SQLException, RemoteException{
+		String sqlMessages = "SELECT * FROM Message INNER JOIN Envoi ON Envoi.id_envoi=Message.id_envoi WHERE Envoi.salon_id =?";
 		ArrayList<Texte<String>> messages = new ArrayList<Texte<String>>();
 		PreparedStatement statement1 = this.connection.prepareStatement(sqlMessages);
 		statement1.setString(1, Integer.toString(salon.getReferences()));
 		ResultSet result1 = statement1.executeQuery();
+		
 		while(result1.next()) {
-			Texte<String> txt = new Texte<String>(salon);
-			txt.setContenu(result1.getString(4));
+			String sqlProprio = "SELECT * FROM utilisateur INNER JOIN Envoi ON login =login_utilisateur WHERE salon_id=? AND id_message=?";
+			PreparedStatement proprio = this.connection.prepareStatement(sqlProprio);
+			proprio.setInt(1, salon.getReferences());
+			proprio.setInt(2, result1.getInt(1));
+			ResultSet proprioRes = proprio.executeQuery();
+			Utilisateur u =new Utilisateur(proprioRes.getString(1), proprioRes.getString(2), proprioRes.getString(3),
+					proprioRes.getString(4), proprioRes.getString(5), proprioRes.getString(6),
+					proprioRes.getString(7));
+			
+			Texte<String> txt = new Texte<String>(result1.getInt(1),salon, result1.getString(2), result1.getDate(4), u);
 			messages.add(txt);
-			salon.addTransferable(new Texte<String>(salon));
+			salon.addTransferable(txt);
+			
+			String sqlEnvoi = "SELECT * FROM Envoi WHERE id_message=?";
+			PreparedStatement statement2 = this.connection.prepareStatement(sqlEnvoi);
+			statement2.setInt(1, result1.getInt(1));
+			ResultSet result2 = statement2.executeQuery();
+			while(result2.next()) {
+				txt.getRequetes().add(new Envoi<Utilisateur>(result2.getInt(1), salon,utilisateur, txt));
+			}
 		}
 		return messages;
+	}
+	
+	public boolean envoyerMessage(Utilisateur utilisateur, SalonDiscussion salon, String contenu) throws SQLException, RemoteException {
+		
+		int idM;
+		String sqlIdMessage = "SELECT MAX(message_id) FROM Message";
+		PreparedStatement statementIdMessage = this.connection.prepareStatement(sqlIdMessage);
+		ResultSet idMessage = statementIdMessage.executeQuery();
+		idM = idMessage.getInt(1)+1;
+		
+		int idE;
+		String sqlIEnvoi = "SELECT MAX(id_envoi) FROM Envoi";
+		PreparedStatement statementIdEnvoi = this.connection.prepareStatement(sqlIEnvoi);
+		ResultSet idEnvoi = statementIdEnvoi.executeQuery();
+		idE = idEnvoi.getInt(1)+1;
+		Envoi<Utilisateur> E = new Envoi<Utilisateur>(idE, salon, utilisateur, idM, contenu);
+		E.envoyer(salon);
+		
+		String sqlMessage = "INSERT INTO Message (contenu, id_envoi, heure) VALUES(?,?,?)";
+		PreparedStatement statementInsertMessage = this.connection.prepareStatement(sqlMessage);
+		statementInsertMessage.setString(1, contenu);
+		statementInsertMessage.setInt(2, idE);
+		statementInsertMessage.setDate(3, new Date(System.currentTimeMillis()));
+		statementInsertMessage.executeUpdate();
+		
+		String sqlEnvoi = "INSERT INTO Envoi (id_message,login_utilisateur, salon_id)" + "VALUES (?, ?,?)";
+		PreparedStatement statementInsertEnvoi = this.connection.prepareStatement(sqlEnvoi);
+		statementInsertEnvoi.setInt(1, idM);
+		statementInsertEnvoi.setString(2, utilisateur.getLogin());
+		statementInsertEnvoi.setInt(3, salon.getReferences());
+		statementInsertEnvoi.executeUpdate();
+		return true;
 	}
 
 	@Override

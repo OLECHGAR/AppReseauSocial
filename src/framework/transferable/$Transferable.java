@@ -24,7 +24,7 @@ public abstract class $Transferable<T> implements java.io.Serializable {
      * Description of the property ZonesPartages.
      */
     protected final ZonePartageSimple ZonePartage; // TODO NOT NULL
-
+    protected int id;
     /**
      * Description of the property requetes.
      */
@@ -47,6 +47,14 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	    throw new NotNullException("ZonePartageSimple zone",
 		    "$Transferable");
 	this.heure = new Date();
+	this.ZonePartage = zone;
+    }
+    
+    public <Z extends ZonePartageSimple> $Transferable(int id, Z zone, T contenu, Date heure) throws NotNullException {
+	super();
+	this.heure = heure;
+	this.id = id;
+	this.contenu = contenu;
 	this.ZonePartage = zone;
     }
 
@@ -102,8 +110,8 @@ public abstract class $Transferable<T> implements java.io.Serializable {
      */
     public void setContenu(Object contenu) throws NotNullException {
 	// TODO changer type object en plus générique
-	if (contenu == null)
-	    throw new NotNullException("contenu", "setContenu");
+	//if (contenu == null)
+	  //  throw new NotNullException("contenu", "setContenu");
 	this.contenu = (T) contenu;
 	if (this.contenu != contenu)
 	    throw new Ensure("getContenu() == contenu", "seContenu");
@@ -117,7 +125,7 @@ public abstract class $Transferable<T> implements java.io.Serializable {
      * @throws NotNullException
      * @require this.requetes.size()>0
      */
-    public $Utilisateur<?> getProprietaire() {
+    public <U extends $Utilisateur<?>> U getProprietaire() {
 	if (this.requetes == null)
 	    throw new NotNullException("$Transferable.requetes",
 		    "$Transferable.getProprietaire");
@@ -129,7 +137,7 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	while (it.hasNext()) {
 	    $Requete<?> requete = it.next();
 	    if (requete.getClass() == new Envoi<$Utilisateur<?>>().getClass()) {
-		return requete.getUtilisateur();
+		return (U)requete.getUtilisateur();
 	    }
 	}
 	return null;
@@ -169,5 +177,9 @@ public abstract class $Transferable<T> implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "" + this.heure +" : "+ this.contenu;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 }

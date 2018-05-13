@@ -52,7 +52,7 @@ public class ChatController implements Initializable {
 	private JFXTextField contenu;
 	
 	private Utilisateur user;
-	private SalonDiscussion zone;
+	private SalonDiscussion salon;
 	private ObservableList<SalonDiscussion> allSalon = FXCollections.observableArrayList();
 	private ObservableList<Utilisateur> ListUsersRoom = FXCollections.observableArrayList();
 	private ObservableList<$Transferable<?>> ListMessagesRoom = FXCollections.observableArrayList();
@@ -154,12 +154,12 @@ public class ChatController implements Initializable {
 		ListUsersRoom.add(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire());
 		ListUsersRoom.addAll(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises());
 		
-		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem()));
+		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
 		
 		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises().toString());
 		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire().toString());
 		System.out.println(ListMessagesRoom.toString());
-		zone = chat_rooms.getSelectionModel().getSelectedItem();
+		salon = chat_rooms.getSelectionModel().getSelectedItem();
 		room_users.setItems(ListUsersRoom);
 		room_messages.setItems(ListMessagesRoom);
 		reseauSocial.closeConnection();
@@ -168,7 +168,14 @@ public class ChatController implements Initializable {
 	
 	public void sendMessage() throws RemoteException, SQLException
 	{
-		new Envoi(contenu.getText(), user, zone, "texte");
-		ListMessagesRoom.add(contenu.getText());		
+		System.out.println("envoie");
+		this.reseauSocial.openConnection();
+		reseauSocial.envoyerMessage(user, salon, contenu.getText());
+		contenu.setText("");
+		
+		ListMessagesRoom.clear();
+		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
+		room_messages.setItems(ListMessagesRoom);
+		this.reseauSocial.closeConnection();
 	}
 }

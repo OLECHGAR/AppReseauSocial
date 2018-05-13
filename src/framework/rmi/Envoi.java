@@ -1,15 +1,18 @@
 package framework.rmi;
 
+import java.util.Date;
+
 import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartages.ZonePartageSimple;
+import framework.transferable.*;
 
 /**
  * Description of Envoie.
  * 
  * @author monbeigj
  */
-public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
+public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> implements java.io.Serializable{
     /**
      * The constructor.
      * 
@@ -32,11 +35,20 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
     public <C> Envoi(C contenu, T u, ZonePartageSimple zoneDestination,
 	    String type) throws NotNullException {
 	super(u, type);
-	super.setTransferable(contenu, zoneDestination);
+	//super.setTransferable(contenu, zoneDestination);
 	super.transferable.addRequete(this);
 	this.envoyer(zoneDestination);
     }
-
+    
+    public <C, Z extends ZonePartageSimple, TR extends $Transferable<C>> Envoi(int id, Z zone, T utilisateur, int idMessage, C contenu){
+    	super(id,utilisateur,zone);
+    	this.setTransferable(idMessage, zone, contenu, new Date());
+    	super.transferable.addRequete(this);
+    }
+    
+    public <Z extends ZonePartageSimple, TR extends $Transferable<?>> Envoi(int id, Z zone, T utilisateur, TR transferable) {
+    	super(id,utilisateur,zone, transferable);
+    }
     /**
      * Permet d'envoyer le transferable vers la zone.
      * 
@@ -152,6 +164,13 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+    
+    @Override
+    public <Z extends ZonePartageSimple, C> void setTransferable(int id, Z zone, C contenu, Date heure) {
+    	System.out.println("Contenu setTransferable : "+(String)contenu);
+    	super.type = "texte";
+    	super.setTransferable(id,zone,contenu,heure);
     }
 
 }

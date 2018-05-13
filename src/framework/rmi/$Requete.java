@@ -3,6 +3,7 @@ package framework.rmi;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import framework.exception.NotNullException;
 import framework.transferable.$Transferable;
@@ -24,7 +25,7 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
      * Description of the property $Utilisateur.
      */
     protected T utilisateur;
-
+    protected int id;
     /**
      * Description of the property transferable.
      */
@@ -35,6 +36,7 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
      */
     // TODO change to Enumeration
     protected String type;
+    protected ZonePartageSimple zone;
 
     /**
      * The constructor.
@@ -51,6 +53,19 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
     // TODO supp ?
     public $Requete() {
 	super();
+    }
+    
+    public <Z extends ZonePartageSimple> $Requete(int id, T utilisateur, Z zone ){
+    	this.id = id;
+    	this.zone = zone;
+    	this.utilisateur = utilisateur;
+    }
+    
+    public <Z extends ZonePartageSimple, TR extends $Transferable<?>> $Requete(int id, T utilisateur, Z zone, TR transferable ){
+    	this.id = id;
+    	this.zone = zone;
+    	this.utilisateur = utilisateur;
+    	this.transferable = transferable;
     }
 
     /**
@@ -91,11 +106,11 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
      * @param contenu
      * @throws NotNullException
      */
-    protected void setTransferable(Object contenu, ZonePartageSimple zone)
+    protected <Z extends ZonePartageSimple, C> void setTransferable(int id, Z zone, C contenu, Date heure)
 	    throws NotNullException {
 	// TODO changer type object en plus générique
 	if (this.type == "texte") {
-	    this.transferable = new Texte<Object>(zone);
+	    this.transferable = new Texte<String>(id, zone, (String)contenu, heure);
 	}
 	if (this.type == "image") {
 	    try {
@@ -122,7 +137,11 @@ public abstract class $Requete<T extends $Utilisateur<?>> {
 		e.printStackTrace();
 	    }
 	}
-	this.transferable.setContenu(contenu);
+	//this.transferable.setContenu(contenu);
+    }
+    
+    public int getId() {
+    	return this.id;
     }
 
 }

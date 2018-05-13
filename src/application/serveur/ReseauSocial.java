@@ -27,5 +27,7 @@ public interface ReseauSocial extends Remote {
 	
 	public ArrayList<SalonDiscussion> getAllUserSalonDiscussion2(Utilisateur utilisateur) throws SQLException, RemoteException;
 	
-	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon) throws SQLException, RemoteException;
+	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon, Utilisateur utilisateur) throws SQLException, RemoteException;
+	
+	public boolean envoyerMessage(Utilisateur utilisateur, SalonDiscussion salon, String contenu) throws SQLException, RemoteException;
 }
