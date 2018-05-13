@@ -1,53 +1,56 @@
 package framework.autorisation;
 
-//Start of user code (user defined imports)
-
-//End of user code
-
-/*******************************************************************************
-* 2018, All rights reserved.
-*******************************************************************************/
-
 /**
  * Description of AutorisationZone.
  * 
  * @author pignardf
  */
 public class AutorisationUtilisateur implements Autorisation {
-	// Start of user code (user defined attributes for AutorisationUtilisateur)
-	private boolean ecriture;
-	private boolean lecture;
+    private boolean ecriture;
+    private boolean lecture;
 
-	// End of user code
+    /**
+     * The constructor.
+     */
+    public AutorisationUtilisateur() {
+	super();
+	this.setEcriture(false);
+	this.setLecture(true);
+    }
 
-	/**
-	 * The constructor.
-	 */
-	public AutorisationUtilisateur() {
-		// Start of user code constructor for AutorisationUtilisateur)
-		super();
-		setEcriture(false);
-		setLecture(true);
-		// End of user code
-	}
+    /**
+     * Autorisation en écriture.
+     * 
+     * @return true si on a le droit d'écrit sinon false.
+     */
+    public boolean isEcriture() {
+	return this.ecriture;
+    }
 
-	public boolean isEcriture() {
-		return ecriture;
-	}
+    /**
+     * Change l'autorisation en écriture.
+     * 
+     * @param ecriture
+     */
+    public void setEcriture(boolean ecriture) {
+	this.ecriture = ecriture;
+    }
 
-	public void setEcriture(boolean ecriture) {
-		this.ecriture = ecriture;
-	}
+    /**
+     * Autorisation en lecture.
+     * 
+     * @return true si on a le droit de lire sinon false.
+     */
+    public boolean isLecture() {
+	return this.lecture;
+    }
 
-	public boolean isLecture() {
-		return lecture;
-	}
-
-	public void setLecture(boolean lecture) {
-		this.lecture = lecture;
-	}
-
-	// Start of user code (user defined methods for AutorisationUtilisateur)
-
-	// End of user code
+    /**
+     * Change l'autorisation en lecture.
+     * 
+     * @param lecture
+     */
+    public void setLecture(boolean lecture) {
+	this.lecture = lecture;
+    }
 }
