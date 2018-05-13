@@ -6,8 +6,12 @@ import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartages.ZonePartage;
 
-public class SalonDiscussion extends ZonePartage {
+public class SalonDiscussion extends ZonePartage<Utilisateur, SalonDiscussion> implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int nbSalon;
 	/**
 	 * Permet de r�f�rencer un salon de mani�re unique
@@ -32,7 +36,7 @@ public class SalonDiscussion extends ZonePartage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalonDiscussion($Utilisateur<SalonDiscussion> proprietaire, String nom, int ref)
+	public SalonDiscussion(Utilisateur proprietaire, String nom, int ref)
 			throws NotNullException {
 		super(proprietaire, nom);
 		nbSalon++;
@@ -41,7 +45,7 @@ public class SalonDiscussion extends ZonePartage {
 	}
 
 	public SalonDiscussion(
-			ArrayList<? extends $Utilisateur<SalonDiscussion>> utilisateursAutorises, int ref)
+			ArrayList<Utilisateur> utilisateursAutorises, int ref)
 			throws NotNullException {
 		super(utilisateursAutorises);
 		nbSalon++;
@@ -52,5 +56,11 @@ public class SalonDiscussion extends ZonePartage {
 	public int getReferences() {
 		return references;
 	}
+
+	@Override
+	public String toString() {
+		return "SalonDiscussion : " + this.nom;
+	}
+
 
 }

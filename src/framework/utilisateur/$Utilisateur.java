@@ -60,7 +60,7 @@ public abstract class $Utilisateur<T extends ZonePartageSimple> {
      * 
      * @param newConnecter
      */
-    public void setConnecter(LoginMotDePasse newConnecter)
+    public void setConnecter(LoginMotDePasse<?> newConnecter)
 	    throws NotNullException {
 	if (newConnecter == null)
 	    throw new NotNullException("LoginMotDePasse newConnecter",
@@ -130,8 +130,10 @@ public abstract class $Utilisateur<T extends ZonePartageSimple> {
     private boolean estCree(T nouvelleZone) {
 	Iterator<T> it = this.ZonesCrees.iterator();
 	while (it.hasNext()) {
-	    if (it.next() == nouvelleZone)
-		return true;
+	    if (it.next() == nouvelleZone) {
+	    	return true;
+	    }
+		
 	}
 	return false;
     }
