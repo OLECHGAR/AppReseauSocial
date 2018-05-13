@@ -37,6 +37,8 @@ public class ChatController implements Initializable {
 	@FXML 
 	private ListView<String> list;
 	@FXML
+	private ListView<Utilisateur> room_users;
+	@FXML
 	private ListView<SalonDiscussion> chat_rooms;
 	
 	private Utilisateur user;
@@ -111,18 +113,26 @@ public class ChatController implements Initializable {
 	
 	public void refreshRooms() throws RemoteException, SQLException
 	{
+		allSalon.clear();
+			
+		//reseauSocial.getAllUserSalonDiscussion(user);
+		//System.out.println(user.getZonesCrees().size());
+		//System.out.println(user.getZonesInteractions().size());
+		//allSalon.addAll(user.getZonesCrees());
+		//System.out.println(user.getZonesInteractions().size());
+		//allSalon.addAll(user.getZonesInteractions());
+		
 		System.out.println("hello");
 		reseauSocial.openConnection();
-		reseauSocial.getAllUserSalonDiscussion(user);
-		
-		System.out.println((user.getZonesCrees().size()));
-		allSalon.addAll(user.getZonesCrees());
-		
-		System.out.println(user.getZonesInteractions().size());
-		allSalon.addAll(user.getZonesInteractions());
-		
+		allSalon.addAll(reseauSocial.getAllUserSalonDiscussion2(user));
+		System.out.println(reseauSocial.getAllUserSalonDiscussion2(user).size());
 		System.out.println(allSalon.size());
 		chat_rooms.setItems(allSalon);
 		reseauSocial.closeConnection();
+	}
+	
+	public void joinRoom() throws RemoteException, SQLException
+	{
+		System.out.println(chat_rooms.getSelectionModel().getSelectedItem().toString());
 	}
 }
