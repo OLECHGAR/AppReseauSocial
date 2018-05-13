@@ -1,7 +1,5 @@
 package framework.zonesPartages;
 
-// Start of user code (user defined imports)
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,15 +8,12 @@ import framework.exception.Invariant;
 import framework.exception.NotNullException;
 import framework.utilisateur.$Utilisateur;
 
-// End of user code
-
 /**
  * Description of ZonePartage.
  * 
  * @author monbeigj
  */
 public class ZonePartage extends ZonePartageSimple {
-    // Start of user code (user defined attributes for ZonePartage)
     /**
      * Description of the property messages.
      */
@@ -27,7 +22,6 @@ public class ZonePartage extends ZonePartageSimple {
     protected boolean estPrivee;
     protected String nom;
 
-    // End of user code
     /**
      * Constructeur d'une zone priv�e sans Propri�taire (pour un chat
      * priv� entre 2 personnes cr�� par d�faut par exemple)
@@ -112,7 +106,6 @@ public class ZonePartage extends ZonePartageSimple {
 	this.ajouterUtilisateurs(utilisateursAutorises);
     }
 
-    // Start of user code (user defined methods for ZonePartage)
     /**
      * Renvoie le propri�taire de la zone.
      * 
@@ -256,7 +249,4 @@ public class ZonePartage extends ZonePartageSimple {
     public boolean getPrivacy() {
 	return this.estPrivee;
     }
-
-    // End of user code
-
 }

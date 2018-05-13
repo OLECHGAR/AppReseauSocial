@@ -1,6 +1,5 @@
 package framework.zonesPartages;
 
-//Start of user code (user defined imports)
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,19 +9,14 @@ import framework.exception.NotNullException;
 import framework.exception.Require;
 import framework.transferable.$Transferable;
 
-//End of user code
-
 /**
  * Description of ZonePartageSimple.
  * 
  * @author pignardf
  */
 public class ZonePartageSimple {
-    // Start of user code (user defined attributes for ZonePartage)
     private static final long serialVersionUID = 1L;
     protected ArrayList<$Transferable<?>> transferables = new ArrayList<$Transferable<?>>();
-
-    // End of user code
 
     /**
      * The constructor.
@@ -30,12 +24,9 @@ public class ZonePartageSimple {
      * @throws RemoteException
      */
     public ZonePartageSimple() {
-	// Start of user code constructor for Reception)
 	super();
-	// End of user code
     }
 
-    // Start of user code (user defined methods for ZonePartageSimple)
     /**
      * Returns tous les transferable de la zone.
      * 
@@ -137,5 +128,4 @@ public class ZonePartageSimple {
 	 * base de donée afin de garder un historique des logs
 	 */
     }
-    // End of user code
 }
