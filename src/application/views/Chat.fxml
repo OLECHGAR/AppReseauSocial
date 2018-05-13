@@ -85,15 +85,15 @@
                   <FontAwesomeIconView fx:id="refresh" fill="WHITE" glyphName="REFRESH" layoutX="265.0" layoutY="24.0" size="18" />
                </children>
             </Pane>
-            <JFXTextField layoutX="11.0" layoutY="459.0" prefHeight="40.0" prefWidth="230.0" promptText="Send a message..." style="-fx-background-color: #fff;" unFocusColor="#a8a4a4">
+            <JFXTextField fx:id="contenu" layoutX="11.0" layoutY="459.0" prefHeight="40.0" prefWidth="230.0" promptText="Send a message..." style="-fx-background-color: #fff;" unFocusColor="#a8a4a4">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </JFXTextField>
             <FontAwesomeIconView fx:id="btn_video" fill="#014492" glyphName="PLAY_CIRCLE" layoutX="251.0" layoutY="489.0" size="24" />
-            <JFXListView fx:id="list" layoutY="40.0" prefHeight="424.0" prefWidth="333.0" style="-fx-background-color: #fff;" />
+            <JFXListView fx:id="room_messages" layoutY="40.0" prefHeight="424.0" prefWidth="333.0" style="-fx-background-color: #fff;" />
             <FontAwesomeIconView fx:id="btn_profile" fill="WHITE" glyphName="USER" layoutX="288.0" layoutY="24.0" onMouseClicked="#homepage" size="18" />
-            <FontAwesomeIconView fx:id="btn_msg" fill="#014492" glyphName="ENVELOPE" layoutX="216.0" layoutY="489.0" size="24" />
+            <FontAwesomeIconView fx:id="btn_msg" onMousePressed="#sendMessage" fill="#014492" glyphName="ENVELOPE" layoutX="216.0" layoutY="489.0" size="24" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

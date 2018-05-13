@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import application.SalonDiscussion;
 import application.Utilisateur;
+import framework.transferable.Texte;
 
 public class ReseauSocialImplementation extends UnicastRemoteObject implements ReseauSocial {
 
@@ -358,35 +359,55 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 						returnList.add(new SalonDiscussion(utilisateur, result.getString(1), result.getInt(4)));
 					}
 				}
-			
-			
-			
-			Iterator<SalonDiscussion> it = returnList.iterator();
-			while(it.hasNext()) {
-				SalonDiscussion current = it.next();
-				if(current.getPrivacy()) {
-					String sqlStat1 = "SELECT * " + "FROM utilisateur "
-							+ "INNER JOIN abonnement ON utilisateur_abo=login "
-							+ "WHERE salon=? AND utilisateur_abo!=?";
-	
-					PreparedStatement statement1 = this.connection.prepareStatement(sqlStat1);
-					statement1.setString(1, Integer.toString(current.getReferences()));
-					statement1.setString(2, current.getProprietaire().getLogin());
-					ResultSet result1 = statement1.executeQuery();
-					ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
-	
-					while (result1.next()) {
-						autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
-								result1.getString(4), result1.getString(5), result1.getString(6),
-								result1.getString(7)));
-					}
-					current.ajouterUtilisateurs(autorises);
-				}
-			}
+		
 		}
 		// Récupération de tous les utilisateurs de la salle sauf le proprio
+			Iterator<SalonDiscussion> it = returnList.iterator();
+			System.out.println("Taille "+returnList.size());
+			while(it.hasNext()) {
+				
+				System.out.println("\nrentre dans le while");
+				SalonDiscussion current = it.next();
+				String sqlStat1 = "SELECT * " + "FROM utilisateur "
+						+ "INNER JOIN abonnement ON utilisateur_abo=login "
+						+ "WHERE salon=? AND utilisateur_abo!=?";
+
+				PreparedStatement statement1 = this.connection.prepareStatement(sqlStat1);
+				statement1.setString(1, Integer.toString(current.getReferences()));
+				statement1.setString(2, current.getProprietaire().getLogin());
+				ResultSet result1 = statement1.executeQuery();
+				ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
+				System.out.println("Ref : " +current.getReferences());
+				while (result1.next()) {
+					
+					System.out.println("login : "+result1.getString(1));
+					
+					autorises.add(new Utilisateur(result1.getString(1), result1.getString(2), result1.getString(3),
+							result1.getString(4), result1.getString(5), result1.getString(6),
+							result1.getString(7)));
+				}
+				if(autorises.size()>0) {
+					current.ajouterUtilisateurs(autorises);
+				}				
 		
+			}
 		return returnList;
+	}
+	
+	@Override
+	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon) throws SQLException, RemoteException{
+		String sqlMessages = "SELECT * FROM Message WHERE salon_id =?";
+		ArrayList<Texte<String>> messages = new ArrayList<Texte<String>>();
+		PreparedStatement statement1 = this.connection.prepareStatement(sqlMessages);
+		statement1.setString(1, Integer.toString(salon.getReferences()));
+		ResultSet result1 = statement1.executeQuery();
+		while(result1.next()) {
+			Texte<String> txt = new Texte<String>(salon);
+			txt.setContenu(result1.getString(4));
+			messages.add(txt);
+			salon.addTransferable(new Texte<String>(salon));
+		}
+		return messages;
 	}
 
 	@Override

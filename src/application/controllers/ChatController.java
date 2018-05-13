@@ -14,6 +14,8 @@ import framework.zonesPartages.ZonePartageSimple;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -21,9 +23,13 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXTextField;
+
 import application.SalonDiscussion;
 import application.Utilisateur;
 import application.serveur.ReseauSocial;
+import framework.rmi.Envoi;
+import framework.transferable.*;
 
 
 public class ChatController implements Initializable {
@@ -40,9 +46,16 @@ public class ChatController implements Initializable {
 	private ListView<Utilisateur> room_users;
 	@FXML
 	private ListView<SalonDiscussion> chat_rooms;
+	@FXML
+	private ListView<$Transferable<?>> room_messages;
+	@FXML
+	private JFXTextField contenu;
 	
 	private Utilisateur user;
+	private SalonDiscussion zone;
 	private ObservableList<SalonDiscussion> allSalon = FXCollections.observableArrayList();
+	private ObservableList<Utilisateur> ListUsersRoom = FXCollections.observableArrayList();
+	private ObservableList<$Transferable<?>> ListMessagesRoom = FXCollections.observableArrayList();
 	private ReseauSocial reseauSocial;
 	
 	@FXML 
@@ -133,6 +146,29 @@ public class ChatController implements Initializable {
 	
 	public void joinRoom() throws RemoteException, SQLException
 	{
-		System.out.println(chat_rooms.getSelectionModel().getSelectedItem().toString());
+		reseauSocial.openConnection();
+		
+		ListUsersRoom.clear();
+		ListMessagesRoom.clear();
+		
+		ListUsersRoom.add(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire());
+		ListUsersRoom.addAll(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises());
+		
+		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem()));
+		
+		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises().toString());
+		//System.out.println(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire().toString());
+		System.out.println(ListMessagesRoom.toString());
+		zone = chat_rooms.getSelectionModel().getSelectedItem();
+		room_users.setItems(ListUsersRoom);
+		room_messages.setItems(ListMessagesRoom);
+		reseauSocial.closeConnection();
+		
+	}
+	
+	public void sendMessage() throws RemoteException, SQLException
+	{
+		new Envoi(contenu.getText(), user, zone, "texte");
+		ListMessagesRoom.add(contenu.getText());		
 	}
 }

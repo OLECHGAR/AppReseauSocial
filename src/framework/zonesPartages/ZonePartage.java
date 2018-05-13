@@ -21,7 +21,7 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
 	/**
      * Description of the property messages.
      */
-    protected ArrayList<U> utilisateursAutorises;
+    protected ArrayList<U> utilisateursAutorises = new ArrayList<U>();
     protected U proprietaire;
     protected boolean estPrivee;
     protected String nom;
@@ -165,14 +165,14 @@ public class ZonePartage<U extends $Utilisateur<Z>,Z extends ZonePartageSimple> 
      * @throw NotNullException
      */
     public boolean estAjoute(U utilisateur) {
-	if (utilisateur == null)
-	    throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
-	utilisateur.rejoindreZone((Z) this);
-	this.utilisateursAutorises.add(utilisateur);
-	Iterator<U> it = this.utilisateursAutorises.iterator();
-	while (it.hasNext()) {
-	    if (it.next() == utilisateur) {
-	    	return true;
+		if (utilisateur == null)
+		    throw new NotNullException("utilisateur", "ZonePartage.estAutorise");
+		utilisateur.rejoindreZone((Z) this);
+		this.utilisateursAutorises.add(utilisateur);
+		Iterator<U> it = this.utilisateursAutorises.iterator();
+		while (it.hasNext()) {
+		    if (it.next() == utilisateur) {
+		    	return true;
 	    }
 	    	
 	}

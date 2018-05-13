@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import application.SalonDiscussion;
 import application.Utilisateur;
+import framework.transferable.Texte;
 
 public interface ReseauSocial extends Remote {
 	
@@ -26,4 +27,5 @@ public interface ReseauSocial extends Remote {
 	
 	public ArrayList<SalonDiscussion> getAllUserSalonDiscussion2(Utilisateur utilisateur) throws SQLException, RemoteException;
 	
+	public ArrayList<Texte<String>> getMessagesSalon(SalonDiscussion salon) throws SQLException, RemoteException;
 }

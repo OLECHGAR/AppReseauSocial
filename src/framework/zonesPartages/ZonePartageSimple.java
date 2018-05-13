@@ -14,7 +14,8 @@ import framework.transferable.$Transferable;
  * 
  * @author pignardf
  */
-public class ZonePartageSimple {
+public class ZonePartageSimple implements java.io.Serializable{
+	// Revoir la généricité de la class
     private static final long serialVersionUID = 1L;
     protected ArrayList<$Transferable<?>> transferables = new ArrayList<$Transferable<?>>();
 

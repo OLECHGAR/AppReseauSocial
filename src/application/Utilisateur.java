@@ -118,7 +118,7 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
     }
 
     /**
-     * Permet de s'aboner à un salon de discution.
+     * Permet de s'aboner ï¿½ un salon de discution.
      * 
      * @param refZone
      * @return
@@ -238,7 +238,7 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
     }
 
     /**
-     * Permet de modifier le prénom de l'utilisateur.
+     * Permet de modifier le prï¿½nom de l'utilisateur.
      * 
      * @return
      */
@@ -284,7 +284,7 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
     }
 
     /**
-     * Permet de récupérer les relations de l'utilisateur.
+     * Permet de rï¿½cupï¿½rer les relations de l'utilisateur.
      * 
      * @return
      */
@@ -293,10 +293,7 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
     }
 
     @Override
-    public String toString() {
-	return "Utilisateur [login=" + this.login + ", motDePasse="
-		+ this.motDePasse + ", nom=" + this.nom + ", prenom="
-		+ this.prenom + ", adresse=" + this.adresse + ", mail="
-		+ this.mail + ", dateNaissance=" + this.dateNaissance + "]";
-    }
+	public String toString() {
+		return ""+nom + ", "+prenom;
+	}
 }

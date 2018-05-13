@@ -19,7 +19,7 @@ import framework.zonesPartages.ZonePartageSimple;
  * 
  * @author monbeigj
  */
-public abstract class $Transferable<T> {
+public abstract class $Transferable<T> implements java.io.Serializable {
     /**
      * Description of the property ZonesPartages.
      */
@@ -31,7 +31,7 @@ public abstract class $Transferable<T> {
     protected ArrayList<$Requete<? extends $Utilisateur<?>>> requetes = new ArrayList<$Requete<? extends $Utilisateur<?>>>();
 
     protected T contenu;
-
+    
     protected Date heure;
 
     /**
@@ -165,4 +165,9 @@ public abstract class $Transferable<T> {
 	}
 	return false;
     }
+
+	@Override
+	public String toString() {
+		return "" + this.heure +" : "+ this.contenu;
+	}
 }

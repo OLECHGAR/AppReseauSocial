@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 
 import framework.exception.NotNullException;
+import framework.transferable.Texte;
 import framework.utilisateur.$Utilisateur;
 import framework.zonesPartages.ZonePartage;
 
@@ -17,6 +18,7 @@ public class SalonDiscussion extends ZonePartage<Utilisateur, SalonDiscussion> i
 	 * Permet de r�f�rencer un salon de mani�re unique
 	 */
 	private final int references;
+	private ArrayList<Texte<String>> messages = new ArrayList<Texte<String>>();
 
 	public SalonDiscussion(Utilisateur proprietaire,
 			ArrayList<Utilisateur> utilisateursAutorises, int ref)
@@ -60,6 +62,10 @@ public class SalonDiscussion extends ZonePartage<Utilisateur, SalonDiscussion> i
 	@Override
 	public String toString() {
 		return "SalonDiscussion : " + this.nom;
+	}
+	
+	public ArrayList<Texte<String>> getMessages(){
+		return this.messages;
 	}
 
 
