@@ -150,14 +150,12 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("SALUT");
+                String sqlState1 = "SELECT * FROM SalonDiscussion WHERE proprietaire=? AND nom=?";
 		PreparedStatement statement1 = this.connection
-				.prepareStatement("SELECT * FROM SalonDiscussion WHERE proprietaire=? AND nom=?");
-		System.out.println("SALUT");
+				.prepareStatement(sqlState1);
 		statement1.setString(1, proprietaire.getLogin());
 		statement1.setString(2, nom);
 		ResultSet result = statement1.executeQuery();
-		System.out.println("SALUT");
 		SalonDiscussion salon;
 
 		if (result.next()) {
@@ -165,20 +163,16 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 			System.out.println(result.toString());
 			return false;
 		} else {
-			System.out.println("SALUT");
 			String sql = "INSERT INTO SalonDiscussion (nom,estPrivee,proprietaire)" + "VALUES (?, ?, ?)";
 			PreparedStatement statement = this.connection.prepareStatement(sql);
 			statement.setString(1, nom);
 			statement.setBoolean(2, privacy);
 			statement.setString(3, proprietaire.getLogin());
-			System.out.println("BOUM");
 			statement.executeUpdate();
-			System.out.println("SALUT");
 
 			String sql1 = "SELECT COUNT(*) FROM SalonDiscussion;";
 			PreparedStatement statementCount = this.connection.prepareStatement(sql1);
 			statement.setString(3, proprietaire.getLogin());
-			System.out.println("BOUM");
 			ResultSet count = statementCount.executeQuery();
 			int ref = Integer.parseInt(count.getString(1));
 			if (!privacy) {
@@ -220,11 +214,11 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
 
             // String sql = "SELECT * FROM SalonDiscussion INNER JOIN abonnement ON
             // salon=reference WHERE utilisateur_abo=?";
-            PreparedStatement statement = this.connection.prepareStatement(
-                "SELECT * "
-                + "FROM SalonDiscussion"
-                + " INNER JOIN abonnement ON salon=reference"
-                + " WHERE utilisateur_abo=? OR proprietaire=?");
+            String sqlStat = "SELECT * "
+                    + "FROM SalonDiscussion"
+                    + " INNER JOIN abonnement ON salon=reference"
+                    + " WHERE utilisateur_abo=? OR proprietaire=?";
+            PreparedStatement statement = this.connection.prepareStatement(sqlStat);
             statement.setString(1, utilisateur.getLogin());
             statement.setString(2, utilisateur.getLogin());
             ResultSet result = statement.executeQuery();
@@ -236,14 +230,14 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
                     // Si la zone est privée
                     if (result.getBoolean(2)) {
                         //Récupération de tous les utilisateurs de la salle sauf le proprio
-                        PreparedStatement statement1 = this.connection.prepareStatement(
-                            "SELECT * "
+                        String sqlStat1 =  "SELECT * "
                             + "FROM utilisateur "
                             + "INNER JOIN abonnement ON utilisateur_abo=login "
-                            + "WHERE salon=? AND utilisateur_abo!=?");
-                            statement.setString(1, Integer.toString(result.getInt(4)));
-                            statement.setString(2, utilisateur.getLogin());
-                            ResultSet result1 = statement1.executeQuery();
+                            + "WHERE salon=? AND utilisateur_abo!=?";
+                        PreparedStatement statement1 = this.connection.prepareStatement(sqlStat1);
+                        statement.setString(1, Integer.toString(result.getInt(4)));
+                        statement.setString(2, utilisateur.getLogin());
+                        ResultSet result1 = statement1.executeQuery();
 
                         ArrayList<Utilisateur> autorises = new ArrayList<Utilisateur>();
                                         
@@ -262,10 +256,10 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
                 // SI l'utilisateur n'est pas le propriétaire de la salle
                 else {
                     // Récupération du propriétaire de la salle
-                    PreparedStatement getProprietaire = this.connection.prepareStatement(
-                        "SELECT * "
+                    String sqlProp = "SELECT * "
                         + "FROM utilisateur "
-                        + "WHERE login=(SELECT proprietaire FROM SalonDiscussion WHERE reference =?");
+                        + "WHERE login=(SELECT proprietaire FROM SalonDiscussion WHERE reference =?";
+                    PreparedStatement getProprietaire = this.connection.prepareStatement(sqlProp);
                     getProprietaire.setString(1, Integer.toString(result.getInt(4)));
                     ResultSet resultProprietaire = getProprietaire.executeQuery();
                     Utilisateur proprietaire = new Utilisateur(resultProprietaire.getString(1),
@@ -276,12 +270,12 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements R
                     // Si la zone est privée
                     if (result.getBoolean(2)) {
                         //Récupération de tous les utilisateurs de la salle sauf le proprio
-                        PreparedStatement statement2 = this.connection.prepareStatement(
-                            "SELECT * "
+                        String sqlStat2 = "SELECT * "
                             + "FROM utilisateur "
                             + "INNER JOIN abonnement "
                             + "ON utilisateur_abo=login "
-                            + "WHERE salon=? AND login!=?");
+                            + "WHERE salon=? AND login!=?";
+                        PreparedStatement statement2 = this.connection.prepareStatement(sqlStat2);
 
                         statement2.setString(1, Integer.toString(result.getInt(4)));
                         statement2.setString(2, proprietaire.getLogin());
