@@ -175,9 +175,9 @@ public class ChatController implements Initializable {
 		ListUsersRoom.add(chat_rooms.getSelectionModel().getSelectedItem().getProprietaire());
 		ListUsersRoom.addAll(chat_rooms.getSelectionModel().getSelectedItem().getUtilisateursAutorises());
 
-		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
-
 		salon = chat_rooms.getSelectionModel().getSelectedItem();
+		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(salon, user));
+
 		room_users.setItems(ListUsersRoom);
 		room_messages.setItems(ListMessagesRoom);
 		reseauSocial.closeConnection();
@@ -198,7 +198,7 @@ public class ChatController implements Initializable {
 							ListMessagesRoom.clear();
 							try {
 								ListMessagesRoom.addAll(reseauSocial
-										.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
+										.getMessagesSalon(salon, user));
 							} catch (RemoteException | SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -218,7 +218,7 @@ public class ChatController implements Initializable {
 		};
 		Thread refreshMessagesThread = new Thread(refreshMessagesTask);
 		refreshMessagesThread.setDaemon(true);
-		refreshMessagesThread.start();
+		refreshMessagesThread.start(); 
 	}
 
 	public void sendMessage() throws RemoteException, SQLException {
@@ -227,7 +227,7 @@ public class ChatController implements Initializable {
 		contenu.setText("");
 
 		ListMessagesRoom.clear();
-		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(chat_rooms.getSelectionModel().getSelectedItem(), user));
+		ListMessagesRoom.addAll(reseauSocial.getMessagesSalon(salon, user));
 		room_messages.setItems(ListMessagesRoom);
 		this.reseauSocial.closeConnection();
 	}
