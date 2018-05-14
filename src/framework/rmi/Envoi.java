@@ -40,12 +40,29 @@ public class Envoi<T extends $Utilisateur<?>> extends $Requete<T> implements jav
 	this.envoyer(zoneDestination);
     }
     
+    /**
+     * Constructeur d'un nouvel Envoi qui créer le transferable lié à cet envoi
+     * 
+     * @param id
+     * @param zone
+     * @param utilisateur
+     * @param idMessage
+     * @param contenu
+     */
     public <C, Z extends ZonePartageSimple, TR extends $Transferable<C>> Envoi(int id, Z zone, T utilisateur, int idMessage, C contenu){
     	super(id,utilisateur,zone);
     	this.setTransferable(idMessage, zone, contenu, new Date());
     	super.transferable.addRequete(this);
     }
     
+    /**
+     * Constructeur d'un nouvel Envoi avec un Transferable déjà créé
+     * 
+     * @param id
+     * @param zone
+     * @param utilisateur
+     * @param transferable
+     */
     public <Z extends ZonePartageSimple, TR extends $Transferable<?>> Envoi(int id, Z zone, T utilisateur, TR transferable) {
     	super(id,utilisateur,zone, transferable);
     }

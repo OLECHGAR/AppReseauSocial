@@ -122,11 +122,5 @@ public class ZonePartageSimple implements java.io.Serializable{
      */
     public void supprimer($Transferable<?> t) {
 	this.transferables.remove(this.transferables.indexOf(t));
-	/*
-	 * ?à décider : Requete de supression du transferable et de toutes les
-	 * requetes en rapport Ou alors juste ne pas attribuer le message à une
-	 * zone pour qu'il disparaisse de la circulation mais de le garder en
-	 * base de donée afin de garder un historique des logs
-	 */
     }
 }

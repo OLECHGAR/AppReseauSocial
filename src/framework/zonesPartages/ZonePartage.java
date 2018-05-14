@@ -147,11 +147,12 @@ public class ZonePartage<U extends $Utilisateur<Z>, Z extends ZonePartageSimple>
 	    if (!(this.estAjoute(it.next())))
 		throw new Invariant("estAjoute(it.next()) == true",
 			"ZonePartage.ajouterUtilisateur");
-	}
+		}
+		
     }
 
     /**
-     * Vï¿½rifie si un utilisateur appartient ï¿½ la liste des utilisateurs
+     * Ajoute et vérifie si utilisateur est bien ajouté
      * autorisï¿½s Ajoute et vÃ©rifie si utilisateur est bien ajoutÃ© Ã  la
      * liste
      * 
@@ -167,6 +168,7 @@ public class ZonePartage<U extends $Utilisateur<Z>, Z extends ZonePartageSimple>
 	Iterator<U> it = this.utilisateursAutorises.iterator();
 	while (it.hasNext()) {
 	    if (it.next() == utilisateur) {
+	    	it.remove(); //Nécessaire sinon génère ConcurrentModificationException
 		return true;
 	    }
 

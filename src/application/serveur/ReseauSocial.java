@@ -90,16 +90,6 @@ public interface ReseauSocial extends Remote {
      * Permet de voir tous les utilisateur du salon.
      * 
      * @param utilisateur
-     * @throws SQLException
-     * @throws RemoteException
-     */
-    public void getAllUserSalonDiscussion(Utilisateur utilisateur)
-	    throws SQLException, RemoteException;
-
-    /**
-     * Permet de voir tous les utilisateur du salon.
-     * 
-     * @param utilisateur
      * @return
      * @throws SQLException
      * @throws RemoteException

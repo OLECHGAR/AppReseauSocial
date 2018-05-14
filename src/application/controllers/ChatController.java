@@ -122,12 +122,48 @@ public class ChatController implements Initializable {
 	}
 
 	public void refreshRooms() throws RemoteException, SQLException {
-		allSalon.clear();
-
+		
 		reseauSocial.openConnection();
+		allSalon.clear();
 		allSalon.addAll(reseauSocial.getAllUserSalonDiscussion2(user));
 		chat_rooms.setItems(allSalon);
 		reseauSocial.closeConnection();
+
+		Task refreshSalonsTask = new Task<Void>() {
+			@Override
+			public Void call() throws Exception {
+				while (true) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								reseauSocial.openConnection();
+							} catch (RemoteException | SQLException e1) {
+								e1.printStackTrace();
+							}
+							allSalon.clear();
+							try {
+								allSalon.addAll(reseauSocial.getAllUserSalonDiscussion2(user));
+							} catch (RemoteException | SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							chat_rooms.setItems(allSalon);
+							try {
+								reseauSocial.closeConnection();
+							} catch (RemoteException | SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+					Thread.sleep(5000);
+				}
+			}
+		};
+		Thread refreshSalonsThread = new Thread(refreshSalonsTask);
+		refreshSalonsThread.setDaemon(true);
+		refreshSalonsThread.start();
 	}
 
 	public void joinRoom() throws RemoteException, SQLException {
@@ -146,7 +182,7 @@ public class ChatController implements Initializable {
 		room_messages.setItems(ListMessagesRoom);
 		reseauSocial.closeConnection();
 
-		Task task = new Task<Void>() {
+		Task refreshMessagesTask = new Task<Void>() {
 			@Override
 			public Void call() throws Exception {
 				while (true) {
@@ -180,9 +216,9 @@ public class ChatController implements Initializable {
 				}
 			}
 		};
-		Thread th = new Thread(task);
-		th.setDaemon(true);
-		th.start();
+		Thread refreshMessagesThread = new Thread(refreshMessagesTask);
+		refreshMessagesThread.setDaemon(true);
+		refreshMessagesThread.start();
 	}
 
 	public void sendMessage() throws RemoteException, SQLException {
