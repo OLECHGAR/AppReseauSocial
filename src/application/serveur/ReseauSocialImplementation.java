@@ -70,7 +70,7 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements
 	Iterator<Utilisateur> it = this.listeUtilisateurs.iterator();
 	while (it.hasNext()) {
 	    Utilisateur u = it.next();
-	    System.out.println(u.toString());
+	    System.out.println(u.toStringComplet());
 	}
 	try {
 	    this.connection.close();
@@ -260,8 +260,6 @@ public class ReseauSocialImplementation extends UnicastRemoteObject implements
 	    return true;
 	}
     }
-
-   
 
     /*
      * 

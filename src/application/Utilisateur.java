@@ -294,6 +294,10 @@ public class Utilisateur extends $Utilisateur<SalonDiscussion> implements
 
     @Override
     public String toString() {
+	return "Nom : " + this.nom + " Prenom : " + this.prenom;
+    }
+
+    public String toStringComplet() {
 	return "Login : " + this.login + " ; " + " Nom : " + this.nom + " ; "
 		+ " Prenom : " + this.prenom + " ; " + " Adresse : "
 		+ this.adresse + " ; " + " DateNaissance : "
