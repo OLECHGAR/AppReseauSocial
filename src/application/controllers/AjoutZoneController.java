@@ -70,8 +70,7 @@ public class AjoutZoneController implements Initializable {
 
 	JFXRadioButton selected = (JFXRadioButton) this.radioGroup
 		.getSelectedToggle();
-	System.out.println(selected.getText());
-
+	
 	this.Users = new ArrayList<Utilisateur>();
 	boolean privacy = false;
 	if (selected.getText().equals("Public"))

@@ -110,7 +110,7 @@ public class LoginController implements Initializable {
 
 	this.reseauSocial.openConnection();
 	Utilisateur user = this.reseauSocial.login(this.username.getText(),
-		this.password.getText());
+	this.password.getText());
 	this.reseauSocial.closeConnection();
 
 	if (user != null) {
@@ -119,7 +119,6 @@ public class LoginController implements Initializable {
 		    "/application/views/Chat.fxml"));
 	    Loader.load();
 
-	    System.out.println("LOGIN : " + user.toString());
 	    ChatController controller = Loader.getController();
 	    controller.setObjects(this.reseauSocial, user);
 

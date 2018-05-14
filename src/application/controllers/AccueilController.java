@@ -156,7 +156,6 @@ public class AccueilController implements Initializable {
      * @param user
      */
     public void setObjects(ReseauSocial reseauSocial, Utilisateur user) {
-	System.out.println("ACCUEILCONTROLLER : " + user.toString());
 	this.user = user;
 	this.reseauSocial = reseauSocial;
 
