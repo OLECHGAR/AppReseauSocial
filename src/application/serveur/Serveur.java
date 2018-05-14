@@ -23,12 +23,12 @@ public class Serveur {
 	String localHost = InetAddress.getLocalHost().getHostAddress();
 	System.setProperty("java.rmi.server.hostname", localHost);
 	Registry rmi = LocateRegistry.createRegistry(port);
-	/** args corespond au chemin d'accï¿½s de la base de donnï¿½e **/
+	/** args corespond au chemin d'accès de la base de donnéés **/
 	ReseauSocialImplementation reseau = new ReseauSocialImplementation(
 		args[0]);
 	/** ON REND DISPONIBLE L'OBJET A DISTANCE **/
 	rmi.rebind("reseau", reseau);
-	System.out.println("Le serveur est lancï¿½ sur l'adresse locale : "
+	System.out.println("Le serveur est lancé sur l'adresse locale : "
 		+ localHost);
 	System.out.println("et sur le port : " + port);
     }
