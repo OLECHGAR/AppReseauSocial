@@ -1,9 +1,9 @@
 # 9Share
-Framework / Réseau social
+Framework / RÃ©seau social
 
-Groupe numéro 9, 9Share
+Groupe numÃ©ro 9, 9Share
 
-composé de Jonathan MONBEIG, Florian PIGNARD,  Mathieu CLUSEL, Marvin AKUESON, 
-Othman LECHGAR, Ismail SARDI, Ali JOUHARI
+composÃ© de Othman LECHGAR,Jonathan MONBEIG, Florian PIGNARD,  Mathieu CLUSEL, Marvin AKUESON, 
+Ismail SARDI, Ali JOUHARI
 
-Création d'un framework permettant l'implémentation d'un réseau social et développement d'une application utilisant ce dernier
+CrÃ©ation d'un framework permettant l'implÃ©mentation d'un rÃ©seau social et dÃ©veloppement d'une application utilisant ce dernier
